@@ -1,0 +1,91 @@
+import React, { useState } from "react";
+import { Input } from "../../UiComponents/input";
+import { Label } from "../../UiComponents/label";
+import { cn } from "../../Library/utils";
+import { sendResetPasswordEmail } from "../../Modules/SetNewPassword";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom"; // ✅ React Router DOM
+
+export default function UserResetPasswordPage() {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
+
+  const handleSendEmail = async (e) => {
+    e.preventDefault();
+    if (!email) return toast.error("Email is required!");
+
+    setLoading(true);
+    try {
+      await sendResetPasswordEmail(email);
+      setEmailSent(true);
+      toast.success("Reset email sent! Check your inbox.");
+    } catch (error) {
+      toast.error("Error: " + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="flex justify-center items-center min-h-screen p-4 bg-neutral-950">
+      <div className="w-full max-w-md p-6 rounded-xl shadow-input bg-black border-white border-2">
+        <h2 className="text-xl font-bold text-neutral-200">Forgot Password?</h2>
+        <p className="text-sm text-neutral-300 mt-1">
+          Enter your email to receive a reset link.
+        </p>
+
+        <form onSubmit={handleSendEmail} className="mt-6 space-y-4">
+          <LabelInputContainer>
+            <Label htmlFor="email">Email Address</Label>
+            <Input
+              id="email"
+              type="email"
+              required
+              placeholder="your@email.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={emailSent}
+            />
+          </LabelInputContainer>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="group/btn relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
+          >
+            {loading ? "Sending..." : emailSent ? "Resend Email" : "Send Reset Email"}
+            <BottomGradient />
+          </button>
+
+          {emailSent && (
+            <p className="text-sm text-green-400 text-center">
+              Email sent! Please check your inbox. Didn't get it? Click above to resend.
+            </p>
+          )}
+        </form>
+
+        <p className="text-center text-sm text-neutral-200 mt-4">
+          Remember your password?{" "}
+          <Link
+            to="/Login"
+            className="text-red-500 hover:underline font-semibold"
+          >
+            Go back to Login
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+const BottomGradient = () => (
+  <>
+    <span className="absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
+    <span className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
+  </>
+);
+
+const LabelInputContainer = ({ children, className }) => (
+  <div className={cn("flex w-full flex-col space-y-2", className)}>{children}</div>
+);

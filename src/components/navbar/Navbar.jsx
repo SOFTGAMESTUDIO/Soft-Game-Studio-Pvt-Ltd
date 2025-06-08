@@ -128,7 +128,7 @@ export function NavbarMenu() {
                 </button>
                 {user.email === import.meta.env.VITE__ADMIN_EMAIL && (
                   <Link
-                    to="/dashboard"
+                    to="/Admin"
                     className="flex items-center px-4 py-2 text-sm hover:bg-gray-200 dark:hover:bg-neutral-900 rounded-full"
                   >
                     <RiAdminFill className="w-4 h-4 mr-2" />
@@ -214,7 +214,7 @@ export function NavbarMenu() {
               {user.email === import.meta.env.VITE__ADMIN_EMAIL && (
                 <NavbarButton
                   onClick={() => {
-                    navigate("/dashboard");
+                    navigate("/Admin");
                     setIsMobileMenuOpen(false);
                   }}
                   className="flex w-full bg-cyan-400 dark:bg-cyan-600 justify-center items-center"

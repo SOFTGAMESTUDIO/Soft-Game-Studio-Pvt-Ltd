@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Layout from '../../components/layout/Layout';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const FAQPage = () => {
 
@@ -93,6 +94,41 @@ const FAQPage = () => {
     }
   return (
     <Layout>
+      <Helmet>
+        <title>FAQs | Soft Game Studio - Your Questions Answered</title>
+        <meta
+          name="description"
+          content="Get answers to the most frequently asked questions about Soft Game Studio's online exams, study resources, certifications, game development services, and more."
+        />
+        <meta
+          name="keywords"
+          content="Soft Game Studio FAQ, online exams help, free education, affordable courses, certification support, exam registration, technical support"
+        />
+        <meta name="author" content="Soft Game Studio Pvt. Ltd." />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:title" content="FAQs | Soft Game Studio" />
+        <meta
+          property="og:description"
+          content="Browse frequently asked questions about Soft Game Studio's educational services and digital products."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://softgamestudio.web.app/FAQs" />
+        <meta
+          property="og:image"
+          content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="FAQs | Soft Game Studio" />
+        <meta
+          name="twitter:description"
+          content="Need help? Explore our FAQ section to find answers to common questions about exams, features, and support."
+        />
+        <meta
+          name="twitter:image"
+          content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050"
+        />
+        <link rel="canonical" href="https://softgamestudio.web.app/FAQs" />
+      </Helmet>
       <div 
         className="min-h-screen transition-colors duration-300 
                    bg-purple-100 text-gray-900

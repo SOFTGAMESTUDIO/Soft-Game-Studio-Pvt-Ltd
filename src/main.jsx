@@ -5,7 +5,8 @@ import './index.css'
 import { CartProvider } from './Modules/Cart/CartContext.jsx';
 ReactDOM.createRoot(document.getElementById("SoftGameStudio")).render(
       <CartProvider>
-      <App />
+ <App />
+     
       </CartProvider>
      
 );

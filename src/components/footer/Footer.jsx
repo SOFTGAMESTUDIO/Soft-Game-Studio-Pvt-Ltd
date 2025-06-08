@@ -30,7 +30,10 @@ const Footer = () => {
     { name: "Privacy Policy", path: "/PrivacyPolicy" },
     { name: "Terms & Conditions", path: "/TermsAndConditions" },
     { name: "Return Policy", path: "/ReturnPolicy" },
+    { name: "Cookies Ploicy", path: "/CookiesPolicy" },
     { name: "Copyright", path: "/CopyrightPage" },
+
+    
   ];
 
   const Feature = [

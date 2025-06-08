@@ -1,6 +1,7 @@
 import React from 'react'
 import { Timeline } from "../../UiComponents/timeline";
 import Layout from '../../components/layout/Layout';
+import { Helmet } from 'react-helmet';
 
 export default function page() {
    const data = [
@@ -204,6 +205,39 @@ export default function page() {
   ];
   return (
     <Layout>
+      <Helmet>
+  <title>About Us | Soft Game Studio</title>
+  <meta
+    name="description"
+    content="Learn more about Soft Game Studio, our mission, vision, and the team dedicated to providing the best online exam and gaming experiences."
+  />
+  <meta
+    name="keywords"
+    content="About Soft Game Studio, Company Info, Mission, Vision, Team, Online Exams, Gaming Studio"
+  />
+  <meta name="author" content="Soft Game Studio Pvt. Ltd." />
+  <meta name="robots" content="index, follow" />
+
+  <meta property="og:title" content="About Us | Soft Game Studio" />
+  <meta
+    property="og:description"
+    content="Discover Soft Game Studio’s story, values, and team behind our innovative online exam and gaming solutions."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://softgamestudio.web.app/AboutUs" />
+  <meta property="og:image" content="https://softgamestudio.web.app/logo-preview.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="About Us | Soft Game Studio" />
+  <meta
+    name="twitter:description"
+    content="Meet the team and learn about Soft Game Studio’s commitment to quality online exams and gaming experiences."
+  />
+  <meta name="twitter:image" content="https://softgamestudio.web.app/logo-preview.jpg" />
+
+  <link rel="canonical" href="https://softgamestudio.web.app/AboutUs" />
+</Helmet>
+
    <Timeline data={data} />
     </Layout>
     

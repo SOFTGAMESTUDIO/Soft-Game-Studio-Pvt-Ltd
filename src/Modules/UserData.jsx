@@ -1,6 +1,6 @@
-// backend/userService.js
-import { fireDB } from "../fireabase/FirebaseConfig"; // Adjust the import path as needed
+
 import { getDocs, collection } from "firebase/firestore";
+import { fireDB } from "../DataBase/firebaseConfig";
 
 export const getUserData = async () => {
   try {

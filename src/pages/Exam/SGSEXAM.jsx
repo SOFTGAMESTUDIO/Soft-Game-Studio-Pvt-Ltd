@@ -159,7 +159,7 @@ const SGSEXAM = () => {
                           </button>
                         ) : (
                           <a
-                            href={exam.location || "#"}
+                            href={exam.examLink || "#"}
                             className="block w-full text-center bg-purple-600 dark:bg-cyan-600 hover:bg-purple-700 dark:hover:bg-cyan-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300 md:flex items-center justify-center gap-2"
                             target="_blank"
                             rel="noopener noreferrer"
@@ -192,76 +192,76 @@ const SGSEXAM = () => {
       
       case "quizExam":
         return (
-          <div className="py-8">
-            {quizExams.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                {quizExams.map((quiz) => (
-                  <motion.div
-                    key={quiz.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
-                  >
-                    <div className="flex justify-center">
-                      <img
-                        src={quiz.imageUrl}
-                        alt={quiz.name}
-                        className="h-60 object-contain object-center mb-6 rounded-xl"
-                      />
-                    </div>
-                    <h2 className="flex flex-wrap tracking-widest text-xs title-font font-medium text-cyan-400 mb-2">
-                      <span className="m-1 flex flex-wrap">Quiz</span>
-                    </h2>
-                    <h1 className="text-lg font-semibold text-white mb-4">
-                      {quiz.name}
-                    </h1>
-                    <p className="text-xs text-gray-300 mb-4">
-                      Language: {quiz.language}
-                    </p>
+         <div className="py-8">
+  {quizExams.length > 0 ? (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      {quizExams.map((quiz) => (
+        <motion.div
+          key={quiz.id}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="bg-purple-100 dark:bg-neutral-950 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-purple-200 dark:border-neutral-800"
+        >
+          <div className="flex justify-center">
+            <img
+              src={quiz.imageUrl}
+              alt={quiz.name}
+              className="h-60 object-contain object-center mb-6 rounded-xl"
+            />
+          </div>
+          <h2 className="flex flex-wrap tracking-widest text-xs title-font font-medium text-purple-600 dark:text-cyan-400 mb-2">
+            <span className="m-1 flex flex-wrap">Quiz</span>
+          </h2>
+          <h1 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            {quiz.name}
+          </h1>
+          <p className="text-xs text-gray-700 dark:text-gray-300 mb-4">
+            Language: {quiz.language}
+          </p>
 
-                    <div className="text-center mb-4 text-white text-sm">
-                      {timers[quiz.id] === "STARTED" ? (
-                        <button
-                          onClick={() => handleOpenQuiz(quiz)}
-                          className="w-full text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                        >
-                          Start Quiz
-                        </button>
-                      ) : (
-                        <button
-                          className="w-full text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                        >
-                          {timers[quiz.id] || "Loading timer..."}
-                        </button>
-                      )}
-                    </div>
-
-                    <div className="items-center flex justify-center flex-wrap">
-                      <button
-                        onClick={() => handleDetailsQuiz(quiz)}
-                        type="button"
-                        className="w-full text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                      >
-                        Details
-                      </button>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            ) : (
-              <motion.div 
-                className="flex items-center justify-center h-96"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8 }}
+          <div className="text-center mb-4">
+            {timers[quiz.id] === "STARTED" ? (
+              <button
+                onClick={() => handleOpenQuiz(quiz)}
+                className="w-full text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
               >
-                <h2 className="text-2xl text-gray-900 dark:text-white">
-                  No Quiz Exams Available
-                </h2>
-              </motion.div>
+                Start Quiz
+              </button>
+            ) : (
+              <button
+                className="w-full text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+              >
+                {timers[quiz.id] || "Loading timer..."}
+              </button>
             )}
           </div>
+
+          <div className="items-center flex justify-center flex-wrap">
+            <button
+              onClick={() => handleDetailsQuiz(quiz)}
+              type="button"
+              className="w-full text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+            >
+              Details
+            </button>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  ) : (
+    <motion.div 
+      className="flex items-center justify-center h-96 bg-purple-50 dark:bg-neutral-900 rounded-lg"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+    >
+      <h2 className="text-2xl text-gray-900 dark:text-white">
+        No Quiz Exams Available
+      </h2>
+    </motion.div>
+  )}
+</div>
         );
       
       case "theoryResult":

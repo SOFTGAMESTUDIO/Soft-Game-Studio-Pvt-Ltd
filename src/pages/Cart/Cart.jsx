@@ -84,7 +84,7 @@ const handleBuyNow = async () => {
       key: import.meta.env.VITE__RAZORPAY_KEY,
       amount: total * 100, // Razorpay expects amount in paise
       currency: "INR",
-      name: "SOft Game Studio",
+      name: "Soft Game Studio",
       description: "Purchase",
       handler: async (response) => {
         const paymentId = response.razorpay_payment_id;

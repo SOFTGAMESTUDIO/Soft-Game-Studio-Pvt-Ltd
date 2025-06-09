@@ -15,6 +15,14 @@ export default function Exam() {
       link: "/Admin-Quiz-Manage",
     },
     {
+      title: "Create Exam",
+      details: [
+        "Create Exam",
+        "Edit Exam "
+      ],
+      link: "/Admin-SGSExam",
+    },
+    {
       title: "User Answers",
       details: ["View User Answers", "Analyze Performance", "Export User Data"],
       link: "/Admin-Quiz-User-Answers",

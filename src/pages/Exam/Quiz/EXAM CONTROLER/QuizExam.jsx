@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import {
   collection,
   addDoc,
@@ -26,14 +26,14 @@ const QuizExam = () => {
   const [filteredUser, setFilteredUser] = useState({});
   const [loading, setLoading] = useState(true);
   const [quizData, setQuizData] = useState(null);
+  const [userList, setUserList] = useState([]);
   const userid = JSON.parse(localStorage.getItem("user"))?.email;
   const [score, setScore] = useState(0);
   const [Que, setQue] = useState(0);
 
-
-    useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
-      const allUsers = await getUserData(); // Backend call
+      const allUsers = await getUserData();
       setUserList(allUsers);
     };
     fetchData();
@@ -42,14 +42,16 @@ const QuizExam = () => {
   useEffect(() => {
     if (Array.isArray(userList) && userList.length > 0 && userid) {
       const matchedUser = userList.find(
-  (user) => user.email?.toLowerCase() === userid?.toLowerCase());
-      setFilteredUser(matchedUser);
+        (user) => user.email?.toLowerCase() === userid?.toLowerCase()
+      );
+      setFilteredUser(matchedUser || {});
     }
-    
     setLoading(false);
   }, [userList, userid]);
 
-  useEffect(() => setDate(new Date().toLocaleDateString()), []);
+  useEffect(() => {
+    setDate(new Date().toLocaleDateString());
+  }, []);
 
   useEffect(() => {
     const handlePopState = () => {
@@ -69,8 +71,6 @@ const QuizExam = () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [step, isAlreadySubmitted]);
-
-  
 
   useEffect(() => {
     const handleContextMenu = (e) => e.preventDefault();
@@ -133,13 +133,6 @@ const QuizExam = () => {
   }, [step, isAlreadySubmitted, filteredUser, quizData]);
 
   useEffect(() => {
-    if (user && userid) {
-      const matchedUser = user.find((obj) => obj.email === userid);
-      if (matchedUser) setFilteredUser(matchedUser);
-    }
-  }, [user, userid]);
-
-  useEffect(() => {
     const fetchQuiz = async () => {
       if (!quizId) {
         toast.error("Quiz ID missing.");
@@ -178,6 +171,8 @@ const QuizExam = () => {
             setIsDisqualified(true);
             console.warn("Disqualified:", docData?.reason);
           }
+          setScore(docData.score || 0);
+          setQue(docData.NoQuestion || 0);
         }
       } catch (err) {
         console.error("Check submission error:", err);
@@ -201,24 +196,6 @@ const QuizExam = () => {
 
   const handlePrevious = () => {
     if (currentQuestion > 0) setCurrentQuestion((prev) => prev - 1);
-  };
-
-  const fetchUserScore = async (uid, quizId) => {
-    try {
-      const q = query(
-        collection(fireDB, "user_Quiz"),
-        where("uid", "==", uid),
-        where("quizId", "==", quizId)
-      );
-      const querySnapshot = await getDocs(q);
-      if (!querySnapshot.empty) {
-        const userDoc = querySnapshot.docs[0].data();
-        setScore(userDoc.score || 0);
-        setQue(userDoc.NoQuestion || 0);
-      }
-    } catch (err) {
-      console.error("Fetch score error:", err);
-    }
   };
 
   const handleSubmit = async () => {
@@ -251,7 +228,8 @@ const QuizExam = () => {
         NoQuestion,
       });
 
-      fetchUserScore(filteredUser.uid, quizId);
+      setScore(correctCount);
+      setQue(NoQuestion);
       toast.success("Quiz submitted!");
       setStep(2);
     } catch (err) {
@@ -263,7 +241,9 @@ const QuizExam = () => {
   if (loading) {
     return (
       <Layout>
-        <p className="text-center text-white mt-10">Loading quiz...</p>
+        <div className="flex justify-center items-center min-h-screen">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        </div>
       </Layout>
     );
   }
@@ -271,171 +251,215 @@ const QuizExam = () => {
   if (!quizData) {
     return (
       <Layout>
-        <p className="text-center mt-10 text-red-500">
-          Quiz data not available.
-        </p>
+        <div className="max-w-4xl mx-auto p-4">
+          <div className="bg-red-100 dark:bg-red-900/20 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-300 px-4 py-3 rounded-lg text-center">
+            Quiz data not available.
+          </div>
+        </div>
       </Layout>
     );
   }
 
   return (
-    <>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
       {step === 0 && (
         <Layout>
-          <div className="min-h-screen flex flex-col items-center justify-center space-y-6">
-            <h1 className="text-3xl font-bold text-blue-500">
-              {quizData.name} Quiz
-            </h1>
-            <p className="text-gray-400 text-sm">
-              Welcome,{" "}
-              <span className="font-medium">
-                {filteredUser?.name || "Loading..."}
-              </span>
-            </p>
-            {isAlreadySubmitted ? (
-              isDisqualified ? (
-                <div className="text-red-500 font-semibold text-center">
-                  Disqualified. Reason: <em>Cheating - switched tab</em>
-                </div>
-              ) : (
-                <>
-                  <div className="bg-green-900/20 border border-green-600 text-green-400 px-4 py-3 rounded-lg w-fit">
-                    You have already completed this exam.
-                  </div>
-                  <div className="text-black">
-                    <Certificate
-                      name={filteredUser.name}
-                      rollNumber={filteredUser.rollNumber}
-                      examName={quizData.name}
-                      date={date}
-                      language={quizData.language}
-                      score={score}
-                      Que={Que}
-                    />
-                  </div>
-                </>
-              )
-            ) : (
-              <>
-                <strong className="text-red-600 text-xl">Important Note</strong>
-                <p className="text-white text-xl">
-                  (Read Before Starting the Quiz)
+          <div className="max-w-4xl mx-auto p-4 md:p-6 lg:p-8">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden p-6 md:p-8 transition-all duration-200">
+              <h1 className="text-2xl md:text-3xl font-bold text-center text-blue-600 dark:text-blue-400 mb-6">
+                {quizData.name} Quiz
+              </h1>
+              
+              <div className="text-center mb-8">
+                <p className="text-gray-600 dark:text-gray-300">
+                  Welcome,{" "}
+                  <span className="font-medium text-gray-900 dark:text-white">
+                    {filteredUser?.name || "User"}
+                  </span>
                 </p>
-                <div
-                  className="text-base text-gray-300 m-4"
-                  dangerouslySetInnerHTML={{ __html: quizData.description }}
-                />
-                <button
-                  onClick={() => setStep(1)}
-                  className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg text-white font-semibold shadow-md"
-                >
-                  Start Quiz
-                </button>
-              </>
-            )}
+              </div>
+
+              {isAlreadySubmitted ? (
+                isDisqualified ? (
+                  <div className="bg-red-100 dark:bg-red-900/20 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-300 px-4 py-3 rounded-lg text-center mb-6">
+                    Disqualified. Reason: <em>Cheating - switched tab</em>
+                  </div>
+                ) : (
+                  <div className="space-y-8">
+                    <div className="bg-green-100 dark:bg-green-900/20 border border-green-400 dark:border-green-600 text-green-700 dark:text-green-300 px-4 py-3 rounded-lg text-center">
+                      You have already completed this exam.
+                    </div>
+                    
+                    <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-inner">
+                      <Certificate
+                        name={filteredUser.name}
+                        rollNumber={filteredUser.rollNumber}
+                        examName={quizData.name}
+                        date={date}
+                        language={quizData.language}
+                        score={score}
+                        Que={Que}
+                      />
+                    </div>
+                  </div>
+                )
+              ) : (
+                <div className="space-y-6">
+                  <div className="bg-yellow-100 dark:bg-yellow-900/20 border border-yellow-400 dark:border-yellow-600 text-yellow-700 dark:text-yellow-300 p-4 rounded-lg">
+                    <h2 className="text-xl font-bold text-center mb-2">Important Note</h2>
+                    <p className="text-center font-medium">(Read Before Starting the Quiz)</p>
+                  </div>
+
+                  <div 
+                    className="prose dark:prose-invert max-w-none bg-gray-50 dark:bg-gray-700 p-4 rounded-lg"
+                    dangerouslySetInnerHTML={{ __html: quizData.description }}
+                  />
+
+                  <div className="flex justify-center pt-4">
+                    <button
+                      onClick={() => setStep(1)}
+                      className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 px-6 py-3 rounded-lg text-white font-semibold shadow-md transition-colors duration-200"
+                    >
+                      Start Quiz
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </Layout>
       )}
 
       {step === 1 && (
-        <div className="space-y-6 m-5 p-5">
-          <div className="bg-[#1e293b] p-5 rounded-xl shadow-inner">
-            <h2 className="text-lg font-semibold mb-3 text-blue-400">
-              Q{currentQuestion + 1}.{" "}
-              {quizData.questions[currentQuestion]?.question}
-            </h2>
-            {quizData.questions[currentQuestion]?.code && (
-              <div className="mt-6 bg-gray-800 p-4 rounded-lg text-white">
-                <h2 className="text-xl font-semibold mb-4">
-                  Code for this Question:
-                </h2>
-                <pre className="whitespace-pre-wrap bg-gray-900 rounded-md p-4 font-mono text-sm overflow-x-auto">
-                  {quizData.questions[currentQuestion].code}
-                </pre>
+        <div className="max-w-4xl mx-auto p-4 md:p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden p-6 transition-all duration-200">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Question {currentQuestion + 1} of {quizData.questions.length}
+              </h2>
+              <div className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium">
+                {quizData.language}
               </div>
-            )}
-
-            <div className="space-y-3 min-h-[100px]">
-              {quizData.questions[currentQuestion]?.options ? (
-                Object.entries(
-                  quizData.questions[currentQuestion].options
-                ).map(([key, value]) => (
-                  <label
-                    key={key}
-                    className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer border transition ${
-                      selectedAnswers[currentQuestion] === key
-                        ? "bg-blue-600 border-blue-400 text-white"
-                        : "bg-[#0f172a] border-gray-700 text-gray-300 hover:bg-gray-800"
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name={`question-${currentQuestion}`}
-                      value={key}
-                      checked={selectedAnswers[currentQuestion] === key}
-                      onChange={() =>
-                        handleRadioChange(currentQuestion, key)
-                      }
-                      className="accent-blue-600 w-6 h-6"
-                    />
-                    <span>{value}</span>
-                  </label>
-                ))
-              ) : (
-                <p className="text-gray-400 italic">
-                  No options available for this question.
-                </p>
-              )}
             </div>
-          </div>
 
-          <div className="flex justify-between pt-4">
-            <button
-              onClick={handlePrevious}
-              disabled={currentQuestion === 0}
-              className="bg-gray-700 text-gray-300 px-5 py-2 rounded-md disabled:opacity-40"
-            >
-              Back
-            </button>
-            <button
-              onClick={handleNext}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md"
-            >
-              {currentQuestion === quizData.questions.length - 1
-                ? "Submit"
-                : "Next"}
-            </button>
+            <div className="space-y-6">
+              <div className="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg">
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+                  {quizData.questions[currentQuestion]?.question}
+                </h3>
+
+                {quizData.questions[currentQuestion]?.code && (
+                  <div className="mt-4 mb-6">
+                    <div className="bg-gray-800 p-4 rounded-lg">
+                      <h4 className="text-sm font-medium text-gray-300 mb-2">
+                        Code for this question:
+                      </h4>
+                      <pre className="whitespace-pre-wrap bg-gray-900 rounded-md p-3 font-mono text-sm text-gray-200 overflow-x-auto">
+                        {quizData.questions[currentQuestion].code}
+                      </pre>
+                    </div>
+                  </div>
+                )}
+
+                <div className="space-y-3">
+                  {quizData.questions[currentQuestion]?.options ? (
+                    Object.entries(
+                      quizData.questions[currentQuestion].options
+                    ).map(([key, value]) => (
+                      <label
+                        key={key}
+                        className={`flex items-start gap-3 p-4 rounded-lg cursor-pointer border transition ${
+                          selectedAnswers[currentQuestion] === key
+                            ? "bg-blue-100 dark:bg-blue-900/30 border-blue-300 dark:border-blue-600"
+                            : "bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600"
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name={`question-${currentQuestion}`}
+                          value={key}
+                          checked={selectedAnswers[currentQuestion] === key}
+                          onChange={() =>
+                            handleRadioChange(currentQuestion, key)
+                          }
+                          className="mt-1 accent-blue-600 w-5 h-5"
+                        />
+                        <span className="text-gray-800 dark:text-gray-200">{value}</span>
+                      </label>
+                    ))
+                  ) : (
+                    <div className="text-center py-4 text-gray-500 dark:text-gray-400">
+                      No options available for this question.
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex justify-between pt-4">
+                <button
+                  onClick={handlePrevious}
+                  disabled={currentQuestion === 0}
+                  className={`px-5 py-2.5 rounded-md font-medium ${
+                    currentQuestion === 0
+                      ? "bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed"
+                      : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
+                  }`}
+                >
+                  Previous
+                </button>
+                <button
+                  onClick={handleNext}
+                  className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white px-5 py-2.5 rounded-md font-medium transition-colors duration-200"
+                >
+                  {currentQuestion === quizData.questions.length - 1
+                    ? "Submit Quiz"
+                    : "Next Question"}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}
 
       {step === 2 && (
         <Layout>
-          <div className="flex flex-col items-center space-y-6 text-center mt-10">
-            <h1 className="text-3xl font-bold text-green-500">
-              Congratulations!
-            </h1>
-            <p className="text-md text-gray-400">
-              You have successfully completed the quiz.
-            </p>
-            <div className="text-black">
-              <Certificate
-                name={filteredUser.name}
-                rollNumber={filteredUser.rollNumber}
-                examName={quizData.name}
-                date={date}
-                language={quizData.language}
-                score={score}
-                Que={Que}
-              />
+          <div className="max-w-4xl mx-auto p-4 md:p-6 lg:p-8">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden p-6 md:p-8 transition-all duration-200">
+              <div className="text-center space-y-6">
+                <div className="space-y-2">
+                  <h1 className="text-2xl md:text-3xl font-bold text-green-600 dark:text-green-400">
+                    Congratulations!
+                  </h1>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    You have successfully completed the quiz.
+                  </p>
+                </div>
+
+                <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-inner">
+                  <Certificate
+                    name={filteredUser.name}
+                    rollNumber={filteredUser.rollNumber}
+                    examName={quizData.name}
+                    date={date}
+                    language={quizData.language}
+                    score={score}
+                    Que={Que}
+                  />
+                </div>
+
+                <div className="pt-4">
+                  <div className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-4 py-3 rounded-lg inline-block">
+                    <p className="font-medium">
+                      Score: {score} out of {Que}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </Layout>
       )}
-
-      {/* 🔧 New Feature: Add your new logic here */}
-
-    </>
+    </div>
   );
 };
 

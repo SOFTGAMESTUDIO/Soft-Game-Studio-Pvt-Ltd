@@ -23,7 +23,7 @@ import { useTheme } from "../../components/Theems/UseTheems";
 
 
 const navItems = [
-  { name: "Exam", link: "#features" },
+  { name: "Exam", link: "/Exam" },
   { name: "Projects", link: "#pricing" },
   { name: "Nots & Books", link: "#contact" },
   { name: "Development", link: "#contact" },

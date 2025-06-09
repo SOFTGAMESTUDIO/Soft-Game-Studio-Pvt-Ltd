@@ -46,6 +46,7 @@ import ExamDetails from "./pages/Exam/SGS EXAM/ExamDetails";
 import SGSEXAM from "./pages/Exam/SGSEXAM";
 import ExamQuizDetails from "./pages/Exam/Quiz/EXAM CONTROLER/ExamDetails";
 import QuizExam from "./pages/Exam/Quiz/EXAM CONTROLER/QuizExam";
+import ExamUplode from "./pages/Admin/DashBoards/Exam/ThuritacalExam.jsx/ExamUplode";
 
 
 function App() {
@@ -149,6 +150,14 @@ function App() {
           element={
             <ProtectedRouteForAdmin>
               <Exam />
+            </ProtectedRouteForAdmin>
+          }
+        />
+         <Route
+          path="/Admin-SGSExam"
+          element={
+            <ProtectedRouteForAdmin>
+              <ExamUplode />
             </ProtectedRouteForAdmin>
           }
         />

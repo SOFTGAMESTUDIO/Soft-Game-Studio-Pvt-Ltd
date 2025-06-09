@@ -16,8 +16,8 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   const AboutUS = [
     { name: "About SGS", path: "/About-SGS" },
-    { name: "About Exam", path: "/CustomerService/AboutUs" },
-    { name: "About Development", path: "/CustomerService/AboutUs" },
+    { name: "About Exam", path: "/About-Exam" },
+    { name: "About Development", path: "#" },
   ];
 
   const ContactUs = [

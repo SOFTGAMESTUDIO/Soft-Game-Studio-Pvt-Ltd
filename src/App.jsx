@@ -23,7 +23,7 @@ import CopyrightPage from "./pages/CopyrightPage/CopyrightPage";
 
 import ScrollToTop from "./ScrollToTop";
 import Cart from "./pages/Cart/Cart";
-import ProductsPage from "./pages/Projects/PRoject";
+import ProductsPage from "./pages/Projects/Product";
 import FeedbackSection from "./pages/CUSTOMER SERVICE/FeedBackFome";
 import FAQItem from "./pages/CUSTOMER SERVICE/FAQs";
 import CookiesPolicy from "./pages/CUSTOMER SERVICE/CookiesPolicy";
@@ -47,6 +47,8 @@ import SGSEXAM from "./pages/Exam/SGSEXAM";
 import ExamQuizDetails from "./pages/Exam/Quiz/EXAM CONTROLER/ExamDetails";
 import QuizExam from "./pages/Exam/Quiz/EXAM CONTROLER/QuizExam";
 import ExamUplode from "./pages/Admin/DashBoards/Exam/ThuritacalExam.jsx/ExamUplode";
+import AboutExam from "./pages/CUSTOMER SERVICE/AboutSGSExam";
+import ProductDetailsPage from "./pages/Projects/ProductDetail";
 
 
 function App() {
@@ -73,6 +75,7 @@ function App() {
         <Route path="/ContactUs" element={<ContactUs />} />
         <Route path="/TermsAndConditions" element={<TermsAndConditions />} />
         <Route path="/About-SGS" element={<About />} />
+        <Route path="/About-Exam" element={<AboutExam />} />
         <Route path="/Feedback" element={<FeedbackSection />} />
         <Route path="/FAQs" element={<FAQItem />} />
         <Route path="/CookiesPolicy" element={<CookiesPolicy />} />
@@ -81,6 +84,7 @@ function App() {
 {/*  Product and Roots  */}
         <Route path="/Cart" element={<Cart />} />
         <Route path="/Project" element={<ProductsPage />} />
+        <Route path="/Project-Details/:id" element={<ProductDetailsPage />} />
 
 {/* Exam Routes */}
          <Route path="/Exam" element={<SGSEXAM/>} />

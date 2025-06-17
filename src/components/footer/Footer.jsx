@@ -17,7 +17,10 @@ const Footer = () => {
   const AboutUS = [
     { name: "About SGS", path: "/About-SGS" },
     { name: "About Exam", path: "/About-Exam" },
-    { name: "About Development", path: "#" },
+    { name: "About Development", path: "/AboutDevelopmet" },
+     { name: "Our Members", path: "/OurMembers"},
+
+    
   ];
 
   const ContactUs = [
@@ -37,13 +40,10 @@ const Footer = () => {
   ];
 
   const Feature = [
-    { name: "Home", path: "/" },
-    { name: "Courses", path: "/Courses" },
-    { name: "Blogs", path: "/Blogs" },
-    { name: "Projects", path: "/Projects" },
-    { name: "Contact Us", path: "/ContactUs" },
-    { name: "About Us", path: "/CustomerService/AboutUs" },
-    { name: "Support", path: "/Support" },
+    { name: "E-Books", path: "/E-Books" },
+    { name: "Projets", path: "/Project" },
+    { name: "Our Courses", path: "/OurCourse" },
+    { name: "Notes & Books", path: "/Notes&Books" },
   ];
 
   const socialLinks = [

@@ -7,7 +7,7 @@ import { useCart } from "../../../Modules/Cart/CartContext";
 import Layout from "../../../components/layout/Layout";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-
+import { Helmet } from "react-helmet";
 const ExamDetails = () => {
   const [product, setProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -37,6 +37,15 @@ const ExamDetails = () => {
   if (isLoading || !product) {
     return (
       <Layout>
+          <Helmet>
+        <title>{product.title} | Quiz Exam | Soft Game Studio</title>
+        <meta name="description" content={product.description || 'Test your skills with our quiz.'} />
+        <meta name="keywords" content={`Quiz, ${product.examLink}, ${product.title}, Soft Game Studio`} />
+        <meta property="og:title" content={`${product.name} | Quiz Exam`} />
+        <meta property="og:description" content={product.description} />
+        <meta property="og:image" content={product.imageUrl} />
+      </Helmet>
+
         <div className="min-h-screen flex items-center justify-center bg-purple-100 dark:bg-neutral-950">
           <motion.div
             animate={{ rotate: 360 }}
@@ -50,6 +59,16 @@ const ExamDetails = () => {
 
   return (
     <Layout>
+    
+      <Helmet>
+        <title>{product.title} | Quiz Exam | Soft Game Studio</title>
+        <meta name="description" content={product.description || 'Test your skills with our quiz.'} />
+        <meta name="keywords" content={`Quiz, ${product.examLink}, ${product.title}, Soft Game Studio`} />
+        <meta property="og:title" content={`${product.name} | Quiz Exam`} />
+        <meta property="og:description" content={product.description} />
+        <meta property="og:image" content={product.imageUrl} />
+      </Helmet>
+
       <div className="bg-purple-100 dark:bg-neutral-950 text-gray-900 dark:text-gray-200 min-h-screen">
         {/* Parallax Hero Section */}
         <div className="relative h-screen overflow-hidden">

@@ -2,18 +2,16 @@ import React, { useState } from "react";
 import { Input } from "../../UiComponents/input";
 import { Label } from "../../UiComponents/label";
 import { cn } from "../../Library/utils";
-import {
-  IconBrandGithub,
-  IconBrandGoogle,
-} from "@tabler/icons-react";
+import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react";
 import {
   handleLogin,
   handleGithubLogin,
   handleGoogleLogin,
 } from "../../Modules/LoginHamdler";
 import { useNavigate, Link } from "react-router-dom"; // React router
+import { Helmet } from "react-helmet";
 
- function UserLogin() {
+function UserLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -26,6 +24,34 @@ import { useNavigate, Link } from "react-router-dom"; // React router
 
   return (
     <div className="flex justify-center items-center min-h-screen p-4 bg-neutral-950">
+      <Helmet>
+        <title>Login | Soft Game Studio</title>
+        <meta
+          name="description"
+          content="Login to your Soft Game Studio account to access projects, courses, exams, and more. Secure and simple authentication for students and developers."
+        />
+        <meta
+          name="keywords"
+          content="Login, User Account, Sign In, Soft Game Studio, Student Portal, Developer Login, Project Access"
+        />
+        <meta name="author" content="Soft Game Studio" />
+
+        <meta property="og:title" content="Login | Soft Game Studio" />
+        <meta
+          property="og:description"
+          content="Access your Soft Game Studio account. View your courses, download projects, and track your progress with secure login."
+        />
+        <meta
+          property="og:url"
+          content="https://softgamestudio.web.app/login"
+        />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:image"
+          content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050"
+        />
+      </Helmet>
+
       <div className="shadow-input w-full max-w-md rounded-2xl border-white border-2 p-4 md:p-8 bg-black">
         <h2 className="text-xl font-bold text-neutral-200">
           Welcome to Soft Game Studio

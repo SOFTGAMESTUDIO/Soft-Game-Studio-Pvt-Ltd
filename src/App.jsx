@@ -49,6 +49,21 @@ import QuizExam from "./pages/Exam/Quiz/EXAM CONTROLER/QuizExam";
 import ExamUplode from "./pages/Admin/DashBoards/Exam/ThuritacalExam.jsx/ExamUplode";
 import AboutExam from "./pages/CUSTOMER SERVICE/AboutSGSExam";
 import ProductDetailsPage from "./pages/Projects/ProductDetail";
+import NotesAndBooks from "./pages/Admin/DashBoards/NotesAndBooks/NotesAndBooks";
+import FreeNotesAndBooks from "./pages/NotesAndBooks/FreeNotesAndBooks.jsx";
+import HomePage from "./components/Hero/HeroSection.jsx";
+import AddCoursePage from "./pages/Admin/DashBoards/Courses/NewCourses.jsx";
+import DisplayCourses from "./pages/Courses/Courses.jsx";
+import SingleCourse from "./pages/Courses/SingleCourse.jsx";
+import PlayListCourse from "./pages/Courses/PlayListCourse.jsx";
+import EbookCreator from "./pages/Admin/DashBoards/EBook/EbookCreator.jsx";
+import DashBoardEbook from "./pages/Admin/DashBoards/EBook/Ebooks.jsx";
+import EditEbook from "./pages/Admin/DashBoards/EBook/EdietEbook.jsx";
+import EbookReader from "./pages/EBook/EBooks.jsx";
+import EbookCatalog from "./pages/EBook/DesplayEbboks.jsx";
+import DevelopmentPage from "./pages/CUSTOMER SERVICE/AboutDevelopment.jsx";
+import ProfilePage from "./pages/Profile/Profile.jsx";
+
 
 
 function App() {
@@ -63,7 +78,7 @@ function App() {
       <ScrollToTop />
       <Routes>
         {/*  Basic Links  */}
-        <Route path="/" element={<About />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<UserLogin />} />
         <Route path="/signup" element={<UserSignup />} />
         <Route path="/resetpassword" element={<UserResetPasswordPage />} />
@@ -80,6 +95,7 @@ function App() {
         <Route path="/FAQs" element={<FAQItem />} />
         <Route path="/CookiesPolicy" element={<CookiesPolicy />} />
         <Route path="/OurMembers" element={<OurMembers />} />
+        <Route path="/AboutDevelopmet" element={<DevelopmentPage/>} />
 
 {/*  Product and Roots  */}
         <Route path="/Cart" element={<Cart />} />
@@ -91,6 +107,29 @@ function App() {
          <Route path="/Exam-Details/:id" element={<ExamDetails />} />
          <Route path="/Exam-Quiz-Details/:id" element={<ExamQuizDetails />} />
          <Route path="/SGS-Quiz/:id" element={<QuizExam />} />
+{/* Notes & Books Routes */}
+
+ <Route path="/Notes&Books" element={<FreeNotesAndBooks/>} />
+
+
+ {/* Our Corses */}
+
+ <Route path="/OurCourse" element={<DisplayCourses/>} />
+ <Route path="/SingleCourse/:id" element={<SingleCourse/>} />
+ <Route path="/PlayListCourse/:id" element={<PlayListCourse/>} />
+
+
+ {/* Our Ebooks */}
+
+ <Route path="/E-Books" element={<EbookCatalog/>} />
+ <Route path="/E-Books/:id" element={<EbookReader/>} />
+
+
+  {/* User Profile */}
+
+ <Route path="/Profile" element={<ProfilePage/>} />
+
+
 
          
 
@@ -205,6 +244,60 @@ function App() {
             </ProtectedRouteForAdmin>
           }
         />
+
+
+         {/*  Admin Notes & Books */}
+         <Route
+          path="/Admin-Notes&Books"
+          element={
+            <ProtectedRouteForAdmin>
+              <NotesAndBooks />
+            </ProtectedRouteForAdmin>
+          }
+        />
+
+
+         {/*  Admin Courses */}
+         <Route
+          path="/Admin-Courses"
+          element={
+            <ProtectedRouteForAdmin>
+              <AddCoursePage />
+            </ProtectedRouteForAdmin>
+          }
+        />
+
+        {/*  Admin E Book */}
+         <Route
+          path="/Admin-EBook"
+          element={
+            <ProtectedRouteForAdmin>
+              <DashBoardEbook/>
+            </ProtectedRouteForAdmin>
+          }/>
+          <Route
+          path="/Admin-EBookADD"
+          element={
+            <ProtectedRouteForAdmin>
+              <EbookCreator/>
+            </ProtectedRouteForAdmin>
+          }
+        />
+        <Route
+          path="/Admin-EBookEdiet/:ebookId"
+          element={
+            <ProtectedRouteForAdmin>
+              <EditEbook/>
+            </ProtectedRouteForAdmin>
+          }
+        />
+
+
+
+
+     
+          
+      
       </Routes>
       <ToastContainer />
     </Router>
@@ -224,7 +317,7 @@ export const ProtectedRoute = ({ children }) => {
   if (user) {
     return children;
   } else {
-    return <Navigate to={"/login"} />;
+    return <Navigate to={"/Login"} />;
   }
 };
 
@@ -233,6 +326,6 @@ export const ProtectedRouteForAdmin = ({ children }) => {
   if (admin.email === import.meta.env.VITE__ADMIN_EMAIL) {
     return children;
   } else {
-    return <Navigate to={"/login"} />;
+    return <Navigate to={"/Login"} />;
   }
 };

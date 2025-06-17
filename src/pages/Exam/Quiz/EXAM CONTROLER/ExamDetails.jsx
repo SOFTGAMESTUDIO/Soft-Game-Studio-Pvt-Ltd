@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import parse from "html-react-parser";
 import { fireDB } from "../../../../DataBase/firebaseConfig";
 import Layout from "../../../../components/layout/Layout";
+import { Helmet } from "react-helmet";
 
 const ExamQuizDetails = () => {
   const navigate = useNavigate();
@@ -70,6 +71,12 @@ const ExamQuizDetails = () => {
   if (loading) {
     return (
       <Layout>
+          <Helmet>
+        <title> Quiz Exam | Soft Game Studio</title>
+        <meta name="description" content='Test your skills with our quiz.' />
+        <meta name="keywords" content={`Quiz, Soft Game Studio`} />
+        <meta property="og:title" content={` Quiz Exam`} />
+      </Helmet>
         <div className="flex justify-center items-center h-screen bg-purple-100 dark:bg-neutral-950">
           <motion.div
             animate={{ rotate: 360 }}
@@ -84,6 +91,15 @@ const ExamQuizDetails = () => {
   if (!exam) {
     return (
       <Layout>
+        <Helmet>
+        <title>{exam.name} | Quiz Exam | Soft Game Studio</title>
+        <meta name="description" content={exam.description || 'Test your skills with our quiz.'} />
+        <meta name="keywords" content={`Quiz, ${exam.level}, ${exam.title}, Soft Game Studio`} />
+        <meta property="og:title" content={`${exam.name} | Quiz Exam`} />
+        <meta property="og:description" content={exam.description} />
+        <meta property="og:url" content={`https://softgamestudio.web.app/exam/quiz/${id}`} />
+        <meta property="og:image" content={exam.imageUrl} />
+      </Helmet>
         <div className="flex flex-col items-center justify-center h-screen bg-purple-100 dark:bg-neutral-950 text-center p-4">
           <motion.div
             initial={{ scale: 0 }}
@@ -129,6 +145,15 @@ const ExamQuizDetails = () => {
 
   return (
     <Layout>
+       <Helmet>
+        <title>{exam.name} | Quiz Exam | Soft Game Studio</title>
+        <meta name="description" content={exam.description || 'Test your skills with our quiz.'} />
+        <meta name="keywords" content={`Quiz, ${exam.level}, ${exam.title}, Soft Game Studio`} />
+        <meta property="og:title" content={`${exam.name} | Quiz Exam`} />
+        <meta property="og:description" content={exam.description} />
+        <meta property="og:url" content={`https://softgamestudio.web.app/exam/quiz/${id}`} />
+        <meta property="og:image" content={exam.imageUrl} />
+      </Helmet>
       <div className="bg-purple-100 dark:bg-neutral-950 text-gray-900 dark:text-gray-200 min-h-screen">
         {/* Parallax Hero Section */}
         <div className="relative h-screen overflow-hidden">

@@ -14,6 +14,7 @@ import Layout from "../../../../components/layout/Layout";
 import Certificate from "../../../../components/Certificate/Certificate";
 import { fireDB } from "../../../../DataBase/firebaseConfig";
 import { getUserData } from "../../../../Modules/UserData";
+import { Helmet } from "react-helmet";
 
 const QuizExam = () => {
   const { id: quizId } = useParams();
@@ -251,6 +252,13 @@ const QuizExam = () => {
   if (!quizData) {
     return (
       <Layout>
+        <Helmet>
+        <title>Quiz Exam | Soft Game Studio</title>
+        <meta name="description" content= {'Test your skills with our quiz.'} />
+        <meta name="keywords" content={`Quiz, Soft Game Studio`} />
+        <meta property="og:title" content={` Quiz Exam`} />
+        <meta property="og:description" content={"this is Provide all type of quiz in exam bases "} />
+      </Helmet>
         <div className="max-w-4xl mx-auto p-4">
           <div className="bg-red-100 dark:bg-red-900/20 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-300 px-4 py-3 rounded-lg text-center">
             Quiz data not available.
@@ -262,6 +270,13 @@ const QuizExam = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+       <Helmet>
+        <title>Quiz Exam | Soft Game Studio</title>
+        <meta name="description" content= {'Test your skills with our quiz.'} />
+        <meta name="keywords" content={`Quiz, Soft Game Studio`} />
+        <meta property="og:title" content={` Quiz Exam`} />
+        <meta property="og:description" content={"this is Provide all type of quiz in exam bases "} />
+      </Helmet>
       {step === 0 && (
         <Layout>
           <div className="max-w-4xl mx-auto p-4 md:p-6 lg:p-8">
@@ -460,6 +475,8 @@ const QuizExam = () => {
         </Layout>
       )}
     </div>
+
+
   );
 };
 

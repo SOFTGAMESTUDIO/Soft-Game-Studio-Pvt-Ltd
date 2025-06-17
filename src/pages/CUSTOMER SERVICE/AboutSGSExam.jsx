@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Layout from "../../components/layout/Layout";
+import { Helmet } from "react-helmet";
 
 const AboutExam = () => {
   const [ref1, inView1] = useInView({ threshold: 0.3, triggerOnce: true });
@@ -11,6 +12,28 @@ const AboutExam = () => {
 
   return (
     <Layout>
+      <Helmet>
+  <title>About Exam Platform | Soft Game Studio</title>
+  <meta 
+    name="description" 
+    content="Discover how the SGS Exam Platform by Soft Game Studio delivers secure, scalable, and AI-powered online & offline exam solutions for institutions and certification bodies." 
+  />
+  <meta 
+    name="keywords" 
+    content="SGS Exam Platform, Online Exams, Offline Exams, AI Proctoring, Secure Exam System, Anti-Cheating Exams, Educational Assessment, Exam Monitoring, Browser Lockdown, Adaptive Testing, Soft Game Studio Exams" 
+  />
+  <meta name="author" content="Soft Game Studio" />
+
+  {/* Open Graph / Social Media */}
+  <meta property="og:title" content="About SGS Exam Platform | Soft Game Studio" />
+  <meta 
+    property="og:description" 
+    content="Learn about the SGS Exam Platform – a secure and scalable assessment system with AI proctoring, real-time analytics, and instant grading for online and offline exams." 
+  />
+  <meta property="og:url" content="https://softgamestudio.web.app/exam-platform" />
+  <meta property="og:type" content="website" />
+</Helmet>
+
  <div className="min-h-screen bg-purple-50 dark:bg-neutral-950 transition-colors duration-300">
       {/* Hero Section with Parallax */}
       <div className="relative h-screen overflow-hidden">

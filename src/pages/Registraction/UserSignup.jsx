@@ -12,6 +12,7 @@ import { Input } from "../../UiComponents/input";
 import { Label } from "../../UiComponents/label";
 import { cn } from "../../Library/utils";
 import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react";
+import { Helmet } from "react-helmet";
 
 export default function UserSignup() {
   const [formData, setFormData] = useState({
@@ -175,11 +176,38 @@ export default function UserSignup() {
 
 // Helper components
 const LabelInputContainer = ({ children, className }) => (
-  <div className={cn("flex flex-col space-y-1 w-full", className)}>{children}</div>
+  <div className={cn("flex flex-col space-y-1 w-full", className)}>
+    {children}
+  </div>
 );
 
 const BottomGradient = () => (
   <>
+    <Helmet>
+      <title>Sign Up | Soft Game Studio</title>
+      <meta
+        name="description"
+        content="Create a free account on Soft Game Studio to access free and premium projects, courses, exams, and more. Fast and secure registration for students and developers."
+      />
+      <meta
+        name="keywords"
+        content="Sign Up, Register, Create Account, Soft Game Studio, Student Registration, Developer Signup, Project Access"
+      />
+      <meta name="author" content="Soft Game Studio" />
+
+      <meta property="og:title" content="Sign Up | Soft Game Studio" />
+      <meta
+        property="og:description"
+        content="Join Soft Game Studio today. Get access to top-quality projects, coding resources, and exam preparation tools. Quick and easy signup process."
+      />
+      <meta property="og:url" content="https://softgamestudio.web.app/signup" />
+      <meta property="og:type" content="website" />
+      <meta
+        property="og:image"
+        content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050"
+      />
+    </Helmet>
+
     <span className="absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
     <span className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
   </>

@@ -6,6 +6,7 @@ import { useCart } from "../../Modules/Cart/CartContext";
 import Layout from "../../components/layout/Layout";
 import GoogleDriveDownloader from "../../Modules/GoogleDriveDownloader";
 import parse from 'html-react-parser';
+import { Helmet } from "react-helmet";
 
 export default function ProductDetailsPage() {
   const { id } = useParams();
@@ -44,6 +45,15 @@ export default function ProductDetailsPage() {
 
   return (
     <Layout>
+
+      <Helmet>
+        <title>{product.title} | Soft Game Studio</title>
+        <meta name="description" content={product.description || "Explore our full project data."} />
+        <meta name="keywords" content={`Project, ${product.title}, Soft Game Studio, Pre-built projects`} />
+        <meta property="og:title" content={product.title} />
+        <meta property="og:description" content={product.description} />
+        <meta property="og:image" content={product.imageURL} />
+      </Helmet>
       <div className="bg-purple-100 dark:bg-neutral-950 text-gray-900 dark:text-gray-200 min-h-screen">
         {/* Parallax Hero Section */}
         <div className="relative h-screen overflow-hidden">

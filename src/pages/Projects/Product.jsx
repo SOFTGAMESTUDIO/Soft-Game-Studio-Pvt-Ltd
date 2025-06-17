@@ -5,6 +5,7 @@ import GoogleDriveDownloader from "../../Modules/GoogleDriveDownloader";
 import { useCart } from "../../Modules/Cart/CartContext";
 import Layout from "../../components/layout/Layout";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 export default function ProductsPage() {
   const { product, loading } = useFetchProducts();
@@ -46,6 +47,31 @@ export default function ProductsPage() {
 
   return (
     <Layout>
+       <Helmet>
+  <title>Projects | Soft Game Studio</title>
+  <meta 
+    name="description" 
+    content="Explore a wide range of free and affordable software projects. Soft Game Studio offers pre-built, full-data projects for students, developers, and startups." 
+  />
+  <meta 
+    name="keywords" 
+    content="Free Projects, Affordable Projects, Pre-built Projects, Full Data Projects, Software Projects, Student Projects, Developer Resources, Soft Game Studio" 
+  />
+  <meta name="author" content="Soft Game Studio" />
+  
+  <meta property="og:title" content="Projects | Soft Game Studio" />
+  <meta 
+    property="og:description" 
+    content="Get free and budget-friendly pre-built projects with full data at Soft Game Studio. Ideal for learning, development, and academic use." 
+  />
+  <meta property="og:url" content="https://softgamestudio.web.app/Projects" />
+  <meta property="og:type" content="website" />
+  <meta 
+    property="og:image" 
+    content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050" 
+  />
+</Helmet>
+
       <div className="bg-purple-100 dark:bg-neutral-950 text-gray-900 dark:text-gray-200 min-h-screen flex flex-col">
 
         {/* Hero Section */}

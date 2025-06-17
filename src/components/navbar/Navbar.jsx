@@ -23,10 +23,10 @@ import { useTheme } from "../../components/Theems/UseTheems";
 
 
 const navItems = [
+  { name: "Home", link: "/" },
   { name: "Exam", link: "/Exam" },
-  { name: "Projects", link: "#pricing" },
-  { name: "Nots & Books", link: "#contact" },
-  { name: "Development", link: "#contact" },
+  { name: "Projects", link: "/Project"},
+  { name: "E-Books", link: "/E-Books" },
 ];
 
 export function NavbarMenu() {

@@ -5,6 +5,7 @@ import { fireDB } from "../../DataBase/firebaseConfig";
 import { useCart } from "../../Modules/Cart/CartContext";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
 
 const SGSEXAM = () => {
   const [activeTab, setActiveTab] = useState("quizExam");
@@ -319,6 +320,32 @@ const SGSEXAM = () => {
 
   return (
     <Layout>
+     <Helmet>
+  <title>Exams | Soft Game Studio</title>
+  <meta 
+    name="description" 
+    content="Take theory and quiz (MCQ) exams online with Soft Game Studio. Improve your skills through structured practice exams designed for students and developers." 
+  />
+  <meta 
+    name="keywords" 
+    content="Online Exams, Theory Exams, Quiz Exams, MCQ Tests, Practice Exams, Soft Game Studio, Free Exams, Student Practice, Competitive Preparation" 
+  />
+  <meta name="author" content="Soft Game Studio" />
+
+  <meta property="og:title" content="Theory & Quiz Exams | Soft Game Studio" />
+  <meta 
+    property="og:description" 
+    content="Access free and premium theory and quiz exams at Soft Game Studio. Test your knowledge and prepare for interviews and competitive exams." 
+  />
+  <meta property="og:url" content="https://softgamestudio.web.app/exams" />
+  <meta property="og:type" content="website" />
+  <meta 
+    property="og:image" 
+    content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050" 
+  />
+</Helmet>
+
+
       <div className="bg-purple-100 dark:bg-neutral-950 text-gray-900 dark:text-gray-200 min-h-screen">
         {/* Hero Section */}
         <div className="relative overflow-hidden bg-purple-600 dark:bg-neutral-900">

@@ -5,6 +5,7 @@ import { cn } from "../../Library/utils";
 import { sendResetPasswordEmail } from "../../Modules/SetNewPassword";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom"; // ✅ React Router DOM
+import { Helmet } from "react-helmet";
 
 export default function UserResetPasswordPage() {
   const [email, setEmail] = useState("");
@@ -29,6 +30,34 @@ export default function UserResetPasswordPage() {
 
   return (
     <div className="flex justify-center items-center min-h-screen p-4 bg-neutral-950">
+      <Helmet>
+        <title>Reset Password | Soft Game Studio</title>
+        <meta
+          name="description"
+          content="Forgot your password? Reset it easily at Soft Game Studio. Secure password recovery for your account to regain access to projects, exams, and courses."
+        />
+        <meta
+          name="keywords"
+          content="Reset Password, Forgot Password, Recover Account, Soft Game Studio, Account Help, Student Login, Developer Account Recovery"
+        />
+        <meta name="author" content="Soft Game Studio" />
+
+        <meta property="og:title" content="Reset Password | Soft Game Studio" />
+        <meta
+          property="og:description"
+          content="Use our secure password reset process to recover your Soft Game Studio account. Quick access to your learning and project dashboard."
+        />
+        <meta
+          property="og:url"
+          content="https://softgamestudio.web.app/reset-password"
+        />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:image"
+          content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050"
+        />
+      </Helmet>
+
       <div className="w-full max-w-md p-6 rounded-xl shadow-input bg-black border-white border-2">
         <h2 className="text-xl font-bold text-neutral-200">Forgot Password?</h2>
         <p className="text-sm text-neutral-300 mt-1">
@@ -54,13 +83,18 @@ export default function UserResetPasswordPage() {
             disabled={loading}
             className="group/btn relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
           >
-            {loading ? "Sending..." : emailSent ? "Resend Email" : "Send Reset Email"}
+            {loading
+              ? "Sending..."
+              : emailSent
+              ? "Resend Email"
+              : "Send Reset Email"}
             <BottomGradient />
           </button>
 
           {emailSent && (
             <p className="text-sm text-green-400 text-center">
-              Email sent! Please check your inbox. Didn't get it? Click above to resend.
+              Email sent! Please check your inbox. Didn't get it? Click above to
+              resend.
             </p>
           )}
         </form>
@@ -87,5 +121,7 @@ const BottomGradient = () => (
 );
 
 const LabelInputContainer = ({ children, className }) => (
-  <div className={cn("flex w-full flex-col space-y-2", className)}>{children}</div>
+  <div className={cn("flex w-full flex-col space-y-2", className)}>
+    {children}
+  </div>
 );

@@ -41,6 +41,39 @@ import Layout from '../../components/layout/Layout';
       ],
       link: "/Admin-Products"
     },
+    {
+      title: "Notes & Books", 
+      details: [
+        "Uplode Notes",
+        "Uplode Books"
+      ],
+      link: "/Admin-Notes&Books"
+    },
+{
+      title: "Courses", 
+      details: [
+        "Add Single Course",
+        "Add Play List Course"
+      ],
+      link: "/Admin-Courses"
+    },
+    {
+      title: "E-Books", 
+      details: [
+        "Add E books",
+        "Ediet E Books"
+      ],
+      link: "/Admin-EBook"
+    },
+
+
+
+    
+
+
+    
+
+   
     
 
 

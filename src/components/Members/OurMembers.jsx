@@ -14,7 +14,7 @@ const teamMembers = [
     accentColor: "bg-pink-500",
     skills: ["Python", "React", "Firebase", "Unity"],
     social: {
-      linkedin: "https://www.linkedin.com/in/livesh-kumar-1a7244354/",
+      linkedin: "https://www.linkedin.com/in/Livesh-Kumar-Garg",
       github: "https://github.com/SOFTGAMESTUDIO",
       instagram: "https://www.instagram.com/liveshkumargarg/",
     }
@@ -28,7 +28,7 @@ const teamMembers = [
     skills: ["C++", "DSA", "JavaScript", "Python"],
     social: {
       linkedin: "https://www.linkedin.com/in/jatin-2a-kumar-/",
-      github: "#",
+      github: "",
       instagram: "https://www.instagram.com/jatinkumar.dua/",
       
     }
@@ -41,8 +41,8 @@ const teamMembers = [
     accentColor: "bg-purple-500",
     skills: ["C", "JavaScript", "Firebase", "HTML/CSS"],
     social: {
-      linkedin: "#",
-      github: "#",
+      linkedin: "www.linkedin.com/in/sharik-hasan",
+      github: "https://github.com/0xSharik",
       instagram: "https://www.instagram.com/samar_pb15/",
       
     }

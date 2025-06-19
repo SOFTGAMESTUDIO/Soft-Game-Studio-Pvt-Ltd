@@ -11,12 +11,5 @@
       "url": "http://localhost:8080",
       "webRoot": "${workspaceFolder}"
     },
-    {
-      "type": "java",
-      "name": "Run with AppMap",
-      "request": "launch",
-      "mainClass": "",
-      "vmArgs": "-javaagent:${userHome}\\.appmap\\lib\\java\\appmap.jar"
-    }
   ]
 }

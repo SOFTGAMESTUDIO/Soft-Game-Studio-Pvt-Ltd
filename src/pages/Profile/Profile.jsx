@@ -5,6 +5,7 @@ import { collection, query, where, getDocs, doc, updateDoc } from 'firebase/fire
 import { fireDB } from '../../DataBase/firebaseConfig';
 import { FaEdit, FaSave, FaTimes, FaUser, FaPhone, FaHome, FaMapMarkerAlt } from 'react-icons/fa';
 import Layout from '../../components/layout/Layout';
+import { Helmet } from 'react-helmet';
 
 const ProfilePage = () => {
   const [userData, setUserData] = useState(null);
@@ -116,6 +117,28 @@ const ProfilePage = () => {
 
   return (
     <Layout>
+      <Helmet>
+  <title>User Profile | Soft Game Studio</title>
+  <meta 
+    name="description" 
+    content="Access and manage your personal profile, exam history, course progress, and certificates on Soft Game Studio. Keep your information secure and up to date." 
+  />
+  <meta 
+    name="keywords" 
+    content="User Profile, Student Dashboard, Exam History, Course Progress, Certification, Soft Game Studio Profile, Account Settings, Personal Information" 
+  />
+  <meta name="author" content="Soft Game Studio" />
+
+  {/* Open Graph / Social Sharing */}
+  <meta property="og:title" content="User Profile | Soft Game Studio" />
+  <meta 
+    property="og:description" 
+    content="Manage your profile, exam records, course enrollments, and personal settings securely on Soft Game Studio." 
+  />
+  <meta property="og:url" content="https://softgamestudio.web.app/profile" />
+  <meta property="og:type" content="website" />
+</Helmet>
+
  <div 
       className="min-h-screen bg-purple-100 dark:bg-neutral-950 transition-colors duration-300 relative overflow-hidden"
       style={{

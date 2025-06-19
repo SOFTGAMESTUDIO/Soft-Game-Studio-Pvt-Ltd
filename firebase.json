@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site":"webjl26",
+    "site": "softgamestudio",
     "public": "dist",
     "ignore": [
       "firebase.json",
@@ -10,9 +10,13 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "/index.html"    
+        "destination": "/index.html"
       }
     ],
     "predeploy": ["npm run build"]
+
   }
 }
+
+
+

@@ -63,6 +63,8 @@ import EbookReader from "./pages/EBook/EBooks.jsx";
 import EbookCatalog from "./pages/EBook/DesplayEbboks.jsx";
 import DevelopmentPage from "./pages/CUSTOMER SERVICE/AboutDevelopment.jsx";
 import ProfilePage from "./pages/Profile/Profile.jsx";
+import AllCoursesPage from "./pages/Admin/DashBoards/Courses/DisplayCourses.jsx";
+import EditCoursePage from "./pages/Admin/DashBoards/Courses/EdietCourses.jsx";
 
 
 
@@ -262,7 +264,23 @@ function App() {
           path="/Admin-Courses"
           element={
             <ProtectedRouteForAdmin>
+              <AllCoursesPage />
+            </ProtectedRouteForAdmin>
+          }
+        />
+        <Route
+          path="/Admin-Courses-Add"
+          element={
+            <ProtectedRouteForAdmin>
               <AddCoursePage />
+            </ProtectedRouteForAdmin>
+          }
+        />
+        <Route
+          path="/Admin-Courses-Ediet/:id"
+          element={
+            <ProtectedRouteForAdmin>
+              <EditCoursePage/>
             </ProtectedRouteForAdmin>
           }
         />

@@ -74,12 +74,12 @@ npm run dev
 
 ```env
 # Firebase
-VITE_FIREBASE_API_KEY="your-key"
-VITE_FIREBASE_AUTH_DOMAIN="your-domain"
-VITE_FIREBASE_PROJECT_ID="your-id"
-VITE_FIREBASE_STORAGE_BUCKET="your-bucket"
-VITE_FIREBASE_MESSAGING_SENDER_ID="your-sender-id"
-VITE_FIREBASE_APP_ID="your-app-id"
+VITE_FIREBASE_API_KEY_SGS="your-key"
+VITE_FIREBASE_AUTH_DOMAIN_SGS="your-domain"
+VITE_FIREBASE_PROJECT_ID_SGS="your-id"
+VITE_FIREBASE_STORAGE_BUCKET_SGS="your-bucket"
+VITE_FIREBASE_MESSAGING_SENDER_ID_SGS="your-sender-id"
+VITE_FIREBASE_APP_ID_SGS="your-app-id"
 
 # Razorpay (Create account at razorpay.com)
 VITE_RAZORPAY_KEY="your-key"

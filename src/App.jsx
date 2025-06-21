@@ -341,7 +341,7 @@ export const ProtectedRoute = ({ children }) => {
 
 export const ProtectedRouteForAdmin = ({ children }) => {
   const admin = JSON.parse(localStorage.getItem("user"));
-  if (admin.email === import.meta.env.VITE__ADMIN_EMAIL) {
+  if (admin.email === import.meta.env.VITE__ADMIN_EMAIL_SGS) {
     return children;
   } else {
     return <Navigate to={"/Login"} />;

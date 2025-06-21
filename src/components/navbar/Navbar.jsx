@@ -126,7 +126,7 @@ export function NavbarMenu() {
                   <ImExit className="w-4 h-4 mr-2" />
                   Logout
                 </button>
-                {user.email === import.meta.env.VITE__ADMIN_EMAIL && (
+                {user.email === import.meta.env.VITE__ADMIN_EMAIL_SGS && (
                   <Link
                     to="/Admin"
                     className="flex items-center px-4 py-2 text-sm hover:bg-gray-200 dark:hover:bg-neutral-900 rounded-full"
@@ -211,7 +211,7 @@ export function NavbarMenu() {
                 <ImExit className="w-6 h-6 mr-2" />
                 Logout
               </NavbarButton>
-              {user.email === import.meta.env.VITE__ADMIN_EMAIL && (
+              {user.email === import.meta.env.VITE__ADMIN_EMAIL_SGS && (
                 <NavbarButton
                   onClick={() => {
                     navigate("/Admin");

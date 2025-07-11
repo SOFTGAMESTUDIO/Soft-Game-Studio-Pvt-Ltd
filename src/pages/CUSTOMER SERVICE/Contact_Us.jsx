@@ -22,16 +22,28 @@ const ContactPage = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    // Simulate email sending (in a real app, use actual emailjs credentials)
-    setTimeout(() => {
-      setIsSubmitting(false);
+  // Replace these with your actual EmailJS credentials
+  const SERVICE_ID = import.meta.env.VITE__EMAILJS_SERVICEID_SGS;
+  const TEMPLATE_ID = import.meta.env.VITE__EMAILJS_TEMPLATEID_SGS;
+  const PUBLIC_KEY = import.meta.env.VITE__EMAILJS_PUBLICKEY_SGS;
+
+  emailjs.send(SERVICE_ID, TEMPLATE_ID, formData, PUBLIC_KEY)
+    .then((response) => {
+      console.log('SUCCESS!', response.status, response.text);
       setStatus("Message sent successfully!");
       setFormData({ name: "", email: "", subject: "", message: "" });
-    }, 1500);
-  };
+    })
+    .catch((err) => {
+      console.error('FAILED...', err);
+      setStatus("Failed to send message. Please try again later.");
+    })
+    .finally(() => {
+      setIsSubmitting(false);
+    });
+};
 
   const { scrollY } = useScroll();
   const parallaxY = useTransform(scrollY, [0, 300], [0, -50]);

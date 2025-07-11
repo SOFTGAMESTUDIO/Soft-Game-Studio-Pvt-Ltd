@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { Input } from "../../UiComponents/input";
 import { Label } from "../../UiComponents/label";
 import { cn } from "../../Library/utils";
-import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react";
+import { IconBrandGoogle } from "@tabler/icons-react";
 import {
   handleLogin,
-  handleGithubLogin,
   handleGoogleLogin,
 } from "../../Modules/LoginHamdler";
 import { useNavigate, Link } from "react-router-dom"; // React router
@@ -100,15 +99,7 @@ function UserLogin() {
           <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
 
           <div className="flex flex-col space-y-4">
-            <button
-              className="group/btn relative flex h-10 w-full items-center justify-start space-x-2 rounded-md px-4 font-medium text-black bg-zinc-900 shadow-[0px_0px_1px_1px_#262626]"
-              type="button"
-              onClick={() => handleGithubLogin(navigate)}
-            >
-              <IconBrandGithub className="h-4 w-4 text-neutral-300" />
-              <span className="text-sm text-neutral-300">GitHub</span>
-              <BottomGradient />
-            </button>
+            
             <button
               className="group/btn relative flex h-10 w-full items-center justify-start space-x-2 rounded-md px-4 font-medium text-black bg-zinc-900 shadow-[0px_0px_1px_1px_#262626]"
               type="button"

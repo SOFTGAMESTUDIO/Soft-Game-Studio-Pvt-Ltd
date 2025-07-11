@@ -36,16 +36,4 @@ const handleLogin = async (email, password, navigate) => {
   }
 };
 
- const handleGithubLogin = async (navigate) => {
-  try {
-    const result = await signInWithPopup(auth, providerGithub);
-    toast.success("GitHub login successful!", { position: "top-right", autoClose: 2000, theme: "colored" });
-    localStorage.setItem("user", JSON.stringify(result.user));
-   navigate("/");
-  } catch (error) {
-    console.error("GitHub login error:", error);
-    toast.error("GitHub login failed.");
-  }
-};
-
-export {handleLogin, handleGithubLogin, handleGoogleLogin};
+export {handleLogin, handleGoogleLogin};

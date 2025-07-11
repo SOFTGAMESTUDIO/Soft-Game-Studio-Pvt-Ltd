@@ -15,6 +15,11 @@ export default function Exam() {
       link: "/Admin-Quiz-Manage",
     },
     {
+      title: "Manage Quizzes Free",
+      details: ["View All Quizzes", "Delete Quizzes", "Export Quiz Data"],
+      link: "/Admin-QuizFree-Manage",
+    },
+    {
       title: "Create Exam",
       details: [
         "Create Exam",

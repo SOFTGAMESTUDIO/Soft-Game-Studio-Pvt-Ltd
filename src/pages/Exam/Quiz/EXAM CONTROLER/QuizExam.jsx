@@ -32,6 +32,7 @@ const QuizExam = () => {
   const [score, setScore] = useState(0);
   const [Que, setQue] = useState(0);
 
+
   useEffect(() => {
     const fetchData = async () => {
       const allUsers = await getUserData();
@@ -56,7 +57,7 @@ const QuizExam = () => {
 
   useEffect(() => {
     const handlePopState = () => {
-      if (step === 2 && !isAlreadySubmitted) handleSubmit();
+      if (step === 1 && !isAlreadySubmitted) handleSubmit();
     };
     const handleBeforeUnload = (e) => {
       if (step === 2 && !isAlreadySubmitted) {
@@ -97,6 +98,92 @@ const QuizExam = () => {
       window.removeEventListener("keyup", blockPrintScreen);
     };
   }, []);
+
+
+const useExamKeyLock = (enableLock = true) => {
+  const attemptCount = useRef(0);
+  useEffect(() => {
+    if (!enableLock) return;
+
+    const handleCheatingAttempt = (keyCombination = '') => {
+      attemptCount.current += 1;
+      
+      if (attemptCount.current < 3) {
+        // Show warning toast for first 3 attempts
+        toast.warning(
+          `Warning ${attemptCount.current}/3: ${keyCombination} is not allowed.`,
+          { autoClose: 3000 }
+        );
+      } else if (attemptCount.current === 3) {
+        // Final warning
+        toast.error(
+          `Final Warning! Next violation will disqualify you.`,
+          { autoClose: 4000 }
+        );
+      } else {
+        // 4th attempt - disqualify
+        disqualifyUser(`Used forbidden key combination: ${keyCombination}`);
+      }
+      
+      return attemptCount.current;
+    };
+
+    const handleKeyDown = (e) => {
+      // Block all modifier key combinations
+      if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) {
+         handleCheatingAttempt(modifiers.join('+'));
+        e.preventDefault();
+        return;
+      }
+
+      // Block specific keys
+      const blockedKeys = [
+        'Tab', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 
+        'F7', 'F8', 'F9', 'F10', 'F11', 'F12',
+        'Escape', 'PrintScreen', 'Insert', 'Delete',
+        'Home', 'End', 'PageUp', 'PageDown',
+        'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'
+      ];
+
+      if (blockedKeys.includes(e.key)) {
+         handleCheatingAttempt(modifiers.join('+'));
+        e.preventDefault();
+        return;
+      }
+
+      // Special case for Alt+Tab (Windows) and Command+Tab (Mac)
+      if ((e.key === 'Tab' && e.altKey) || (e.key === 'Tab' && e.metaKey)) {
+         handleCheatingAttempt(modifiers.join('+'));
+        e.preventDefault();
+        return;
+      }
+
+
+    };
+
+    useExamKeyLock(step === 1);
+
+    // Block right click context menu
+    const handleContextMenu = (e) => e.preventDefault();
+
+    // Block copy/paste
+    const handleCopyPaste = (e) => e.preventDefault();
+
+    window.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('contextmenu', handleContextMenu);
+    document.addEventListener('copy', handleCopyPaste);
+    document.addEventListener('cut', handleCopyPaste);
+    document.addEventListener('paste', handleCopyPaste);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('contextmenu', handleContextMenu);
+      document.removeEventListener('copy', handleCopyPaste);
+      document.removeEventListener('cut', handleCopyPaste);
+      document.removeEventListener('paste', handleCopyPaste);
+    };
+  }, [enableLock]);
+};
 
   const handleDisqualification = async () => {
     if (!filteredUser?.uid || !quizData) return;
@@ -199,46 +286,53 @@ const QuizExam = () => {
     if (currentQuestion > 0) setCurrentQuestion((prev) => prev - 1);
   };
 
-  const handleSubmit = async () => {
-    if (!filteredUser?.uid) {
-      toast.error("User not authenticated.");
-      return;
-    }
-    if (!quizData) {
-      toast.error("Quiz not loaded.");
-      return;
-    }
+ const handleSubmit = async () => {
+  if (isAlreadySubmitted) return; // ✅ prevent double submission
 
-    let correctCount = 0;
-    quizData.questions.forEach((q, i) => {
-      if (selectedAnswers[i] === q.correctAnswer) correctCount++;
+  if (!filteredUser?.uid) {
+    toast.error("User not authenticated.");
+    return;
+  }
+
+  if (!quizData) {
+    toast.error("Quiz not loaded.");
+    return;
+  }
+
+  let correctCount = 0;
+  quizData.questions.forEach((q, i) => {
+    if (selectedAnswers[i] === q.correctAnswer) correctCount++;
+  });
+
+  const NoQuestion = quizData.questions.length;
+
+  try {
+    await addDoc(collection(fireDB, "user_Quiz"), {
+      quizId,
+      language: quizData.language,
+      uid: filteredUser.uid,
+      email: filteredUser.email,
+      name: filteredUser.name,
+      rollNumber: filteredUser.rollNumber,
+      timestamp: new Date(),
+      score: correctCount,
+      NoQuestion,
     });
 
-    const NoQuestion = quizData.questions.length;
+    // ✅ Set this so submission happens only once
+    setIsAlreadySubmitted(true); 
+    setScore(correctCount);
+    setQue(NoQuestion);
+    toast.success("Quiz submitted!");
+    setStep(2);
+  } catch (err) {
+    console.error("Submit error:", err);
+    toast.error("Submission failed.");
+  }
+};
 
-    try {
-      await addDoc(collection(fireDB, "user_Quiz"), {
-        quizId,
-        language: quizData.language,
-        uid: filteredUser.uid,
-        email: filteredUser.email,
-        name: filteredUser.name,
-        rollNumber: filteredUser.rollNumber,
-        timestamp: new Date(),
-        score: correctCount,
-        NoQuestion,
-      });
 
-      setScore(correctCount);
-      setQue(NoQuestion);
-      toast.success("Quiz submitted!");
-      setStep(2);
-    } catch (err) {
-      console.error("Submit error:", err);
-      toast.error("Submission failed.");
-    }
-  };
-
+  
   if (loading) {
     return (
       <Layout>

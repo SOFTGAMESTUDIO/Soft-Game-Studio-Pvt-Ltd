@@ -68,6 +68,12 @@ import EditCoursePage from "./pages/Admin/DashBoards/Courses/EdietCourses.jsx";
 
 
 
+import AdminCreateQuizFREE from "./pages/Admin/DashBoards/Exam/QuizFree/CreateQuiz";
+import EditQuizDetailsFREE from "./pages/Admin/DashBoards/Exam/QuizFree/EditQuizDetails";
+import EditQuizQuestionFREE from "./pages/Admin/DashBoards/Exam/QuizFree/EditQuizQuestions";
+import ManageQuizFREE from "./pages/Admin/DashBoards/Exam/QuizFree/ManageQuizzes";
+
+
 function App() {
   return (
     <MyProvider>
@@ -109,6 +115,11 @@ function App() {
          <Route path="/Exam-Details/:id" element={<ExamDetails />} />
          <Route path="/Exam-Quiz-Details/:id" element={<ExamQuizDetails />} />
          <Route path="/SGS-Quiz/:id" element={<QuizExam />} />
+
+
+        
+
+
 {/* Notes & Books Routes */}
 
  <Route path="/Notes&Books" element={<FreeNotesAndBooks/>} />
@@ -247,6 +258,39 @@ function App() {
           }
         />
 
+
+ <Route
+          path="/Admin-QuizFree-Create"
+          element={
+            <ProtectedRouteForAdmin>
+              <AdminCreateQuizFREE />
+            </ProtectedRouteForAdmin>
+          }
+        />
+        <Route
+          path="/Admin-QuizFree-Edit-QuizDetails/:id"
+          element={
+            <ProtectedRouteForAdmin>
+              <EditQuizDetailsFREE />
+            </ProtectedRouteForAdmin>
+          }
+        />
+        <Route
+          path="/Admin-QuizFree-Edit-QuizQuestion/:id"
+          element={
+            <ProtectedRouteForAdmin>
+              <EditQuizQuestionFREE />
+            </ProtectedRouteForAdmin>
+          }
+        />
+        <Route
+          path="/Admin-QuizFree-Manage"
+          element={
+            <ProtectedRouteForAdmin>
+              <ManageQuizFREE />
+            </ProtectedRouteForAdmin>
+          }
+        />
 
          {/*  Admin Notes & Books */}
          <Route

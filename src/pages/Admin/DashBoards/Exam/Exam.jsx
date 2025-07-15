@@ -32,6 +32,11 @@ export default function Exam() {
       details: ["View User Answers", "Analyze Performance", "Export User Data"],
       link: "/Admin-Quiz-User-Answers",
     },
+    {
+      title: "Daily Quuiz",
+      details: ["View User Answers", "Create Quiz ", "Edit Quiz", "Delete Quiz"],
+      link: "/Admin-DailyQuizQuiz-Manage",
+    },
   ];
 
   return (

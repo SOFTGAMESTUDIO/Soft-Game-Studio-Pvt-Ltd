@@ -74,6 +74,14 @@ import EditQuizQuestionFREE from "./pages/Admin/DashBoards/Exam/QuizFree/EditQui
 import ManageQuizFREE from "./pages/Admin/DashBoards/Exam/QuizFree/ManageQuizzes";
 
 
+
+import AdminCreateQuizDaily from "./pages/Admin/DashBoards/Exam/DailyQuiz/CreateQuiz";
+import EditQuizDetailsDaily from "./pages/Admin/DashBoards/Exam/DailyQuiz/EditQuizDetails";
+import EditQuizQuestionDaily from "./pages/Admin/DashBoards/Exam/DailyQuiz/EditQuizQuestions";
+import ManageQuizDaily from "./pages/Admin/DashBoards/Exam/DailyQuiz/ManageQuizzes";
+import UserAnswersDaily from "./pages/Admin/DashBoards/Exam/DailyQuiz/UserAnswers";
+
+
 function App() {
   return (
     <MyProvider>
@@ -258,7 +266,7 @@ function App() {
           }
         />
 
-
+ {/* Admin Quiz Free */}
  <Route
           path="/Admin-QuizFree-Create"
           element={
@@ -288,6 +296,52 @@ function App() {
           element={
             <ProtectedRouteForAdmin>
               <ManageQuizFREE />
+            </ProtectedRouteForAdmin>
+          }
+        />
+
+
+
+
+        {/* Admin Daily Quiz */}
+
+              <Route
+          path="/Admin-DailyQuiz-Create"
+          element={
+            <ProtectedRouteForAdmin>
+              <AdminCreateQuizDaily />
+            </ProtectedRouteForAdmin>
+          }
+        />
+        <Route
+          path="/Admin-DailyQuiz-Edit-QuizDetails/:id"
+          element={
+            <ProtectedRouteForAdmin>
+              <EditQuizDetailsDaily />
+            </ProtectedRouteForAdmin>
+          }
+        />
+        <Route
+          path="/Admin-DailyQuiz-Edit-QuizQuestion/:id"
+          element={
+            <ProtectedRouteForAdmin>
+              <EditQuizQuestionDaily />
+            </ProtectedRouteForAdmin>
+          }
+        />
+        <Route
+          path="/Admin-DailyQuizQuiz-Manage"
+          element={
+            <ProtectedRouteForAdmin>
+              <ManageQuizDaily />
+            </ProtectedRouteForAdmin>
+          }
+        />
+        <Route
+          path="/Admin-DailyQuizQuiz-User-Answers"
+          element={
+            <ProtectedRouteForAdmin>
+              <UserAnswersDaily />
             </ProtectedRouteForAdmin>
           }
         />

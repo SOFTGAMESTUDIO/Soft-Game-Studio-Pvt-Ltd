@@ -166,30 +166,12 @@ export default function ProductDetailsPage() {
                   transition={{ duration: 0.8 }}
                   viewport={{ once: true }}
                 >
+                  
                   {parse(product.description)}
                 </motion.div>
                 
-                {/* Quantity Selector for Paid Products */}
-                {product.price > 0 && (
-                  <div className="flex items-center mt-6">
-                    <span className="mr-4 font-medium">Quantity:</span>
-                    <div className="flex items-center border border-gray-300 dark:border-neutral-700 rounded-md">
-                      <button 
-                        onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
-                        className="px-3 py-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors"
-                      >
-                        -
-                      </button>
-                      <span className="px-4 py-1 border-x border-gray-300 dark:border-neutral-700">{quantity}</span>
-                      <button 
-                        onClick={() => setQuantity(prev => prev + 1)}
-                        className="px-3 py-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                )}
+           
+                
 
                 <motion.div 
                   className="mt-6 sm:mt-8 flex flex-wrap gap-3 sm:gap-4"

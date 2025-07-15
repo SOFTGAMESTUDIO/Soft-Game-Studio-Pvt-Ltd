@@ -259,12 +259,10 @@ const PlayListCourse = () => {
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Chapter Notes</h3>
                   <div className="prose max-w-none dark:prose-invert prose-purple">
                     {course.chapters?.[activeChapter]?.notes ? (
-                      <ReactQuill 
-                        value={course.chapters[activeChapter].notes}
-                        readOnly={true}
-                        modules={{ toolbar: false }}
-                        theme="snow"
-                      />
+                       <div
+  className="prose max-w-none dark:prose-invert prose-purple"
+  dangerouslySetInnerHTML={{ __html: course.notes }}
+/>
                     ) : (
                       <div className="text-gray-500 dark:text-gray-400 italic">
                         No notes available for this chapter.

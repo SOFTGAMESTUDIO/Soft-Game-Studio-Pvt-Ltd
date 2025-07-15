@@ -31,7 +31,7 @@ const ManageQuizzes = () => {
 
   const fetchQuizzes = async () => {
     try {
-      const quizCollection = collection(fireDB, "quizzes");
+      const quizCollection = collection(fireDB, "Dailyquizzes");
       const quizSnapshot = await getDocs(quizCollection);
       const quizList = quizSnapshot.docs.map((doc) => ({ 
         id: doc.id, 
@@ -49,7 +49,7 @@ const ManageQuizzes = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this quiz?")) {
       try {
-        await deleteDoc(doc(fireDB, "quizzes", id));
+        await deleteDoc(doc(fireDB, "Dailyquizzes", id));
         toast.success("Quiz deleted successfully");
         setQuizzes(prev => prev.filter(quiz => quiz.id !== id));
       } catch (error) {
@@ -80,7 +80,7 @@ const ManageQuizzes = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg shadow"
-              onClick={() => navigate("/Admin-Quiz-Create")}
+              onClick={() => navigate("/Admin-DailyQuiz-Create")}
             >
               Create New Quiz
             </motion.button>
@@ -107,7 +107,7 @@ const ManageQuizzes = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg shadow"
-                onClick={() => navigate("/Admin-Quiz-Create")}
+                onClick={() => navigate("/Admin-DailyQuiz-Create")}
               >
                 Create New Quiz
               </motion.button>
@@ -143,7 +143,7 @@ const ManageQuizzes = () => {
                           whileHover="hover"
                           whileTap="tap"
                           className="flex-1 bg-blue-100 dark:bg-blue-900/50 hover:bg-blue-200 dark:hover:bg-blue-800 text-blue-600 dark:text-blue-400 px-3 py-2 rounded-lg text-sm font-medium"
-                          onClick={() => navigate(`/Admin-Quiz-Edit-QuizDetails/${quiz.id}`)}
+                          onClick={() => navigate(`/Admin-DailyQuiz-Edit-QuizDetails/${quiz.id}`)}
                         >
                           Edit Details
                         </motion.button>
@@ -152,13 +152,13 @@ const ManageQuizzes = () => {
                           whileHover="hover"
                           whileTap="tap"
                           className="flex-1 bg-purple-100 dark:bg-purple-900/50 hover:bg-purple-200 dark:hover:bg-purple-800 text-purple-600 dark:text-purple-400 px-3 py-2 rounded-lg text-sm font-medium"
-                          onClick={() => navigate(`/Admin-Quiz-Edit-QuizQuestion/${quiz.id}`)}
+                          onClick={() => navigate(`/Admin-DailyQuiz-Edit-QuizQuestion/${quiz.id}`)}
                         >
                           Edit Questions
                         </motion.button>
                       </div>
-                      
-                      <motion.button
+                       <div className="flex flex-wrap gap-2 mt-4">
+                        <motion.button
                         variants={buttonHover}
                         whileHover="hover"
                         whileTap="tap"
@@ -167,6 +167,18 @@ const ManageQuizzes = () => {
                       >
                         Delete Quiz
                       </motion.button>
+                        <motion.button
+                          variants={buttonHover}
+                          whileHover="hover"
+                          whileTap="tap"
+                          className="flex-1 bg-purple-100 dark:bg-purple-900/50 hover:bg-purple-200 dark:hover:bg-purple-800 text-purple-600 dark:text-purple-400 px-3 py-2 rounded-lg text-sm font-medium"
+                          onClick={() => navigate(`/Admin-DailyQuizQuiz-User-Answers`)}
+                        >
+                          User Answra
+                        </motion.button>
+                      </div>
+                      
+                     
                     </div>
                   </motion.div>
                 ))}

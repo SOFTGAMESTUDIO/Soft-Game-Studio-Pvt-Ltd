@@ -32,7 +32,7 @@ const UpdateProduct = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              updateProduct(id, () => navigate("/products"));
+              updateProduct(id, () => navigate("/Admin-Products"));
             }}
             className="space-y-4"
           >

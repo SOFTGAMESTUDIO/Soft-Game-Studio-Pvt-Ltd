@@ -29,7 +29,7 @@ const AddProduct = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              addProduct(() => navigate("/products"));
+              addProduct(() => navigate("/Admin-Products"));
             }}
           >
             <input

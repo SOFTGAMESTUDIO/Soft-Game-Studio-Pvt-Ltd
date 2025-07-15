@@ -307,7 +307,7 @@ const HomePage = () => {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                           {[
                             { icon: "✉️", title: "Email", value: "officialsoftgamestudio@gmail.com" },
-                            { icon: "📱", title: "Phone", value: "For Hindi: +91 9888015499" },
+                            { icon: "📱", title: "Phone", value: "For Hindi: +91 9914267704" },
                             { icon: "📱", title: "Phone", value: "For English: +91 6283400770 " },
                           ].map((contact, idx) => (
                             <motion.div

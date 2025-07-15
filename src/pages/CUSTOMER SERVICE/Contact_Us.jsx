@@ -249,7 +249,7 @@ const ContactPage = () => {
                     <p className="font-semibold text-purple-700 dark:text-purple-400">
                       Phone:
                     </p>
-                    <p>For Hindi: +91 9888015499</p>
+                    <p>For Hindi: +91 9914267704</p>
                     <p>For English: +91 6283400770</p>
                   </motion.div>
                   <motion.div variants={itemVariants}>

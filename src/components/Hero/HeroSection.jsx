@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import Layout from '../layout/Layout';
 import { Link } from 'react-router-dom';
+import { View } from 'lucide-react';
 
 
 const HomePage = () => {
@@ -111,9 +112,9 @@ const HomePage = () => {
    
   ];
 
-  const Projects = [ { title: "E-commerce Platform", link: "#", description: "Full-featured online shopping experience" },
-                          { title: "Education Portal", link: "#", description: "Interactive learning management system" },
-                          { title: "Healthcare Solution", link: "#", description: "Patient management and telemedicine platform" }]
+  const Projects = [ { title: "SGS Quiz App", link: "https://github.com/SOFTGAMESTUDIO/sgs-quiz-app", description: "Easy And Actractive Interface Quiz App", img: "https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/SGS%20Projects%2FUntitled%20design%20(1).png?alt=media&token=7f45671d-5c45-458e-98ef-ad66b9a00786", View: "/" },
+                          { title: "CU STUDY HUB", link: "https://github.com/SOFTGAMESTUDIO/CU-Notes-HUB-SGS", description: "Free Notes Sharing and acces", img: "https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/CU-STUDY-HUB-Soft-Game-Studio-07-18-2025_07_45_PM.png?alt=media&token=caea8d02-76e5-4997-bd8e-d4481571e299" ,view: "https://custudyhub.web.app/"},
+                          { title: "Coming Soon", link: "#", description: "Coming Soon",  img: "", view: "/" },]
 
 
 
@@ -225,12 +226,18 @@ const HomePage = () => {
                           >
                             <div className="h-48 rounded-xl overflow-hidden mb-4">
                               <div className="bg-gradient-to-r from-purple-400 to-purple-600 w-full h-full flex items-center justify-center">
-                                <span className="text-white text-4xl">Project {idx + 1}</span>
-                              </div>
+  {project.img === "" ? (
+    <span className="text-white text-4xl">Project {idx+1}</span>
+  ) : (
+    <img src={project.img} alt="Project Preview" className="max-h-full max-w-full object-contain" />
+  )}
+</div>
+
                             </div>
                             <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
                             <p className="text-purple-700 dark:text-purple-300">{project.description}</p>
-                            <a href={project.link}>Github Link</a>
+                            <a href={project.link}>Github Link</a> <br />
+                            <a href={project.view}>View Project</a>
                           </motion.div>
                         ))}
                       </div>
@@ -416,6 +423,7 @@ const HomePage = () => {
                           >
                             <div className="bg-gradient-to-r from-purple-400 to-indigo-500 h-64 flex items-center justify-center">
                               <img className='h-64 w-full object-cover' src={item.img} alt="" />
+                             
                             </div>
                             <div className="p-6 bg-white dark:bg-neutral-800">
                               <h3 className="text-xl font-bold mb-2">{item.title}</h3>

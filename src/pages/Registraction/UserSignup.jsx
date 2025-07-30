@@ -13,22 +13,53 @@ import { Helmet } from "react-helmet";
 import Layout from "../../components/layout/Layout";
 
 export default function UserSignup() {
-  const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
     phone: "",
   });
-
+  
+  const [passwordErrors, setPasswordErrors] = useState({
+    minLength: false,
+    hasCapital: false,
+    hasNumber: false,
+    hasSymbol: false
+  });
+  
+  const [showPasswordValidation, setShowPasswordValidation] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+    
+    if (id === 'password') {
+      validatePassword(value);
+    }
+  };
+
+  const validatePassword = (password) => {
+    const errors = {
+      minLength: password.length >= 6,
+      hasCapital: /[A-Z]/.test(password),
+      hasNumber: /[0-9]/.test(password),
+      hasSymbol: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)
+    };
+    setPasswordErrors(errors);
+    return Object.values(errors).every(Boolean);
   };
 
   const handleEmailSignup = async (e) => {
     e.preventDefault();
+    
+    const isValidPassword = validatePassword(formData.password);
+    if (!isValidPassword) {
+      setShowPasswordValidation(true);
+      return;
+    }
+    
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -117,17 +148,36 @@ export default function UserSignup() {
                 required
               />
             </LabelInputContainer>
-            <LabelInputContainer className="mb-4">
+             <LabelInputContainer className="mb-4">
               <Label htmlFor="password" className="text-neutral-700 dark:text-neutral-300">Password</Label>
               <Input
                 id="password"
                 value={formData.password}
                 onChange={handleChange}
+                onFocus={() => setShowPasswordValidation(true)}
                 placeholder="••••••••"
                 type="password"
                 className="bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white"
                 required
               />
+              
+              {/* Password validation checklist */}
+              {showPasswordValidation && (
+                <div className="mt-2 text-xs">
+                  <p className={passwordErrors.minLength ? "text-green-500" : "text-red-500"}>
+                    • At least 6 characters
+                  </p>
+                  <p className={passwordErrors.hasCapital ? "text-green-500" : "text-red-500"}>
+                    • Contains a capital letter
+                  </p>
+                  <p className={passwordErrors.hasNumber ? "text-green-500" : "text-red-500"}>
+                    • Contains a number
+                  </p>
+                  <p className={passwordErrors.hasSymbol ? "text-green-500" : "text-red-500"}>
+                    • Contains a symbol
+                  </p>
+                </div>
+              )}
             </LabelInputContainer>
             <LabelInputContainer className="mb-8">
               <Label htmlFor="phone" className="text-neutral-700 dark:text-neutral-300">Phone No.</Label>

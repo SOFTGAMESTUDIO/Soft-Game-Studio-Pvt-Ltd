@@ -13,7 +13,7 @@ const teamMembers = [
     name: "LIVESH KUMAR GARG",
     role: "SENIOR DEVELOPER & FOUNDER",
     bio: "BCA student with expertise in Python, HTML, CSS, JavaScript, React JS, Data Structures & Algorithms (DSA), SQL, Firebase, Unity, and Unreal Engine. Passionate about exploring new technologies and building innovative projects.",
-    image: "https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/DEVLOPERS%2FSnapchat-467264900.jpg?alt=media&token=a1f217d0-2444-47d1-8e40-7d69b43a970d",
+    image: "https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Developers%2FLG.jpg?alt=media",
     accentColor: "bg-pink-500",
     skills: ["Python", "React", "Firebase", "Unity"],
     social: {
@@ -26,7 +26,7 @@ const teamMembers = [
     name: "JATIN DUA",
     role: "JUNIOR DEVELOPER",
     bio: "B Tech CSBS student with proficiency in C, C++, DSA, HTML, CSS, JavaScript, and Python. Eager to expand knowledge and apply skills to real-world projects.",
-    image: "https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/DEVLOPERS%2FSnapchat-471840155.jpg?alt=media&token=af7951a2-e956-4531-804f-ec448f914083",
+    image: "https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Developers%2FJK.jpg?alt=media",
     accentColor: "bg-blue-500",
     skills: ["C++", "DSA", "JavaScript", "Python"],
     social: {
@@ -39,7 +39,7 @@ const teamMembers = [
     name: "SHARIK HASAN",
     role: "JUNIOR DEVELOPER",
     bio: "B Tech CSE student with expertise in C, HTML, CSS, JavaScript, and Firebase database. Focused on enhancing skills and working on practical projects.",
-    image: "https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/DEVLOPERS%2F467048382_429449520023246_5293710440583554823_n.jpeg?alt=media&token=c4cacfe1-bea3-43a6-848e-8b5e852e41a1",
+    image: "https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Developers%2FSK.jpeg?alt=media",
     accentColor: "bg-purple-500",
     skills: ["C", "JavaScript", "Firebase", "HTML/CSS"],
     social: {

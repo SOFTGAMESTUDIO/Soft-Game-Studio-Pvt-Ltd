@@ -224,8 +224,8 @@ export default function page() {
     content="Discover Soft Game Studio’s story, values, and team behind our innovative online exam and gaming solutions."
   />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://softgamestudio.web.app/AboutUs" />
-  <meta property="og:image" content="https://softgamestudio.web.app/logo-preview.jpg" />
+  <meta property="og:url" content="https://soft-game-studio.web.app/AboutUs" />
+  <meta property="og:image" content="https://soft-game-studio.web.app/logo-preview.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="About Us | Soft Game Studio" />
@@ -233,9 +233,9 @@ export default function page() {
     name="twitter:description"
     content="Meet the team and learn about Soft Game Studio’s commitment to quality online exams and gaming experiences."
   />
-  <meta name="twitter:image" content="https://softgamestudio.web.app/logo-preview.jpg" />
+  <meta name="twitter:image" content="https://soft-game-studio.web.app/logo-preview.jpg" />
 
-  <link rel="canonical" href="https://softgamestudio.web.app/AboutUs" />
+  <link rel="canonical" href="https://soft-game-studio.web.app/AboutUs" />
 </Helmet>
 
    <Timeline data={data} />

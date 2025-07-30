@@ -184,7 +184,7 @@ const EbookCatalog = () => {
     property="og:description" 
     content="Free E-Books, Affordable E-Books, Ebooks PDF, Full Detailed E-Book, languages  E-Book , Student learning , Developer E-Books, Soft Game Studio E-books, Soft Game Studio " 
   />
-  <meta property="og:url" content="https://softgamestudio.web.app/E-Books" />
+  <meta property="og:url" content="https://soft-game-studio.web.app/E-Books" />
   <meta property="og:type" content="website" />
 </Helmet>
       <div className="min-h-screen bg-purple-100 dark:bg-neutral-950 transition-colors duration-500 py-12 px-4 sm:px-6">

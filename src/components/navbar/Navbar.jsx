@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Navbar,
   NavBody,
@@ -17,9 +15,12 @@ import { IoMdMenu } from "react-icons/io";
 import { ImExit, ImEnter } from "react-icons/im";
 import { FiSun, FiMoon } from "react-icons/fi";
 import { FaCartArrowDown } from "react-icons/fa";
-import { getLocalCart, getFirebaseCart } from "../../Modules/Cart/cartUtils";
 import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "../../components/Theems/UseTheems";
+import { useAuth } from "../../AuthProvide";
+import { auth } from "../../DataBase/firebaseConfig";
+import { signOut } from "firebase/auth";
+import { useCart } from "../../Modules/Cart/CartContext";
 
 
 const navItems = [
@@ -32,31 +33,13 @@ const navItems = [
 export function NavbarMenu() {
  const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
 
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    if (storedUser) setUser(storedUser);
-  }, []);
-
-  useEffect(() => {
-    const loadCartCount = async () => {
-      if (user?.uid) {
-        const firebaseCart = await getFirebaseCart(user.uid);
-        setCartCount(firebaseCart.reduce((sum, item) => sum + (item.quantity || 1), 0));
-      } else {
-        const localCart = getLocalCart();
-        setCartCount(localCart.reduce((sum, item) => sum + (item.quantity || 1), 0));
-      }
-    };
-    loadCartCount();
-  }, [user]);
+  const { user, isAdmin} = useAuth()
+  const {cartItems} = useCart()
 
   const logout = () => {
-    localStorage.removeItem("user");
-    setUser(null);
+   signOut(auth)  
   };
 
   const toggleTheme = () => {
@@ -77,9 +60,9 @@ export function NavbarMenu() {
             aria-label="Cart"
           >
             <FaCartArrowDown className="w-5 h-5" />
-            {cartCount > 0 && (
+            {cartItems.length > 0 && (
               <span className="absolute top-0 right-0 px-2 py-1 text-xs font-bold text-white bg-red-600 rounded-full">
-                {cartCount}
+                {cartItems.length}
               </span>
             )}
           </NavbarButton>
@@ -95,7 +78,7 @@ export function NavbarMenu() {
           {/* Profile/Login Dropdown */}
           <div className="relative group">
             <NavbarButton className="flex items-center p-1 rounded-full text-neutral-950 dark:text-gray-300   ">
-              {user?.email ? (
+              {user ?  (
                 <>
                   <IoMdMenu className="w-4 h-4 mr-2" />
                   <RiAccountCircleFill className="w-6 h-6" />
@@ -110,7 +93,7 @@ export function NavbarMenu() {
               )}
             </NavbarButton>
 
-            {user?.email && (
+            {user && (
               <div className="absolute right-0 text-neutral-950 dark:text-gray-300  hidden group-hover:block bg-white dark:bg-neutral-950 w-48 p-2 rounded-md shadow-lg z-50">
                 <Link
                   to="/Profile"
@@ -126,7 +109,7 @@ export function NavbarMenu() {
                   <ImExit className="w-4 h-4 mr-2" />
                   Logout
                 </button>
-                {user.email === import.meta.env.VITE__ADMIN_EMAIL_SGS && (
+                { isAdmin  && (
                   <Link
                     to="/Admin"
                     className="flex items-center px-4 py-2 text-sm hover:bg-gray-200 dark:hover:bg-neutral-900 rounded-full"
@@ -151,9 +134,9 @@ export function NavbarMenu() {
               className="relative p-2 rounded-full text-neutral-950 dark:text-gray-300"
             >
               <FaCartArrowDown className="w-5 h-5" />
-              {cartCount > 0 && (
+              {cartItems.length > 0 && (
                 <span className="absolute top-0 right-0 px-2 py-1 text-xs font-bold text-white bg-red-600 rounded-full">
-                  {cartCount}
+                  {cartItems.length}
                 </span>
               )}
             </NavbarButton>
@@ -211,7 +194,7 @@ export function NavbarMenu() {
                 <ImExit className="w-6 h-6 mr-2" />
                 Logout
               </NavbarButton>
-              {user.email === import.meta.env.VITE__ADMIN_EMAIL_SGS && (
+              {isAdmin && (
                 <NavbarButton
                   onClick={() => {
                     navigate("/Admin");

@@ -64,11 +64,11 @@ export default function ProductsPage() {
     property="og:description" 
     content="Get free and budget-friendly pre-built projects with full data at Soft Game Studio. Ideal for learning, development, and academic use." 
   />
-  <meta property="og:url" content="https://softgamestudio.web.app/Projects" />
+  <meta property="og:url" content="https://soft-game-studio.web.app/Projects" />
   <meta property="og:type" content="website" />
   <meta 
     property="og:image" 
-    content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050" 
+    content="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media" 
   />
 </Helmet>
 

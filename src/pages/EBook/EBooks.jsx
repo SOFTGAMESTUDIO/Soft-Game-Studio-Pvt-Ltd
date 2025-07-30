@@ -267,7 +267,7 @@ const EbookReader = () => {
           property="og:description" 
           content="Free E-Books, Affordable E-Books, Ebooks PDF, Full Detailed E-Book, languages  E-Book , Student learning , Developer E-Books, Soft Game Studio E-books, Soft Game Studio " 
         />
-        <meta property="og:url" content="https://softgamestudio.web.app/E-Books" />
+        <meta property="og:url" content="https://soft-game-studio.web.app/E-Books" />
         <meta property="og:type" content="website" />
       </Helmet>
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-purple-50 dark:bg-gradient-to-b dark:from-neutral-950 dark:to-purple-900/10">

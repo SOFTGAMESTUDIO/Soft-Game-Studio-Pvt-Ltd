@@ -7,6 +7,7 @@ import { fireDB } from '../../DataBase/firebaseConfig';
 import { FaEdit, FaSave, FaTimes, FaUser, FaPhone, FaHome, FaMapMarkerAlt, FaShoppingBag, FaClock } from 'react-icons/fa';
 import Layout from '../../components/layout/Layout';
 import { Helmet } from 'react-helmet';
+import { useAuth } from '../../AuthProvide';
 
 const ProfilePage = () => {
   const [userData, setUserData] = useState(null);
@@ -23,10 +24,14 @@ const ProfilePage = () => {
   const bgPatternDark = "url('https://www.transparenttextures.com/patterns/black-thread-light.png')";
   const profileBg = "url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')";
 
+
+   const {user } = useAuth()
   useEffect(() => {
+
+   
     const fetchUserData = async () => {
       try {
-        const storedUser = JSON.parse(localStorage.getItem('user'));
+        const storedUser = user;
         if (!storedUser?.email) {
           navigate('/Login');
           return;
@@ -120,14 +125,6 @@ const ProfilePage = () => {
       }));
       
       setIsEditing(false);
-      
-      // Update localStorage if needed
-      const storedUser = JSON.parse(localStorage.getItem('user'));
-      localStorage.setItem('user', JSON.stringify({
-        ...storedUser,
-        name: editedData.name
-      }));
-      
     } catch (error) {
       console.error('Error updating document:', error);
     }
@@ -167,7 +164,7 @@ const ProfilePage = () => {
           property="og:description" 
           content="Manage your profile, exam records, course enrollments, and personal settings securely on Soft Game Studio." 
         />
-        <meta property="og:url" content="https://softgamestudio.web.app/profile" />
+        <meta property="og:url" content="https://soft-game-studio.web.app/profile" />
         <meta property="og:type" content="website" />
       </Helmet>
 

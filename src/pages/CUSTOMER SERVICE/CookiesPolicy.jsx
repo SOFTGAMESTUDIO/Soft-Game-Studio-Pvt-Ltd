@@ -97,8 +97,8 @@ const CookiesPolicy = () => {
     content="Find out about the types of cookies used by Soft Game Studio and how they improve your browsing experience."
   />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://softgamestudio.web.app/CookiesPolicy" />
-  <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050"/>
+  <meta property="og:url" content="https://soft-game-studio.web.app/CookiesPolicy" />
+  <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media"/>
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Cookies Policy | Soft Game Studio" />
@@ -106,9 +106,9 @@ const CookiesPolicy = () => {
     name="twitter:description"
     content="Understand Soft Game Studio’s cookie usage and how it affects your online experience."
   />
-  <meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050" />
+  <meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media" />
 
-  <link rel="canonical" href="https://softgamestudio.web.app/CookiesPolicy" />
+  <link rel="canonical" href="https://soft-game-studio.web.app/CookiesPolicy" />
 </Helmet>
 
       <div className="min-h-screen bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-gray-950 dark:to-neutral-950 text-gray-800 dark:text-gray-200 overflow-hidden">
@@ -400,7 +400,7 @@ const CookiesPolicy = () => {
                   </div>
                 </a>
                 <a
-                  href="https://softgamestudio.web.app/ContactUs"
+                  href="https://soft-game-studio.web.app/ContactUs"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-4 bg-purple-50 dark:bg-gray-800 rounded-xl hover:bg-purple-100 dark:hover:bg-gray-700 transition-colors"

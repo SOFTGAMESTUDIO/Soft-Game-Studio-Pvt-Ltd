@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import { Input } from "../../UiComponents/input";
 import { Label } from "../../UiComponents/label";
 import { cn } from "../../Library/utils";
-import { IconBrandGoogle } from "@tabler/icons-react";
 import {
   handleLogin,
-  handleGoogleLogin,
 } from "../../Modules/LoginHamdler";
 import { useNavigate, Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
@@ -44,12 +42,12 @@ function UserLogin() {
           />
           <meta
             property="og:url"
-            content="https://softgamestudio.web.app/login"
+            content="https://soft-game-studio.web.app/login"
           />
           <meta property="og:type" content="website" />
           <meta
             property="og:image"
-            content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050"
+            content="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media"
           />
         </Helmet>
 

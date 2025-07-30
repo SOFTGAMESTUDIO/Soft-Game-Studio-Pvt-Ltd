@@ -49,7 +49,7 @@ const ManageQuizzes = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this quiz?")) {
       try {
-        await deleteDoc(doc(fireDB, "quizzes", id));
+        await deleteDoc(doc(fireDB, "quizzesfree", id));
         toast.success("Quiz deleted successfully");
         setQuizzes(prev => prev.filter(quiz => quiz.id !== id));
       } catch (error) {

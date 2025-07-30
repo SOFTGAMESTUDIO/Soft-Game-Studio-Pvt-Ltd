@@ -337,11 +337,11 @@ const SGSEXAM = () => {
     property="og:description" 
     content="Access free and premium theory and quiz exams at Soft Game Studio. Test your knowledge and prepare for interviews and competitive exams." 
   />
-  <meta property="og:url" content="https://softgamestudio.web.app/exams" />
+  <meta property="og:url" content="https://soft-game-studio.web.app/exams" />
   <meta property="og:type" content="website" />
   <meta 
     property="og:image" 
-    content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050" 
+    content="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media" 
   />
 </Helmet>
 

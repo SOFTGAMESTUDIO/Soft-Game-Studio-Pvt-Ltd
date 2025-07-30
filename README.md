@@ -20,7 +20,7 @@ Welcome to the **Soft Game Studio** GitHub Repository — a fully-featured, web-
 
 ## 🌐 Live Demo
 
-**[https://softgamestudio.web.app](https://softgamestudio.web.app)**
+**[https://soft-game-studio.web.app](https://soft-game-studio.web.app)**
 
 ---
 

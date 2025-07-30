@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@cloudinary/react": "^1.14.3",
+    "@cloudinary/url-gen": "^1.21.0",
     "@emailjs/browser": "^4.4.1",
     "@headlessui/react": "^2.2.4",
     "@monaco-editor/react": "^4.7.0",
@@ -20,6 +22,7 @@
     "axios": "^1.10.0",
     "chart": "^0.1.2",
     "chart.js": "^4.5.0",
+    "dotenv": "^17.2.1",
     "file-saver": "^2.0.5",
     "firebase": "^11.10.0",
     "firebase-admin": "^13.4.0",

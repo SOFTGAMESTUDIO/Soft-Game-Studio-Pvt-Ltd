@@ -4,11 +4,7 @@ import Layout from "../../../../components/layout/Layout";
 
 export default function Exam() {
   const tabs = [
-    {
-      title: "Create Quiz",
-      details: ["Create New Quiz", "Add Questions", "Set Exam Date and Time"],
-      link: "/Admin-Quiz-Create",
-    },
+ 
     {
       title: "Manage Quizzes",
       details: ["View All Quizzes", "Delete Quizzes", "Export Quiz Data"],
@@ -18,6 +14,11 @@ export default function Exam() {
       title: "Manage Quizzes Free",
       details: ["View All Quizzes", "Delete Quizzes", "Export Quiz Data"],
       link: "/Admin-QuizFree-Manage",
+    }, 
+    {
+      title: "Weekly Quuiz",
+      details: ["View User Answers", "Create Quiz ", "Edit Quiz", "Delete Quiz"],
+      link: "/Admin-DailyQuizQuiz-Manage",
     },
     {
       title: "Create Exam",
@@ -32,11 +33,7 @@ export default function Exam() {
       details: ["View User Answers", "Analyze Performance", "Export User Data"],
       link: "/Admin-Quiz-User-Answers",
     },
-    {
-      title: "Daily Quuiz",
-      details: ["View User Answers", "Create Quiz ", "Edit Quiz", "Delete Quiz"],
-      link: "/Admin-DailyQuizQuiz-Manage",
-    },
+
   ];
 
   return (

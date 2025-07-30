@@ -15,6 +15,7 @@ import Certificate from "../../../../components/Certificate/Certificate";
 import { fireDB } from "../../../../DataBase/firebaseConfig";
 import { getUserData } from "../../../../Modules/UserData";
 import { Helmet } from "react-helmet";
+import { useAuth } from "../../../../AuthProvide";
 
 const QuizExam = () => {
   const { id: quizId } = useParams();
@@ -28,7 +29,8 @@ const QuizExam = () => {
   const [loading, setLoading] = useState(true);
   const [quizData, setQuizData] = useState(null);
   const [userList, setUserList] = useState([]);
-  const userid = JSON.parse(localStorage.getItem("user"))?.email;
+  const {user } = useAuth();
+  const userid = user
   const [score, setScore] = useState(0);
   const [Que, setQue] = useState(0);
 

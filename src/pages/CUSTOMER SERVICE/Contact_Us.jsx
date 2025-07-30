@@ -94,14 +94,14 @@ const ContactPage = () => {
           {/* Canonical URL */}
           <link
             rel="canonical"
-            href="https://softgamestudio.web.app/ContactUs"
+            href="https://soft-game-studio.web.app/ContactUs"
           />
 
           {/* Open Graph / Facebook */}
           <meta property="og:type" content="website" />
           <meta
             property="og:url"
-            content="https://softgamestudio.web.app/ContactUs"
+            content="https://soft-game-studio.web.app/ContactUs"
           />
           <meta
             property="og:title"

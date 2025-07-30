@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "softgamestudio",
+    "site": "softgamestudios",
     "public": "dist",
     "ignore": [
       "firebase.json",
@@ -14,9 +14,5 @@
       }
     ],
     "predeploy": ["npm run build"]
-
   }
 }
-
-
-

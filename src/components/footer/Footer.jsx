@@ -27,6 +27,7 @@ const Footer = () => {
     { name: "Contact Us", path: "/ContactUs" },
     { name: "Feedback", path: "/Feedback" },
     { name: "FAQs", path: "/FAQs" },
+    { name: "Suport US", path: "/SuportUs" },
   ];
 
   const Legal = [
@@ -44,6 +45,9 @@ const Footer = () => {
     { name: "Projets", path: "/Project" },
     { name: "Our Courses", path: "/OurCourse" },
     { name: "Notes & Books", path: "/Notes&Books" },
+    { name: "SGS Quiz App", path: "/SGS-Quiz-App" },
+
+    
   ];
 
   const socialLinks = [
@@ -93,7 +97,7 @@ const Footer = () => {
           >
             <div className="flex items-center space-x-3 mb-4">
               <img
-                src="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050"
+                src="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media"
                 className="w-10 h-10 rounded-full"
                 alt="SOFT GAME STUDIO"
               />

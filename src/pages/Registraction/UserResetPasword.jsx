@@ -51,12 +51,12 @@ export default function UserResetPasswordPage() {
           />
           <meta
             property="og:url"
-            content="https://softgamestudio.web.app/reset-password"
+            content="https://soft-game-studio.web.app/reset-password"
           />
           <meta property="og:type" content="website" />
           <meta
             property="og:image"
-            content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050"
+            content="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media"
           />
         </Helmet>
 

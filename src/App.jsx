@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -80,9 +80,23 @@ import EditQuizDetailsDaily from "./pages/Admin/DashBoards/Exam/DailyQuiz/EditQu
 import EditQuizQuestionDaily from "./pages/Admin/DashBoards/Exam/DailyQuiz/EditQuizQuestions";
 import ManageQuizDaily from "./pages/Admin/DashBoards/Exam/DailyQuiz/ManageQuizzes";
 import UserAnswersDaily from "./pages/Admin/DashBoards/Exam/DailyQuiz/UserAnswers";
+import SGSQuizAppPage from "./pages/App/SGSQUIZAPP.jsx";
+import SupportUs from "./components/Suport US/SuportUS.jsx";
+import SGSProjectsPage from "./pages/Admin/DashBoards/SGS Projects/SGSProjectsPage.jsx";
+
+
+import { useAuth } from "./AuthProvide.jsx";
+import SGSProject from "./pages/SGSProject/SGSProject.jsx";
+
+
+
+
+
 
 
 function App() {
+
+
   return (
     <MyProvider>
        <Router
@@ -112,6 +126,7 @@ function App() {
         <Route path="/CookiesPolicy" element={<CookiesPolicy />} />
         <Route path="/OurMembers" element={<OurMembers />} />
         <Route path="/AboutDevelopmet" element={<DevelopmentPage/>} />
+        <Route path="/SuportUS" element={<SupportUs/>} />
 
 {/*  Product and Roots  */}
         <Route path="/Cart" element={<Cart />} />
@@ -151,7 +166,14 @@ function App() {
  <Route path="/Profile" element={<ProfilePage/>} />
 
 
+  {/* App Page */}
 
+ <Route path="/SGS-Quiz-App" element={<SGSQuizAppPage/>} />
+
+
+{/* SGS PROJECT PAGE */}
+
+  <Route path="/SGS-Projects" element={<SGSProject/>} />
          
 
         {/*  Admin Routes */}
@@ -410,7 +432,14 @@ function App() {
 
 
 
-
+{/*  Admin SGS Project */}
+         <Route
+          path="/Admin-SGSProjects"
+          element={
+            <ProtectedRouteForAdmin>
+              <SGSProjectsPage/>
+            </ProtectedRouteForAdmin>
+          }/>
      
           
       
@@ -428,8 +457,10 @@ export default App;
 
 // user
 
+
+
 export const ProtectedRoute = ({ children }) => {
-  const user = localStorage.getItem("user");
+const { user} = useAuth(); // Add parentheses
   if (user) {
     return children;
   } else {
@@ -438,8 +469,8 @@ export const ProtectedRoute = ({ children }) => {
 };
 
 export const ProtectedRouteForAdmin = ({ children }) => {
-  const admin = JSON.parse(localStorage.getItem("user"));
-  if (admin.email === import.meta.env.VITE__ADMIN_EMAIL_SGS) {
+  const { isAdmin } = useAuth(); // Add parentheses
+  if (isAdmin) {
     return children;
   } else {
     return <Navigate to={"/Login"} />;

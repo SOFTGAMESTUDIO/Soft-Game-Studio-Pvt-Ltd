@@ -112,10 +112,10 @@ const FAQPage = () => {
           content="Browse frequently asked questions about Soft Game Studio's educational services and digital products."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://softgamestudio.web.app/FAQs" />
+        <meta property="og:url" content="https://soft-game-studio.web.app/FAQs" />
         <meta
           property="og:image"
-          content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050"
+          content="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media"
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="FAQs | Soft Game Studio" />
@@ -125,9 +125,9 @@ const FAQPage = () => {
         />
         <meta
           name="twitter:image"
-          content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050"
+          content="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media"
         />
-        <link rel="canonical" href="https://softgamestudio.web.app/FAQs" />
+        <link rel="canonical" href="https://soft-game-studio.web.app/FAQs" />
       </Helmet>
       <div 
         className="min-h-screen transition-colors duration-300 

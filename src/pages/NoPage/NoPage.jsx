@@ -28,11 +28,11 @@ export default function NotFoundPage() {
           property="og:description"
           content="Oops! This page doesn't exist. Return to Soft Game Studio's homepage to continue exploring our content."
         />
-        <meta property="og:url" content="https://softgamestudio.web.app/404" />
+        <meta property="og:url" content="https://soft-game-studio.web.app/404" />
         <meta property="og:type" content="website" />
         <meta
           property="og:image"
-          content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050"
+          content="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media"
         />
       </Helmet>
 
@@ -71,7 +71,7 @@ export default function NotFoundPage() {
             className="relative"
           >
             <img
-              src="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/SGS%20images%2F%E2%80%94Pngtree%E2%80%94error%20404%20page%20not%20found_6681621.png?alt=media&token=e8563741-5d63-4b58-895c-951529ee8ad3" // Add your custom astronaut + 404 image in this path
+              src="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2F404Error.png?alt=media" // Add your custom astronaut + 404 image in this path
               alt="404 Illustration"
               className="w-full h-auto"
             />

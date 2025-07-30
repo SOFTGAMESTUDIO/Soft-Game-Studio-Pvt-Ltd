@@ -7,6 +7,7 @@ import { fireDB } from "../../DataBase/firebaseConfig";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useCart } from "../../Modules/Cart/CartContext";
 import Layout from "../../components/layout/Layout";
+import { useAuth } from "../../AuthProvide";
 
 const Cart = () => {
 const { cartItems, removeFromCart, clearCart } = useCart();
@@ -43,7 +44,7 @@ const handleDelete = (id) => {
 };
 
 const handleBuyNow = async () => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const {user } = useAuth();
   if (!user) {
     toast.error("User not logged in");
     return;

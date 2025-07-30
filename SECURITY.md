@@ -34,7 +34,7 @@ We aim to maintain the security of all active repositories. The following outlin
 
 ## 🌐 Additional Information
 
-- 💻 Official Website: [softgamestudio.web.app](https://softgamestudio.web.app)
+- 💻 Official Website: [softgamestudio.web.app](https://soft-game-studio.web.app)
 - 🛠️ GitHub Repository: [github.com/SOFTGAMESTUDIO/SoftGameStudio](https://github.com/SOFTGAMESTUDIO/SoftGameStudio)
 - 📧 Contact: [team.softgamestudio@gmail.com](mailto:team.softgamestudio@gmail.com)
 

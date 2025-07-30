@@ -37,7 +37,7 @@ const EditQuizDetails = () => {
           });
         } else {
           toast.error("Quiz not found");
-          navigate("/admin/manage");
+          navigate("/Admin-Quiz-Manage");
         }
       } catch (err) {
         toast.error("Error fetching quiz");
@@ -63,7 +63,7 @@ const EditQuizDetails = () => {
     try {
       await updateDoc(doc(fireDB, "quizzes", id), quizDetails);
       toast.success("Quiz details updated");
-      navigate("/ADMIN-EXAM/");
+      navigate("/Admin-Quiz-Manage");
     } catch (error) {
       toast.error("Failed to update quiz");
     }

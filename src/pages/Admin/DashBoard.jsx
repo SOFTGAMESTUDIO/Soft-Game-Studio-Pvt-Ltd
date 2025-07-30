@@ -65,6 +65,14 @@ import Layout from '../../components/layout/Layout';
       ],
       link: "/Admin-EBook"
     },
+    {
+      title: "SGS Projects", 
+      details: [
+        "Add SGS Projects",
+        "Ediet SGS Projects"
+      ],
+      link: "/Admin-SGSProjects"
+    },
 
 
 
@@ -89,7 +97,7 @@ import Layout from '../../components/layout/Layout';
 
   return (
     <Layout>
- <section className="text-gray-700 dark:text-gray-400 bg-gray-100 dark:bg-gray-900 body-font overflow-hidden transition-colors duration-300">
+      <section className="text-gray-700 dark:text-gray-400 bg-gray-100 dark:bg-gray-900 body-font overflow-hidden transition-colors duration-300">
        <div className="container px-5 py-20 mx-auto">
          <h1 className="text-4xl font-bold mb-12 text-center text-gray-900 dark:text-white">
            Admin Panel

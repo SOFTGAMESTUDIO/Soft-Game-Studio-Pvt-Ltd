@@ -28,7 +28,7 @@ const EditQuizQuestions = () => {
         setQuestions(quizSnap.data().questions || []);
       } else {
         toast.error("Quiz not found");
-        navigate("/ADMIN-EXAM/");
+        navigate("/Admin-DailyQuizQuiz-Manage");
       }
     };
     fetchQuestions();
@@ -84,7 +84,7 @@ const EditQuizQuestions = () => {
     try {
       await updateDoc(doc(fireDB, "Dailyquizzes", id), { questions });
       toast.success("Questions saved");
-      navigate("/ADMIN-EXAM/");
+      navigate("/Admin-DailyQuizQuiz-Manage");
     } catch (error) {
       toast.error("Save failed");
     }

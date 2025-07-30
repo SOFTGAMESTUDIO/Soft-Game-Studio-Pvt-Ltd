@@ -56,7 +56,9 @@ const DisplayCourses = () => {
     property="og:description" 
     content="Soft Game Studio offers a wide range of free and affordable online courses. Learn development, design, and career skills at your own pace." 
   />
-  <meta property="og:url" content="https://softgamestudio.web.app/OurCourse" />
+  <meta property="og:url" content="https://soft-game-studio.web.app/OurCourse" />
+  <meta property="og:url" content="https://softgamestudios.web.app/OurCourse" /> 
+  
   <meta property="og:type" content="website" />
 </Helmet>
 

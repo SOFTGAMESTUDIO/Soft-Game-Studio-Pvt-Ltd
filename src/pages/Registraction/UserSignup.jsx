@@ -3,13 +3,12 @@ import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useNavigate, Link } from "react-router-dom";
 import {
   auth,
-  providerGoogle,
 } from "../../DataBase/firebaseConfig";
 import { addUserToFirestore } from "../../Modules/signupHandler";
 import { Input } from "../../UiComponents/input";
 import { Label } from "../../UiComponents/label";
 import { cn } from "../../Library/utils";
-import { IconBrandGoogle } from "@tabler/icons-react";
+
 import { Helmet } from "react-helmet";
 import Layout from "../../components/layout/Layout";
 
@@ -43,22 +42,6 @@ export default function UserSignup() {
     }
   };
 
-  const handleSocialSignup = async (provider) => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const nameParts = result.user.displayName?.split(" ") || ["", ""];
-      const socialData = {
-        firstName: nameParts[0],
-        lastName: nameParts[1],
-        email: result.user.email,
-        phone: "",
-      };
-      await addUserToFirestore(result.user, socialData);
-      navigate("/login");
-    } catch (error) {
-      console.error("Social signup error:", error.message);
-    }
-  };
 
   return (
     <Layout>
@@ -79,11 +62,11 @@ export default function UserSignup() {
           property="og:description"
           content="Join Soft Game Studio today. Get access to top-quality projects, coding resources, and exam preparation tools. Quick and easy signup process."
         />
-        <meta property="og:url" content="https://softgamestudio.web.app/signup" />
+        <meta property="og:url" content="https://soft-game-studio.web.app/signup" />
         <meta property="og:type" content="website" />
         <meta
           property="og:image"
-          content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050"
+          content="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media"
         />
       </Helmet>
 

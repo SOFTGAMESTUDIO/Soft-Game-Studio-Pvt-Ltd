@@ -4,6 +4,7 @@ import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import Editor from "@monaco-editor/react";
 import Layout from "../../../../../components/layout/Layout";
+import { useNavigate } from "react-router-dom";
 
 const initialQuestion = {
   question: "",
@@ -13,6 +14,7 @@ const initialQuestion = {
 };
 
 const AdminCreateQuiz = () => {
+  const {navigate} = useNavigate()
   const [step, setStep] = useState(0);
   const [quizId, setQuizId] = useState(null);
   const [quizDetails, setQuizDetails] = useState({
@@ -122,6 +124,7 @@ const AdminCreateQuiz = () => {
     try {
       await updateDoc(doc(fireDB, "quizzes", quizId), { questions });
       toast.success("Questions saved successfully.");
+      navigate("/Admin-Quiz-Manage")
     } catch (error) {
       console.error("Error saving questions:", error);
       toast.error("Failed to save questions.");

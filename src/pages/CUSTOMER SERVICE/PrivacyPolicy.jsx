@@ -29,8 +29,8 @@ const PrivacyPolicy = () => {
     content="Understand how Soft Game Studio handles your personal data, ensures privacy, and complies with regulations like GDPR."
   />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://softgamestudio.web.app/PrivacyPolicy" />
-  <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050" />
+  <meta property="og:url" content="https://soft-game-studio.web.app/PrivacyPolicy" />
+  <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Privacy Policy | Soft Game Studio" />
@@ -38,9 +38,9 @@ const PrivacyPolicy = () => {
     name="twitter:description"
     content="Learn how Soft Game Studio protects your personal information and ensures your data privacy while using our services."
   />
-  <meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050" />
+  <meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media" />
 
-  <link rel="canonical" href="https://softgamestudio.web.app/PrivacyPolicy" />
+  <link rel="canonical" href="https://soft-game-studio.web.app/PrivacyPolicy" />
 </Helmet>
 
        <div className="min-h-screen bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-neutral-950 dark:to-gray-950 text-gray-800 dark:text-gray-200 overflow-hidden">
@@ -99,7 +99,7 @@ const PrivacyPolicy = () => {
         >
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-12 rounded-full bg-purple-600 dark:bg-purple-700 overflow-hidden flex items-center justify-center">
-              <img  src="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050" alt="" />
+              <img  src="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media" alt="" />
             </div>
             <h1 className="text-3xl font-bold text-purple-800 dark:text-purple-400">Soft Game Studio</h1>
           </div>
@@ -318,7 +318,7 @@ const PrivacyPolicy = () => {
                 Email Privacy Team
               </a>
               <a
-                href="https://softgamestudio.web.app/ContactUs"
+                href="https://soft-game-studio.web.app/ContactUs"
                 className="px-6 py-3 bg-white dark:bg-gray-800 border border-purple-600 text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-gray-700 rounded-lg transition-colors"
               >
                 Contact Form

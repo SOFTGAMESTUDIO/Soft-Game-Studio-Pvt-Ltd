@@ -28,8 +28,8 @@ const ReturnPolicy = () => {
     content="Understand Soft Game Studio’s strict no-return, no-refund policy and learn how to reach out for any questions."
   />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://softgamestudio.web.app/ReturnPolicy" />
-  <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050" />
+  <meta property="og:url" content="https://soft-game-studio.web.app/ReturnPolicy" />
+  <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Return & Refund Policy | Soft Game Studio" />
@@ -37,10 +37,10 @@ const ReturnPolicy = () => {
     name="twitter:description"
     content="Review Soft Game Studio’s Return and Refund Policy to know your purchase rights and our contact info."
   />
-  <meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050" />
+  <meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media" />
   <meta name="twitter:site" content="@SoftGameStudio" />
 
-  <link rel="canonical" href="https://softgamestudio.web.app/ReturnPolicy" />
+  <link rel="canonical" href="https://soft-game-studio.web.app/ReturnPolicy" />
 </Helmet>
 
       <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-gray-950 dark:to-neutral-950 text-gray-800 dark:text-gray-200 overflow-hidden">
@@ -99,7 +99,7 @@ const ReturnPolicy = () => {
           >
             <div className="flex items-center justify-center gap-3 mb-6">
                <div className="w-12 h-12 rounded-full bg-purple-600 dark:bg-purple-700 overflow-hidden flex items-center justify-center">
-              <img  src="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050" alt="" />
+              <img  src="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media" alt="" />
             </div>
               <h1 className="text-3xl font-bold text-purple-800 dark:text-purple-400">Soft Game Studio</h1>
             </div>
@@ -204,12 +204,12 @@ const ReturnPolicy = () => {
                       <p>
                         Refers to SOFT GAME STUDIO, accessible from{" "}
                         <a
-                          href="https://softgamestudio.web.app"
+                          href="https://soft-game-studio.web.app"
                           className="text-blue-600 dark:text-blue-400 underline hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          https://softgamestudio.web.app
+                          https://soft-game-studio.web.app
                         </a>
                       </p>
                     </div>
@@ -284,7 +284,7 @@ const ReturnPolicy = () => {
                   Email Our Team
                 </a>
                 <a
-                  href="https://softgamestudio.web.app/ContactUs"
+                  href="https://soft-game-studio.web.app/ContactUs"
                   className="px-6 py-3 bg-white dark:bg-gray-800 border border-blue-600 text-blue-600 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg transition-colors"
                 >
                   Contact Form

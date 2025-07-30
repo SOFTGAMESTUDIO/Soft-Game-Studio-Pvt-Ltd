@@ -30,7 +30,7 @@ const AboutExam = () => {
     property="og:description" 
     content="Learn about the SGS Exam Platform – a secure and scalable assessment system with AI proctoring, real-time analytics, and instant grading for online and offline exams." 
   />
-  <meta property="og:url" content="https://softgamestudio.web.app/exam-platform" />
+  <meta property="og:url" content="https://soft-game-studio.web.app/exam-platform" />
   <meta property="og:type" content="website" />
 </Helmet>
 

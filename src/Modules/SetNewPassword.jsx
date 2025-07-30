@@ -1,5 +1,6 @@
 // app/Library/resetWithEmail.js
-import { auth, sendPasswordResetEmail } from "../DataBase/firebaseConfig";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth, } from "../DataBase/firebaseConfig";
 
 export async function sendResetPasswordEmail(email) {
   try {

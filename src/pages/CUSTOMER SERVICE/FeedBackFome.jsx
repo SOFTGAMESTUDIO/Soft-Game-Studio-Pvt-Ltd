@@ -5,8 +5,7 @@ import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
 import Layout from "../../components/layout/Layout";
 import { Helmet } from "react-helmet";
-import { fireDB, storage } from "../../DataBase/firebaseConfig"; // Import Firebase configuration
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { fireDB} from "../../DataBase/firebaseConfig"; // Import Firebase configuration
 import { collection, addDoc, getDocs, serverTimestamp, query, orderBy } from "firebase/firestore";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
@@ -177,7 +176,7 @@ export default function FeedbackSection() {
   return (
     <Layout>
       <Helmet>
-        <link rel="canonical" href="https://softgamestudio.web.app/Feedback" />
+        <link rel="canonical" href="https://soft-game-studio.web.app/Feedback" />
         <title>Customer Feedback Portal | Share Your Experience - Soft Game Studio</title>
         <meta name="description" content="Submit your feedback and read customer testimonials. See our 4.8/5 average rating from 50+ reviews. Help us improve your experience with our feedback form." />
         
@@ -190,7 +189,7 @@ export default function FeedbackSection() {
         <meta property="og:title" content="Share Your Feedback - Soft Game Studio Customer Portal" />
         <meta property="og:description" content="Join 50+ customers who've rated us 4.8/5. Submit your experience through our interactive feedback form with live rating statistics." />
         <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/SGS%20images%2FCustomer-Feedback-Portal-Share-Your-Experience-Soft-Game-Studio-06-07-2025_02_08_PM.png?alt=media&token=2f94c5c4-6d9c-482b-92df-015bef62c1ce" />
-        <meta property="og:url" content="https://softgamestudio.web.app/Feedback" />
+        <meta property="og:url" content="https://soft-game-studio.web.app/Feedback" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Soft Game Studio" />
         
@@ -213,7 +212,7 @@ export default function FeedbackSection() {
               "name": "Soft Game Studio",
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/Designer.png?alt=media&token=3e6ee22e-f7f7-4d73-8ce7-0b1441ed3050"
+                "url": "https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media"
               }
             }
           })}

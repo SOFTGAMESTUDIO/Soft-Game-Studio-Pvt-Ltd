@@ -271,7 +271,7 @@ const HomePage = () => {
                       <FaArrowRight className="ml-2" />
                     </Link>
                     <Link 
-                      to="https://github.com/SOFTGAMESTUDIO/SGS-QUIZ-APP/releases/download/SGS-QUIZ-APP/sgs-quiz-v1.apk"
+                      to="https://github.com/SOFTGAMESTUDIO/SGS-QUIZ-APP/releases/download/SGS-QUIZ-APP/sgs-official-v1.0.0.apk"
                       className="bg-white dark:bg-slate-800 border border-blue-600 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-700 px-6 py-3 rounded-full flex items-center justify-center transition-colors"
                     >
                       <FaDownload className="mr-2" />
@@ -588,16 +588,7 @@ const HomePage = () => {
         </section>
 
 
-        <div>
-            <button
-              onClick={() => navigate("/SuportUS")}
-              className=" fixed bottom-6 right-6 z-50 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-full shadow-lg flex items-center gap-2 transition-all duration-300"
-            >
-            
-             <FaHeart className="text-white" />
-            <span className="font-semibold">Support Us</span>
-            </button>
-        </div>
+        
       </div>
     </Layout>
   );

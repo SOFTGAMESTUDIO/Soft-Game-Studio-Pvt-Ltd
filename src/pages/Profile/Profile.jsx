@@ -164,7 +164,7 @@ const ProfilePage = () => {
           property="og:description" 
           content="Manage your profile, exam records, course enrollments, and personal settings securely on Soft Game Studio." 
         />
-        <meta property="og:url" content="https://soft-game-studio.web.app/profile" />
+        <meta property="og:url" content="https://softgamestudios.web.app/profile" />
         <meta property="og:type" content="website" />
       </Helmet>
 

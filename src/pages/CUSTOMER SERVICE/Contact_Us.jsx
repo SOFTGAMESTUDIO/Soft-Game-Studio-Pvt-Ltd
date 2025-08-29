@@ -10,8 +10,8 @@ const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "",
     message: "",
+    subject: "",
   });
   const [status, setStatus] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,29 +21,61 @@ const ContactPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // const handleChange = (e) => {
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     [e.target.name]: e.target.value,
+  //   }));
+  // };
+
+  // const sendMail = async (e) => {
+  //   e.preventDefault();
+  //   setIsSubmitting(true);
+  //   try {
+  //     const res = await fetch("http://localhost:8000/api/v1/email/emailSendt", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(formData),
+  //     });
+
+  //     const data = await res.json();
+
+  //     if (res.ok) {
+  //       setStatus("Email sent successfully!");
+  //     } else {
+  //       setStatus(`Error: ${data.message || "Something went wrong"}`);
+  //     }
+  //   } catch (error) {
+  //     setStatus("Error sending email");
+  //     console.error(error);
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
+
   const handleSubmit = (e) => {
-  e.preventDefault();
-  setIsSubmitting(true);
-
-  // Replace these with your actual EmailJS credentials
-  const SERVICE_ID = import.meta.env.VITE__EMAILJS_SERVICEID_SGS;
-  const TEMPLATE_ID = import.meta.env.VITE__EMAILJS_TEMPLATEID_SGS;
-  const PUBLIC_KEY = import.meta.env.VITE__EMAILJS_PUBLICKEY_SGS;
-
-  emailjs.send(SERVICE_ID, TEMPLATE_ID, formData, PUBLIC_KEY)
-    .then((response) => {
-      console.log('SUCCESS!', response.status, response.text);
-      setStatus("Message sent successfully!");
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    })
-    .catch((err) => {
-      console.error('FAILED...', err);
-      setStatus("Failed to send message. Please try again later.");
-    })
-    .finally(() => {
-      setIsSubmitting(false);
-    });
-};
+    // e.preventDefault();
+    // setIsSubmitting(true);
+    // // Replace these with your actual EmailJS credentials
+    // const SERVICE_ID = import.meta.env.VITE__EMAILJS_SERVICEID_SGS;
+    // const TEMPLATE_ID = import.meta.env.VITE__EMAILJS_TEMPLATEID_SGS;
+    // const PUBLIC_KEY = import.meta.env.VITE__EMAILJS_PUBLICKEY_SGS;
+    // emailjs.send(SERVICE_ID, TEMPLATE_ID, formData, PUBLIC_KEY)
+    //   .then((response) => {
+    //     console.log('SUCCESS!', response.status, response.text);
+    //     setStatus("Message sent successfully!");
+    //     setFormData({ name: "", email: "", subject: "", message: "" });
+    //   })
+    //   .catch((err) => {
+    //     console.error('FAILED...', err);
+    //     setStatus("Failed to send message. Please try again later.");
+    //   })
+    //   .finally(() => {
+    //     setIsSubmitting(false);
+    //   });
+  };
 
   const { scrollY } = useScroll();
   const parallaxY = useTransform(scrollY, [0, 300], [0, -50]);
@@ -81,7 +113,7 @@ const ContactPage = () => {
           <title>
             Contact Us - Soft Game Studio | Game Development & Education
           </title>
-        
+
           <meta
             name="title"
             content="Contact Soft Game Studio - Game Development Experts"
@@ -94,14 +126,14 @@ const ContactPage = () => {
           {/* Canonical URL */}
           <link
             rel="canonical"
-            href="https://soft-game-studio.web.app/ContactUs"
+            href="https://softgamestudios.web.app/ContactUs"
           />
 
           {/* Open Graph / Facebook */}
           <meta property="og:type" content="website" />
           <meta
             property="og:url"
-            content="https://soft-game-studio.web.app/ContactUs"
+            content="https://softgamestudios.web.app/ContactUs"
           />
           <meta
             property="og:title"
@@ -143,10 +175,6 @@ const ContactPage = () => {
             name="twitter:image:alt"
             content="Connect with Soft Game Studio"
           />
-
-    
-
-         
         </Helmet>
 
         {/* Parallax Background Elements */}
@@ -278,20 +306,16 @@ const ContactPage = () => {
                   className="rounded-2xl overflow-hidden border border-purple-200 dark:border-neutral-700 shadow-lg"
                   whileHover={{ scale: 1.01 }}
                 >
-                <iframe
-  title="Soft Game Studio Location"
-  width="100%"
-  height="350"
-  style={{ border: 0, borderRadius: "12px" }}
-  loading="lazy"
-  allowFullScreen
-  referrerPolicy="no-referrer-when-downgrade"
-  src={`https://www.google.com/maps/embed/v1/place?key=${GOOGLE_MAPS_API_KEY}&q=Soft+Game+Studio`}
-/>
-
-
-
-
+                  <iframe
+                    title="Soft Game Studio Location"
+                    width="100%"
+                    height="350"
+                    style={{ border: 0, borderRadius: "12px" }}
+                    loading="lazy"
+                    allowFullScreen
+                    referrerPolicy="no-referrer-when-downgrade"
+                    src={`https://www.google.com/maps/embed/v1/place?key=${GOOGLE_MAPS_API_KEY}&q=Soft+Game+Studio`}
+                  />
                 </motion.div>
               </motion.div>
 

@@ -49,7 +49,7 @@ const DevelopmentPage = () => {
     property="og:description" 
     content="Explore web, app, and software development services by Soft Game Studio. Scalable and affordable solutions for your digital needs." 
   />
-  <meta property="og:url" content="https://soft-game-studio.web.app/AboutDevelopmet" />
+  <meta property="og:url" content="https://softgamestudios.web.app/AboutDevelopmet" />
   <meta property="og:type" content="website" />
 </Helmet>
 

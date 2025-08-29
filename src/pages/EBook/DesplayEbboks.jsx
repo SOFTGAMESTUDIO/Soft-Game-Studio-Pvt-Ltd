@@ -1,6 +1,6 @@
 // src/pages/EbookCatalog.jsx
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { FaSearch, FaBook, FaSpinner, FaArrowUp } from 'react-icons/fa';
 import { motion } from 'framer-motion';
@@ -16,6 +16,7 @@ const EbookCatalog = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [chapterCounts, setChapterCounts] = useState({});
   const headerRef = useRef(null);
+  const navigate = useNavigate();
 
   // Fetch chapter counts for each ebook
   const fetchChapterCounts = useCallback(async (ebooksData) => {
@@ -95,6 +96,19 @@ const EbookCatalog = () => {
     });
   }, []);
 
+  // FIX: Ensure chapters open centered in the viewport
+  const navigateToEbook = (ebookId) => {
+    // Scroll to center before navigating
+    const windowHeight = window.innerHeight;
+    const scrollTarget = Math.max(0, window.scrollY + (windowHeight / 4));
+    window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
+    
+    // Navigate after slight delay to allow scroll animation
+    setTimeout(() => {
+      navigate(`/E-Books/${ebookId}`);
+    }, 300);
+  };
+
   const handleImageError = (e) => {
     e.target.onerror = null;
     e.target.parentElement.innerHTML = '<div class="bg-purple-100 border-2 border-dashed border-purple-300 dark:border-neutral-700 rounded-xl w-full h-full flex items-center justify-center dark:bg-neutral-800"><FaBook class="h-12 w-12 text-purple-400 dark:text-purple-500"/></div>';
@@ -167,26 +181,26 @@ const EbookCatalog = () => {
 
   return (
     <Layout>
-       <Helmet>
-  <title>E-Books | Soft Game Studio</title>
-  <meta 
-    name="description" 
-    content="Explore a wide range of free and affordable E-Books. Soft Game Studio offers Short Notes E books with pdf formate " 
-  />
-  <meta 
-    name="keywords" 
-    content="Free E-Books, Affordable E-Books, Ebooks PDF, Full Detailed E-Book, languages  E-Book , Student learning , Developer E-Books, Soft Game Studio E-books, Soft Game Studio " 
-  />
-  <meta name="author" content="Soft Game Studio" />
-  
-  <meta property="og:title" content="E-Books | Soft Game Studio" />
-  <meta 
-    property="og:description" 
-    content="Free E-Books, Affordable E-Books, Ebooks PDF, Full Detailed E-Book, languages  E-Book , Student learning , Developer E-Books, Soft Game Studio E-books, Soft Game Studio " 
-  />
-  <meta property="og:url" content="https://soft-game-studio.web.app/E-Books" />
-  <meta property="og:type" content="website" />
-</Helmet>
+      <Helmet>
+        <title>E-Books | Soft Game Studio</title>
+        <meta 
+          name="description" 
+          content="Explore a wide range of free and affordable E-Books. Soft Game Studio offers Short Notes E books with pdf format" 
+        />
+        <meta 
+          name="keywords" 
+          content="Free E-Books, Affordable E-Books, Ebooks PDF, Full Detailed E-Book, languages E-Book, Student learning, Developer E-Books, Soft Game Studio E-books, Soft Game Studio" 
+        />
+        <meta name="author" content="Soft Game Studio" />
+        <meta property="og:title" content="E-Books | Soft Game Studio" />
+        <meta 
+          property="og:description" 
+          content="Free E-Books, Affordable E-Books, Ebooks PDF, Full Detailed E-Book, languages E-Book, Student learning, Developer E-Books, Soft Game Studio E-books, Soft Game Studio" 
+        />
+        <meta property="og:url" content="https://softgamestudios.web.app/E-Books" />
+        <meta property="og:type" content="website" />
+      </Helmet>
+      
       <div className="min-h-screen bg-purple-100 dark:bg-neutral-950 transition-colors duration-500 py-12 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           {/* Parallax Header */}
@@ -294,12 +308,12 @@ const EbookCatalog = () => {
                         <span className="text-sm text-purple-600 dark:text-purple-400 font-medium">
                           {chapterCounts[ebook.id] || 0} chapters
                         </span>
-                        <Link 
-                          to={`/E-Books/${ebook.id}`} 
+                        <button 
+                          onClick={() => navigateToEbook(ebook.id)}
                           className="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg transition-colors flex items-center dark:bg-purple-500 dark:hover:bg-purple-600"
                         >
                           Read Now
-                        </Link>
+                        </button>
                       </div>
                     </div>
                   </div>

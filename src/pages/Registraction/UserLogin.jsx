@@ -42,7 +42,7 @@ function UserLogin() {
           />
           <meta
             property="og:url"
-            content="https://soft-game-studio.web.app/login"
+            content="https://softgamestudios.web.app/login"
           />
           <meta property="og:type" content="website" />
           <meta

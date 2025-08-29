@@ -28,7 +28,7 @@ const ReturnPolicy = () => {
     content="Understand Soft Game Studio’s strict no-return, no-refund policy and learn how to reach out for any questions."
   />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://soft-game-studio.web.app/ReturnPolicy" />
+  <meta property="og:url" content="https://softgamestudios.web.app/ReturnPolicy" />
   <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media" />
 
   <meta name="twitter:card" content="summary_large_image" />
@@ -40,7 +40,7 @@ const ReturnPolicy = () => {
   <meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media" />
   <meta name="twitter:site" content="@SoftGameStudio" />
 
-  <link rel="canonical" href="https://soft-game-studio.web.app/ReturnPolicy" />
+  <link rel="canonical" href="https://softgamestudios.web.app/ReturnPolicy" />
 </Helmet>
 
       <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-gray-950 dark:to-neutral-950 text-gray-800 dark:text-gray-200 overflow-hidden">
@@ -204,12 +204,12 @@ const ReturnPolicy = () => {
                       <p>
                         Refers to SOFT GAME STUDIO, accessible from{" "}
                         <a
-                          href="https://soft-game-studio.web.app"
+                          href="https://softgamestudios.web.app"
                           className="text-blue-600 dark:text-blue-400 underline hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          https://soft-game-studio.web.app
+                          https://softgamestudios.web.app
                         </a>
                       </p>
                     </div>
@@ -284,7 +284,7 @@ const ReturnPolicy = () => {
                   Email Our Team
                 </a>
                 <a
-                  href="https://soft-game-studio.web.app/ContactUs"
+                  href="https://softgamestudios.web.app/ContactUs"
                   className="px-6 py-3 bg-white dark:bg-gray-800 border border-blue-600 text-blue-600 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg transition-colors"
                 >
                   Contact Form

@@ -176,7 +176,7 @@ export default function FeedbackSection() {
   return (
     <Layout>
       <Helmet>
-        <link rel="canonical" href="https://soft-game-studio.web.app/Feedback" />
+        <link rel="canonical" href="https://softgamestudios.web.app/Feedback" />
         <title>Customer Feedback Portal | Share Your Experience - Soft Game Studio</title>
         <meta name="description" content="Submit your feedback and read customer testimonials. See our 4.8/5 average rating from 50+ reviews. Help us improve your experience with our feedback form." />
         
@@ -189,7 +189,7 @@ export default function FeedbackSection() {
         <meta property="og:title" content="Share Your Feedback - Soft Game Studio Customer Portal" />
         <meta property="og:description" content="Join 50+ customers who've rated us 4.8/5. Submit your experience through our interactive feedback form with live rating statistics." />
         <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/webjl26.appspot.com/o/SGS%20images%2FCustomer-Feedback-Portal-Share-Your-Experience-Soft-Game-Studio-06-07-2025_02_08_PM.png?alt=media&token=2f94c5c4-6d9c-482b-92df-015bef62c1ce" />
-        <meta property="og:url" content="https://soft-game-studio.web.app/Feedback" />
+        <meta property="og:url" content="https://softgamestudios.web.app/Feedback" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Soft Game Studio" />
         

@@ -166,7 +166,7 @@ function OurMembers() {
           name="description"
           content="Meet the talented team members of Soft Game Studio. From game developers to education technologists, discover the people behind our innovative projects."
         />
-        <link rel="canonical" href="https://soft-game-studio.web.app/OurMembers" />
+        <link rel="canonical" href="https://softgamestudios.web.app/OurMembers" />
         <meta property="og:title" content="Meet Our Members - Soft Game Studio" />
         <meta
           property="og:description"

@@ -51,7 +51,7 @@ export default function UserResetPasswordPage() {
           />
           <meta
             property="og:url"
-            content="https://soft-game-studio.web.app/reset-password"
+            content="https://softgamestudios.web.app/reset-password"
           />
           <meta property="og:type" content="website" />
           <meta

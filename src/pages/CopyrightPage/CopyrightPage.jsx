@@ -17,7 +17,7 @@ const CopyrightPage = () => {
         <meta name="author" content="Soft Game Studio" />
         <meta property="og:title" content="Copyright & Legal | Soft Game Studio" />
         <meta property="og:description" content="Explore the legal and copyright policies of Soft Game Studio including Udyam registration, business details, and content licensing info." />
-        <meta property="og:url" content="https://soft-game-studio.web.app/CopyrightPage" />
+        <meta property="og:url" content="https://softgamestudios.web.app/CopyrightPage" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media" />
       </Helmet>
@@ -377,7 +377,7 @@ const CopyrightPage = () => {
                 <p className="text-center">
                   For more details, visit our official website:{" "}
                   <a 
-                    href="https://soft-game-studio.web.app/" 
+                    href="https://softgamestudios.web.app/" 
                     className="text-blue-600 dark:text-blue-400 font-semibold hover:underline"
                   >
                     Soft Game Studio

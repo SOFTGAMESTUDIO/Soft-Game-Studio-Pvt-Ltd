@@ -1,0 +1,33 @@
+User-agent: *
+Allow: /$
+Allow: /About-SGS
+Allow: /About-Exam
+Allow: /Project
+Allow: /Project-Details/
+Allow: /Exam
+Allow: /Exam-Details/
+Allow: /Notes&Books
+Allow: /OurCourse
+Allow: /SingleCourse/
+Allow: /E-Books
+Allow: /FAQs
+Allow: /ContactUs
+Allow: /Feedback
+
+Disallow: /login
+Disallow: /signup
+Disallow: /resetpassword
+Disallow: /Profile
+Disallow: /Cart
+Disallow: /admin/
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /private/
+Disallow: /*?*
+Disallow: /*.php$
+Disallow: /*.js$
+Disallow: /*.css$
+
+Crawl-delay: 5
+
+Sitemap: https://softgamestudios.web.app/sitemap.xml

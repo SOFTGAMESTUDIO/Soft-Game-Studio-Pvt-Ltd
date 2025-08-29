@@ -97,7 +97,7 @@ const ExamQuizDetails = () => {
         <meta name="keywords" content={`Quiz, ${exam.level}, ${exam.title}, Soft Game Studio`} />
         <meta property="og:title" content={`${exam.name} | Quiz Exam`} />
         <meta property="og:description" content={exam.description} />
-        <meta property="og:url" content={`https://soft-game-studio.web.app/exam/quiz/${id}`} />
+        <meta property="og:url" content={`https://softgamestudios.web.app/exam/quiz/${id}`} />
         <meta property="og:image" content={exam.imageUrl} />
       </Helmet>
         <div className="flex flex-col items-center justify-center h-screen bg-purple-100 dark:bg-neutral-950 text-center p-4">
@@ -151,7 +151,7 @@ const ExamQuizDetails = () => {
         <meta name="keywords" content={`Quiz, ${exam.level}, ${exam.title}, Soft Game Studio`} />
         <meta property="og:title" content={`${exam.name} | Quiz Exam`} />
         <meta property="og:description" content={exam.description} />
-        <meta property="og:url" content={`https://soft-game-studio.web.app/exam/quiz/${id}`} />
+        <meta property="og:url" content={`https://softgamestudios.web.app/exam/quiz/${id}`} />
         <meta property="og:image" content={exam.imageUrl} />
       </Helmet>
       <div className="bg-purple-100 dark:bg-neutral-950 text-gray-900 dark:text-gray-200 min-h-screen">

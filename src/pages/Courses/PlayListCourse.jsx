@@ -87,7 +87,7 @@ const PlayListCourse = () => {
           property="og:description" 
           content="Soft Game Studio offers a wide range of free and affordable online courses. Learn development, design, and career skills at your own pace." 
         />
-         <meta property="og:url" content="https://soft-game-studio.web.app/OurCourse" />
+         <meta property="og:url" content="https://softgamestudios.web.app/OurCourse" />
   <meta property="og:url" content="https://softgamestudios.web.app/OurCourse" /> 
         <meta property="og:type" content="website" />
       </Helmet>
@@ -241,9 +241,7 @@ const PlayListCourse = () => {
                     {course.chapters?.[activeChapter]?.videoUrl ? (
                       
                         <VideoPlayer
-                                      videoUrl={`https://www.youtube.com/watch?v=${course.chapters[activeChapter].videoUrl}`}
-                                      title={course.chapters[activeChapter].title}
-                                      
+                                      videoId={`${course.chapters[activeChapter].videoUrl}`}
                                     />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-r from-purple-500 to-indigo-600 flex items-center justify-center">

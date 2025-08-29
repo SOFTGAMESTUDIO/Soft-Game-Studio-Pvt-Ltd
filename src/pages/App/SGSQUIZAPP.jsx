@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet';
 import Layout from '../../components/layout/Layout';
 import { fireDB } from '../../DataBase/firebaseConfig';
-import { FaStar, FaStarHalfAlt, FaRegStar, FaDownload, } from "react-icons/fa";
+import { FaStar, FaStarHalfAlt, FaRegStar, FaDownload, FaEye, } from "react-icons/fa";
 import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 import { Link } from 'react-router-dom';
 
@@ -189,7 +189,7 @@ const SGSQuizAppPage = () => {
                     />
                   </div>
                   <a
-                    href="https://github.com/SOFTGAMESTUDIO/SGS-QUIZ-APP/releases/download/SGS-QUIZ-APP/sgs-quiz-v1.apk"
+                    href="https://github.com/SOFTGAMESTUDIO/SGS-QUIZ-APP/releases/download/SGS-QUIZ-APP/sgs-official-v1.0.0.apk"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -200,6 +200,20 @@ const SGSQuizAppPage = () => {
                     >
                       <FaDownload />
                       Download Now
+                    </motion.button>
+                  </a>
+                       <a
+                    href="https://github.com/SOFTGAMESTUDIO/SGS-QUIZ-APP/releases/tag/SGS-QUIZ-APP"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-full py-4 px-6 mt-6 rounded-xl font-bold text-lg bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg hover:shadow-xl flex items-center justify-center gap-3"
+                    >
+                      <FaEye />
+                      Explore App
                     </motion.button>
                   </a>
 

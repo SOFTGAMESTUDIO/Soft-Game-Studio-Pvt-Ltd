@@ -64,7 +64,7 @@ export default function ProductsPage() {
     property="og:description" 
     content="Get free and budget-friendly pre-built projects with full data at Soft Game Studio. Ideal for learning, development, and academic use." 
   />
-  <meta property="og:url" content="https://soft-game-studio.web.app/Projects" />
+  <meta property="og:url" content="https://softgamestudios.web.app/Projects" />
   <meta property="og:type" content="website" />
   <meta 
     property="og:image" 

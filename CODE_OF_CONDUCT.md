@@ -83,7 +83,7 @@ This Code of Conduct is adapted from the [Contributor Covenant](https://www.cont
 ## 🔗 About Us
 
 **Soft Game Studio**  
-Website: [https://soft-game-studio.web.app](https://soft-game-studio.web.app)  
+Website: [https://softgamestudios.web.app](https://softgamestudios.web.app)  
 GitHub: [https://github.com/SOFTGAMESTUDIO/SoftGameStudio](https://github.com/SOFTGAMESTUDIO/SoftGameStudio)  
 Contact: [team.softgamestudio@gmail.com](mailto:team.softgamestudio@gmail.com)
 

@@ -112,7 +112,7 @@ const FAQPage = () => {
           content="Browse frequently asked questions about Soft Game Studio's educational services and digital products."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://soft-game-studio.web.app/FAQs" />
+        <meta property="og:url" content="https://softgamestudios.web.app/FAQs" />
         <meta
           property="og:image"
           content="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media"
@@ -127,7 +127,7 @@ const FAQPage = () => {
           name="twitter:image"
           content="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media"
         />
-        <link rel="canonical" href="https://soft-game-studio.web.app/FAQs" />
+        <link rel="canonical" href="https://softgamestudios.web.app/FAQs" />
       </Helmet>
       <div 
         className="min-h-screen transition-colors duration-300 

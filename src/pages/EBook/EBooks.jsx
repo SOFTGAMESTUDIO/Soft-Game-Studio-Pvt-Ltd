@@ -34,6 +34,7 @@ const EbookReader = () => {
   const [currentChapter, setCurrentChapter] = useState(null);
   const contentRefs = useRef([]);
   const parallaxRef = useRef(null);
+  const chapterRefs = useRef([]); // New ref for chapter containers
 
   useEffect(() => {
     const fetchEbook = async () => {
@@ -68,6 +69,7 @@ const EbookReader = () => {
         
         // Initialize refs
         contentRefs.current = chaptersData.map(() => React.createRef());
+        chapterRefs.current = chaptersData.map(() => React.createRef()); // Initialize chapter refs
         
         setLoading(false);
       } catch (err) {
@@ -92,11 +94,30 @@ const EbookReader = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // FIX: Scroll expanded chapter to center of viewport
+  const scrollToExpandedChapter = (chapterId) => {
+    const chapterIndex = chapters.findIndex(chapter => chapter.id === chapterId);
+    if (chapterIndex !== -1 && chapterRefs.current[chapterIndex]) {
+      // Calculate center position
+      const element = chapterRefs.current[chapterIndex];
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - (window.innerHeight / 2) + (element.clientHeight / 2);
+      
+      // Scroll to center the element
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const toggleChapter = (chapterId) => {
     if (expandedChapter === chapterId) {
       setExpandedChapter(null);
     } else {
       setExpandedChapter(chapterId);
+      // Scroll to the chapter after a short delay to allow rendering
+      setTimeout(() => scrollToExpandedChapter(chapterId), 50);
     }
   };
 
@@ -267,7 +288,7 @@ const EbookReader = () => {
           property="og:description" 
           content="Free E-Books, Affordable E-Books, Ebooks PDF, Full Detailed E-Book, languages  E-Book , Student learning , Developer E-Books, Soft Game Studio E-books, Soft Game Studio " 
         />
-        <meta property="og:url" content="https://soft-game-studio.web.app/E-Books" />
+        <meta property="og:url" content="https://softgamestudios.web.app/E-Books" />
         <meta property="og:type" content="website" />
       </Helmet>
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-purple-50 dark:bg-gradient-to-b dark:from-neutral-950 dark:to-purple-900/10">
@@ -375,6 +396,7 @@ const EbookReader = () => {
                   chapters.map((chapter, index) => (
                     <motion.div 
                       key={chapter.id}
+                      ref={el => chapterRefs.current[index] = el} // Add ref to chapter container
                       className="bg-white/90 dark:bg-neutral-800/90 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl border border-purple-100 dark:border-purple-900/30 transition-all duration-300 hover:shadow-2xl"
                       initial={{ opacity: 0, y: 50 }}
                       animate={{ opacity: 1, y: 0 }}

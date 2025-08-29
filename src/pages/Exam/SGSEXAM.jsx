@@ -337,7 +337,7 @@ const SGSEXAM = () => {
     property="og:description" 
     content="Access free and premium theory and quiz exams at Soft Game Studio. Test your knowledge and prepare for interviews and competitive exams." 
   />
-  <meta property="og:url" content="https://soft-game-studio.web.app/exams" />
+  <meta property="og:url" content="https://softgamestudios.web.app/exams" />
   <meta property="og:type" content="website" />
   <meta 
     property="og:image" 

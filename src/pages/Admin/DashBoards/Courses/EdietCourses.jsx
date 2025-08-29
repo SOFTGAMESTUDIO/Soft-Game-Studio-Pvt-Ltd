@@ -2,10 +2,91 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import { fireDB } from '../../../../DataBase/firebaseConfig';
 import Layout from '../../../../components/layout/Layout';
+import { useEditor, EditorContent } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import Link from '@tiptap/extension-link';
+
+// TipTap Editor Component
+const TiptapEditor = ({ content, onChange }) => {
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+      Link.configure({
+        HTMLAttributes: {
+          class: 'text-purple-600 hover:underline',
+        },
+      }),
+    ],
+    content,
+    onUpdate: ({ editor }) => {
+      onChange(editor.getHTML());
+    },
+    editorProps: {
+      attributes: {
+        class: 'bg-white dark:bg-neutral-800 p-3 border border-gray-300 dark:border-neutral-700 rounded-lg min-h-[150px] focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-gray-100',
+      },
+    },
+  });
+
+  const setLink = () => {
+    const url = prompt('Enter URL');
+    if (url) {
+      editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
+    }
+  };
+
+  return (
+    <div className="tiptap-editor">
+      <div className="toolbar flex flex-wrap gap-1 mb-2">
+        <button
+          type="button"
+          onClick={() => editor.chain().focus().toggleBold().run()}
+          className={`p-2 rounded ${editor?.isActive('bold') ? 'bg-purple-500 text-white' : 'bg-gray-200 dark:bg-neutral-700'}`}
+        >
+          <span className="font-bold">B</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => editor.chain().focus().toggleItalic().run()}
+          className={`p-2 rounded ${editor?.isActive('italic') ? 'bg-purple-500 text-white' : 'bg-gray-200 dark:bg-neutral-700'}`}
+        >
+          <span className="italic">I</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+          className={`p-2 rounded ${editor?.isActive('heading', { level: 2 }) ? 'bg-purple-500 text-white' : 'bg-gray-200 dark:bg-neutral-700'}`}
+        >
+          H2
+        </button>
+        <button
+          type="button"
+          onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
+          className={`p-2 rounded ${editor?.isActive('heading', { level: 3 }) ? 'bg-purple-500 text-white' : 'bg-gray-200 dark:bg-neutral-700'}`}
+        >
+          H3
+        </button>
+        <button
+          type="button"
+          onClick={() => editor.chain().focus().toggleBulletList().run()}
+          className={`p-2 rounded ${editor?.isActive('bulletList') ? 'bg-purple-500 text-white' : 'bg-gray-200 dark:bg-neutral-700'}`}
+        >
+          <span>• List</span>
+        </button>
+        <button
+          type="button"
+          onClick={setLink}
+          className={`p-2 rounded ${editor?.isActive('link') ? 'bg-purple-500 text-white' : 'bg-gray-200 dark:bg-neutral-700'}`}
+        >
+          Link
+        </button>
+      </div>
+      <EditorContent editor={editor}  />
+    </div>
+  );
+};
 
 const EditCoursePage = () => {
   const { id } = useParams();
@@ -39,7 +120,7 @@ const EditCoursePage = () => {
               description: course.description,
               videoUrl: course.videoUrl || '',
               notes: course.notes || '',
-              sourceLinks: course.sourceLinks || [''],
+              sourceLinks: course.sourceLinks?.length ? [...course.sourceLinks] : [''],
               chapters: []
             });
           } else {
@@ -50,12 +131,14 @@ const EditCoursePage = () => {
               videoUrl: '',
               notes: '',
               sourceLinks: [''],
-              chapters: course.chapters || []
+              chapters: course.chapters?.length 
+                ? [...course.chapters] 
+                : [{ title: '', videoUrl: '', notes: '', sourceLinks: [''] }]
             });
           }
         } else {
           console.log('No such course!');
-          navigate('/AllCourses');
+          navigate('/Admin-Courses');
         }
       } catch (error) {
         console.error('Error fetching course: ', error);
@@ -102,6 +185,18 @@ const EditCoursePage = () => {
     setCourseData(prev => ({ ...prev, chapters: newChapters }));
   };
 
+  const addChapterSourceLink = (chapIndex) => {
+    const newChapters = [...courseData.chapters];
+    newChapters[chapIndex].sourceLinks.push('');
+    setCourseData(prev => ({ ...prev, chapters: newChapters }));
+  };
+
+  const removeChapterSourceLink = (chapIndex, linkIndex) => {
+    const newChapters = [...courseData.chapters];
+    newChapters[chapIndex].sourceLinks = newChapters[chapIndex].sourceLinks.filter((_, i) => i !== linkIndex);
+    setCourseData(prev => ({ ...prev, chapters: newChapters }));
+  };
+
   const addChapter = () => {
     setCourseData(prev => ({
       ...prev,
@@ -117,6 +212,18 @@ const EditCoursePage = () => {
       ...prev,
       chapters: prev.chapters.filter((_, i) => i !== index)
     }));
+  };
+
+  // Handle notes changes for single course
+  const handleNotesChange = (value) => {
+    setCourseData(prev => ({ ...prev, notes: value }));
+  };
+
+  // Handle chapter notes changes
+  const handleChapterNotesChange = (chapIndex, value) => {
+    const newChapters = [...courseData.chapters];
+    newChapters[chapIndex].notes = value;
+    setCourseData(prev => ({ ...prev, chapters: newChapters }));
   };
 
   const handleSubmit = async (e) => {
@@ -144,12 +251,15 @@ const EditCoursePage = () => {
       const courseRef = doc(fireDB, 'courses', id);
       await updateDoc(courseRef, courseToUpdate);
       alert('Course updated successfully!');
-      navigate('/AllCourses');
+      navigate('/Admin-Courses');
     } catch (error) {
       console.error('Error updating course: ', error);
       alert('Error updating course');
     }
   };
+
+
+
 
   return (
     <Layout>
@@ -202,7 +312,7 @@ const EditCoursePage = () => {
                   Thumbnail URL
                 </label>
                 <input
-                  type="url"
+                  type="text"
                   name="thumbnail"
                   value={courseData.thumbnail}
                   onChange={handleInputChange}
@@ -256,20 +366,9 @@ const EditCoursePage = () => {
                     <label className="block text-lg font-medium text-gray-800 dark:text-gray-200 mb-2">
                       Course Notes
                     </label>
-                    <ReactQuill
-                      value={courseData.notes}
-                      onChange={(value) => setCourseData(prev => ({ ...prev, notes: value }))}
-                      modules={{
-                        toolbar: [
-                          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                          ['bold', 'italic', 'underline', 'strike'],
-                          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                          ['link'],
-                          ['clean']
-                        ]
-                      }}
-                      className="bg-white dark:bg-neutral-800 text-gray-900 dark:text-gray-100 rounded-lg"
-                      theme="snow"
+                    <TiptapEditor 
+                      content={courseData.notes} 
+                      onChange={handleNotesChange} 
                     />
                   </div>
 
@@ -351,7 +450,7 @@ const EditCoursePage = () => {
                             Video URL
                           </label>
                           <input
-                            type="url"
+                            type="text"
                             value={chapter.videoUrl}
                             onChange={(e) => handleChapterChange(chapIndex, 'videoUrl', e.target.value)}
                             className="w-full p-3 rounded-lg border border-gray-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
@@ -363,20 +462,9 @@ const EditCoursePage = () => {
                           <label className="block text-md font-medium text-gray-700 dark:text-gray-300 mb-2">
                             Chapter Notes
                           </label>
-                          <ReactQuill
-                            value={chapter.notes}
-                            onChange={(value) => handleChapterChange(chapIndex, 'notes', value)}
-                            modules={{
-                              toolbar: [
-                                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                                ['bold', 'italic', 'underline', 'strike'],
-                                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                                ['link'],
-                                ['clean']
-                              ]
-                            }}
-                            className="bg-white dark:bg-neutral-800 text-gray-900 dark:text-gray-100 rounded-lg"
-                            theme="snow"
+                          <TiptapEditor
+                            content={chapter.notes}
+                            onChange={(value) => handleChapterNotesChange(chapIndex, value)}
                           />
                         </div>
 
@@ -396,11 +484,7 @@ const EditCoursePage = () => {
                               {chapter.sourceLinks.length > 1 && (
                                 <button
                                   type="button"
-                                  onClick={() => {
-                                    const newLinks = [...chapter.sourceLinks];
-                                    newLinks.splice(linkIndex, 1);
-                                    handleChapterChange(chapIndex, 'sourceLinks', newLinks);
-                                  }}
+                                  onClick={() => removeChapterSourceLink(chapIndex, linkIndex)}
                                   className="ml-2 p-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
                                 >
                                   Remove
@@ -410,10 +494,7 @@ const EditCoursePage = () => {
                           ))}
                           <button
                             type="button"
-                            onClick={() => {
-                              const newLinks = [...chapter.sourceLinks, ''];
-                              handleChapterChange(chapIndex, 'sourceLinks', newLinks);
-                            }}
+                            onClick={() => addChapterSourceLink(chapIndex)}
                             className="mt-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
                           >
                             + Add Link

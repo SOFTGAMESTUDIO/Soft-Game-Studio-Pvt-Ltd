@@ -63,7 +63,7 @@ export default function FreeNotesAndBooks() {
     property="og:description" 
     content="Access a wide range of free notes and books in PDF format from reputed institutes and platforms. Perfect for students and learners." 
   />
-  <meta property="og:url" content="https://soft-game-studio.web.app/notes-books" />
+  <meta property="og:url" content="https://softgamestudios.web.app/notes-books" />
   <meta property="og:type" content="website" />
 </Helmet>
 

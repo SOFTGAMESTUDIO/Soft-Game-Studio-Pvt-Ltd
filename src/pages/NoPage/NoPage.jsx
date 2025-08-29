@@ -28,7 +28,7 @@ export default function NotFoundPage() {
           property="og:description"
           content="Oops! This page doesn't exist. Return to Soft Game Studio's homepage to continue exploring our content."
         />
-        <meta property="og:url" content="https://soft-game-studio.web.app/404" />
+        <meta property="og:url" content="https://softgamestudios.web.app/404" />
         <meta property="og:type" content="website" />
         <meta
           property="og:image"

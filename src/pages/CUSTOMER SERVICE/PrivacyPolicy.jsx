@@ -29,7 +29,7 @@ const PrivacyPolicy = () => {
     content="Understand how Soft Game Studio handles your personal data, ensures privacy, and complies with regulations like GDPR."
   />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://soft-game-studio.web.app/PrivacyPolicy" />
+  <meta property="og:url" content="https://softgamestudios.web.app/PrivacyPolicy" />
   <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media" />
 
   <meta name="twitter:card" content="summary_large_image" />
@@ -40,7 +40,7 @@ const PrivacyPolicy = () => {
   />
   <meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/Assets%2FSqure%20Logo.png?alt=media" />
 
-  <link rel="canonical" href="https://soft-game-studio.web.app/PrivacyPolicy" />
+  <link rel="canonical" href="https://softgamestudios.web.app/PrivacyPolicy" />
 </Helmet>
 
        <div className="min-h-screen bg-gradient-to-br from-purple-100 to-indigo-100 dark:from-neutral-950 dark:to-gray-950 text-gray-800 dark:text-gray-200 overflow-hidden">
@@ -318,7 +318,7 @@ const PrivacyPolicy = () => {
                 Email Privacy Team
               </a>
               <a
-                href="https://soft-game-studio.web.app/ContactUs"
+                href="https://softgamestudios.web.app/ContactUs"
                 className="px-6 py-3 bg-white dark:bg-gray-800 border border-purple-600 text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-gray-700 rounded-lg transition-colors"
               >
                 Contact Form

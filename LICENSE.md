@@ -36,11 +36,11 @@ SOFTWARE.
 
 ## 🔗 References & Contact
 
-- 📍 **Company**: [Soft Game Studio](https://soft-game-studio.web.app)
-- 📄 **License Page**: [softgamestudio.web.app/CopyrightPage](https://soft-game-studio.web.app/CopyrightPage)
+- 📍 **Company**: [Soft Game Studio](https://softgamestudios.web.app)
+- 📄 **License Page**: [softgamestudio.web.app/CopyrightPage](https://softgamestudios.web.app/CopyrightPage)
 - 🌐 **Open Source Projects**: [github.com/SOFTGAMESTUDIO/SoftGameStudio](https://github.com/SOFTGAMESTUDIO/SoftGameStudio)
 - 📧 **Contact**: [team.softgamestudio@gmail.com](mailto:team.softgamestudio@gmail.com)
-- 🖥️ **Portfolio Website**: [softgamestudio.web.app](https://soft-game-studio.web.app)
+- 🖥️ **Portfolio Website**: [softgamestudio.web.app](https://softgamestudios.web.app)
 
 ---
 

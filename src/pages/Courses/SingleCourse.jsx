@@ -6,12 +6,19 @@ import { fireDB } from '../../DataBase/firebaseConfig';
 import VideoPlayer from '../../components/Video Player/Videoplayer';
 import Layout from '../../components/layout/Layout';
 import { Helmet } from 'react-helmet';
+import axios from "axios";
 
 const SingleCourse = () => {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
+  const [videoId, setvideoId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+
+  const API_KEY = import.meta.env.VITE_GOOGLE_API; // Replace with your actual API key
+
+  const [videoDetails, setVideoDetails] = useState(null);
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -24,6 +31,7 @@ const SingleCourse = () => {
           const courseData = { id: docSnap.id, ...docSnap.data() };
           console.log("Fetched course:", courseData);
           setCourse(courseData);
+          setvideoId(courseData.videoUrl)
         } else {
           console.warn('Course not found in Firestore');
           setError('Course not found');
@@ -39,13 +47,51 @@ const SingleCourse = () => {
     fetchCourse();
   }, [id]);
 
-  if (loading) {
+  useEffect(() => {
+    const fetchVideoDetails = async () => {
+      try {
+        const response = await axios.get(
+          `https://www.googleapis.com/youtube/v3/videos`,
+          {
+            params: {
+              part: "snippet,contentDetails,statistics",
+              id: videoId,
+              key: API_KEY,
+            },
+          }
+        );
+        setVideoDetails(response.data.items[0]);
+      } catch (error) {
+        console.error("Error fetching video data", error);
+      }
+    };
+
+    if (videoId) {
+      fetchVideoDetails();
+    }
+  }, [videoId]);
+
+  const formatDuration = (isoDuration) => {
+    const match = isoDuration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+    const hours = (match[1] || "0H").slice(0, -1);
+    const minutes = (match[2] || "0M").slice(0, -1);
+    const seconds = (match[3] || "0S").slice(0, -1);
+    return `${hours !== "0" ? hours + "h " : ""}${minutes}m ${seconds}s`;
+  };
+  
+
+
+
+  
+
+  if (loading || !videoDetails) {
     return (
       <div className="min-h-screen bg-purple-100 dark:bg-neutral-950 flex items-center justify-center">
         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-purple-600"></div>
       </div>
     );
   }
+  const { snippet, statistics, contentDetails } = videoDetails;
 
   if (error) {
     return (
@@ -87,7 +133,7 @@ const SingleCourse = () => {
           property="og:description" 
           content="Soft Game Studio offers a wide range of free and affordable online courses. Learn development, design, and career skills at your own pace." 
         />
-     <meta property="og:url" content="https://soft-game-studio.web.app/OurCourse" />
+     <meta property="og:url" content="https://softgamestudios.web.app/OurCourse" />
   <meta property="og:url" content="https://softgamestudios.web.app/OurCourse" /> 
         <meta property="og:type" content="website" />
       </Helmet>
@@ -155,8 +201,7 @@ const SingleCourse = () => {
                     <div className="aspect-w-16 aspect-h-9 bg-black rounded-xl overflow-hidden">
                       {course?.videoUrl ? (
                         <VideoPlayer
-                          videoUrl={`https://www.youtube.com/watch?v=${course.videoUrl}`}
-                          title={course.title}
+                          videoId={String(course.videoUrl).trim()}
                         />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-r from-purple-500 to-indigo-600 flex items-center justify-center">
@@ -227,16 +272,18 @@ const SingleCourse = () => {
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-6">
                     <span className="text-gray-600 dark:text-gray-400">Duration</span>
-                    <span className="font-medium text-gray-900 dark:text-white">45 min</span>
+                    <span className="font-medium text-gray-900 dark:text-white">{formatDuration(contentDetails.duration)}</span>
                   </div>
                   <div className="flex items-center justify-between mb-6">
-                    <span className="text-gray-600 dark:text-gray-400">Level</span>
-                    <span className="font-medium text-gray-900 dark:text-white">Intermediate</span>
+                    <span className="text-gray-600 dark:text-gray-400">Views : <span className="font-medium text-gray-900 dark:text-white">{statistics.viewCount}</span> </span>
+                    
+                    <span className="text-gray-600 dark:text-gray-400">Likes : <span className="font-medium text-gray-900 dark:text-white">{statistics.likeCount}</span></span>
+                    
                   </div>
                   <div className="flex items-center justify-between mb-6">
-                    <span className="text-gray-600 dark:text-gray-400">Last Updated</span>
+                    <span className="text-gray-600 dark:text-gray-400">Uploaded on</span>
                     <span className="font-medium text-gray-900 dark:text-white">
-                      {course?.createdAt?.toDate?.().toLocaleDateString?.() || "Unknown"}
+                      {new Date(snippet.publishedAt).toLocaleDateString()}
                     </span>
                   </div>
                 </div>
@@ -244,6 +291,7 @@ const SingleCourse = () => {
             </div>
           </div>
         </div>
+       
 
         {/* Footer CTA */}
         <div className="bg-gradient-to-r from-purple-600 to-indigo-700 dark:from-purple-900 dark:to-indigo-900 py-16">

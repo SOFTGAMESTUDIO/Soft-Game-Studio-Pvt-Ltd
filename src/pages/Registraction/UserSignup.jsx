@@ -93,7 +93,7 @@ const [formData, setFormData] = useState({
           property="og:description"
           content="Join Soft Game Studio today. Get access to top-quality projects, coding resources, and exam preparation tools. Quick and easy signup process."
         />
-        <meta property="og:url" content="https://soft-game-studio.web.app/signup" />
+        <meta property="og:url" content="https://softgamestudios.web.app/signup" />
         <meta property="og:type" content="website" />
         <meta
           property="og:image"

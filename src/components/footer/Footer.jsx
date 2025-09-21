@@ -45,7 +45,7 @@ const Footer = () => {
     { name: "Projets", path: "/Project" },
     { name: "Our Courses", path: "/OurCourse" },
     { name: "Notes & Books", path: "/Notes&Books" },
-    { name: "SGS Quiz App", path: "/SGS-Quiz-App" },
+    // { name: "SGS Quiz App", path: "/SGS-Quiz-App" },
 
     
   ];

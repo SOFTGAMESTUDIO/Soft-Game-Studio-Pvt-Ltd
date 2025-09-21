@@ -10,14 +10,13 @@ import {
 } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
-import Layout from "../../../../components/layout/Layout";
-import Certificate from "../../../../components/Certificate/Certificate";
-import { fireDB } from "../../../../DataBase/firebaseConfig";
-import { getUserData } from "../../../../Modules/UserData";
-import { Helmet } from "react-helmet";
-import { useAuth } from "../../../../AuthProvide";
+import Layout from "../../../components/layout/Layout";
+import Certificate from "../../../components/Certificate/Certificate";
+import { fireDB } from "../../../DataBase/firebaseConfig";
+import { getUserData } from "../../../Modules/UserData";
+import { useAuth } from "../../../AuthProvide";
 
-const QuizExam = () => {
+const OfficialQuizExam = () => {
   const { id: quizId } = useParams();
   const [date, setDate] = useState("");
   const [step, setStep] = useState(0);
@@ -29,8 +28,7 @@ const QuizExam = () => {
   const [loading, setLoading] = useState(true);
   const [quizData, setQuizData] = useState(null);
   const [userList, setUserList] = useState([]);
-  const {user } = useAuth();
-  const userid = user
+  const {user } = useAuth()
   const [score, setScore] = useState(0);
   const [Que, setQue] = useState(0);
 
@@ -43,15 +41,16 @@ const QuizExam = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    if (Array.isArray(userList) && userList.length > 0 && userid) {
-      const matchedUser = userList.find(
-        (user) => user.email?.toLowerCase() === userid?.toLowerCase()
-      );
-      setFilteredUser(matchedUser || {});
-    }
-    setLoading(false);
-  }, [userList, userid]);
+ useEffect(() => {
+  if (!user || !userList.length) return; // wait until user is ready
+
+  const matchedUser = userList.find(
+    (u) => u.email?.toLowerCase() === user.email?.toLowerCase()
+  );
+  setFilteredUser(matchedUser || {});
+  setLoading(false);
+}, [userList, user]);
+
 
   useEffect(() => {
     setDate(new Date().toLocaleDateString());
@@ -334,7 +333,6 @@ const useExamKeyLock = (enableLock = true) => {
 };
 
 
-  
   if (loading) {
     return (
       <Layout>
@@ -348,13 +346,6 @@ const useExamKeyLock = (enableLock = true) => {
   if (!quizData) {
     return (
       <Layout>
-        <Helmet>
-        <title>Quiz Exam | Soft Game Studio</title>
-        <meta name="description" content= {'Test your skills with our quiz.'} />
-        <meta name="keywords" content={`Quiz, Soft Game Studio`} />
-        <meta property="og:title" content={` Quiz Exam`} />
-        <meta property="og:description" content={"this is Provide all type of quiz in exam bases "} />
-      </Helmet>
         <div className="max-w-4xl mx-auto p-4">
           <div className="bg-red-100 dark:bg-red-900/20 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-300 px-4 py-3 rounded-lg text-center">
             Quiz data not available.
@@ -366,16 +357,10 @@ const useExamKeyLock = (enableLock = true) => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
-       <Helmet>
-        <title>Quiz Exam | Soft Game Studio</title>
-        <meta name="description" content= {'Test your skills with our quiz.'} />
-        <meta name="keywords" content={`Quiz, Soft Game Studio`} />
-        <meta property="og:title" content={` Quiz Exam`} />
-        <meta property="og:description" content={"this is Provide all type of quiz in exam bases "} />
-      </Helmet>
+       
       {step === 0 && (
-        <Layout>
-          <div className="max-w-4xl mx-auto p-4 md:p-6 lg:p-8">
+   <Layout>
+ <div className="max-w-4xl mx-auto p-4 md:p-6 lg:p-8">
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden p-6 md:p-8 transition-all duration-200">
               <h1 className="text-2xl md:text-3xl font-bold text-center text-blue-600 dark:text-blue-400 mb-6">
                 {quizData.name} Quiz
@@ -438,7 +423,9 @@ const useExamKeyLock = (enableLock = true) => {
               )}
             </div>
           </div>
-        </Layout>
+   </Layout>
+         
+
       )}
 
       {step === 1 && (
@@ -576,4 +563,4 @@ const useExamKeyLock = (enableLock = true) => {
   );
 };
 
-export default QuizExam;
+export default OfficialQuizExam;

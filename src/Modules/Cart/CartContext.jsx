@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot, getDoc, setDoc } from "firebase/firestore";
 import { fireDB } from "../../DataBase/firebaseConfig";
 import { useAuth } from "../../AuthProvide";
 
@@ -8,6 +8,18 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const { user } = useAuth();
   const [cartItems, setCartItems] = useState([]);
+
+   const getFirebaseCart = async (uid) => {
+    const cartRef = doc(fireDB, "carts", uid);
+    const snap = await getDoc(cartRef);
+    return snap.exists() ? snap.data().items || [] : [];
+  };
+
+  // 🔹 Utility: set cart in Firestore
+  const setFirebaseCart = async (uid, items) => {
+    const cartRef = doc(fireDB, "carts", uid);
+    await setDoc(cartRef, { items }, { merge: true });
+  };
 
   // 🧠 Load Firebase cart in real-time when user is logged in
   useEffect(() => {
@@ -24,6 +36,8 @@ export const CartProvider = ({ children }) => {
 
     return () => unsubscribe();
   }, [user]);
+
+
 
   const updateCart = useCallback(async (items) => {
     if (!user) return console.warn("You must be logged in to update cart.");

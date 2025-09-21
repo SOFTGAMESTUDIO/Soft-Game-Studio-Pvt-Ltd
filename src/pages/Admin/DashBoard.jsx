@@ -73,6 +73,18 @@ import Layout from '../../components/layout/Layout';
       ],
       link: "/Admin-SGSProjects"
     },
+    {
+      title: "SGS Members", 
+      details: [
+        "Add SGS Membres",
+        "Ediet SGS Members"
+      ],
+      link: "/Admin-AddMembr"
+    },
+
+
+
+    
 
 
 

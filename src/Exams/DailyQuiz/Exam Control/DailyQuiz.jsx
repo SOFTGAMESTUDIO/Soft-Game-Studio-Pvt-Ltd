@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { collection, addDoc, getDoc, doc } from "firebase/firestore";
+import { collection, addDoc, getDoc, doc, query, where, getDocs } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import Layout from "../../../components/layout/Layout";
@@ -18,9 +18,10 @@ const WeeklyQuiz = () => {
   const [totalQuestions, setTotalQuestions] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(0);
+  const [hasAttempted, setHasAttempted] = useState(false);
   const timerRef = useRef(null);
-  const {user} = useAuth()
-  const violationCount = useRef(0);
+  const violationCount = useRef(0); // Added missing ref
+  const { user } = useAuth();
 
   // Anti-cheating measures
   useEffect(() => {
@@ -102,7 +103,7 @@ const WeeklyQuiz = () => {
         timestamp: new Date(),
         disqualified: true,
         reason,
-        language: quizData.language,
+        language: quizData?.language || "unknown",
         violations: violationCount.current
       });
       
@@ -114,13 +115,37 @@ const WeeklyQuiz = () => {
     }
   };
 
+  // Check if user has already attempted this quiz
+  useEffect(() => {
+    const checkAttempt = async () => {
+      if (!user?.email || !quizId) return;
+      
+      try {
+        const q = query(
+          collection(fireDB, "user_DailyQuiz"),
+          where("email", "==", user.email),
+          where("quizId", "==", quizId)
+        );
+        const querySnapshot = await getDocs(q);
+        
+        if (!querySnapshot.empty) {
+          setHasAttempted(true);
+        }
+      } catch (error) {
+        console.error("Error checking attempt:", error);
+      }
+    };
+
+    checkAttempt();
+  }, [user, quizId]);
+
   // Fetch user data
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const users = await getUserData();
-        const currentUser = users.find(users => 
-          users.email?.toLowerCase() === user.email?.toLowerCase()
+        const currentUser = users.find(u => 
+          u.email?.toLowerCase() === user.email?.toLowerCase()
         );
         setUserData(currentUser || {});
       } catch (error) {
@@ -130,7 +155,6 @@ const WeeklyQuiz = () => {
     };
     
     if (user?.email) fetchUserData();
-
   }, [user]);
 
   // Fetch quiz data
@@ -203,14 +227,16 @@ const WeeklyQuiz = () => {
     }
   };
 
-  const handlePrevQuestion = () => {
-    if (currentQuestion > 0) {
-      setCurrentQuestion(prev => prev - 1);
+  const handleStartQuiz = () => {
+    if (hasAttempted) {
+      toast.error("You can only attempt this quiz once");
+      return;
     }
+    setStep(1);
   };
 
   const handleSubmit = async () => {
-    if (isSubmitting) return;
+    if (isSubmitting || hasAttempted) return;
     
     setIsSubmitting(true);
     clearInterval(timerRef.current);
@@ -229,8 +255,8 @@ const WeeklyQuiz = () => {
       // Save results to Firebase
       await addDoc(collection(fireDB, "user_DailyQuiz"), {
         quizId,
-        userId: userData.uid,
-        email: userData.email,
+        userId: user.uid,
+        email: user.email,
         name: userData.name,
         rollNumber: userData.rollNumber,
         timestamp: new Date(),
@@ -241,6 +267,7 @@ const WeeklyQuiz = () => {
         timeTaken: quizData.timeLimit ? (quizData.timeLimit * 60 - timeRemaining) : null
       });
 
+      setHasAttempted(true); // Mark as attempted after submission
       setStep(2);
       toast.success("Quiz submitted successfully!");
     } catch (err) {
@@ -332,10 +359,13 @@ const WeeklyQuiz = () => {
 
                 <div className="text-center">
                   <button
-                    onClick={() => setStep(1)}
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105"
+                    onClick={handleStartQuiz}
+                    disabled={hasAttempted}
+                    className={`bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ${
+                      hasAttempted ? "opacity-50 cursor-not-allowed" : "transform hover:scale-105"
+                    }`}
                   >
-                    Start Quiz Now
+                    {hasAttempted ? "Already Attempted" : "Start Quiz Now"}
                   </button>
                 </div>
               </div>
@@ -409,19 +439,7 @@ const WeeklyQuiz = () => {
                   </div>
                 </div>
 
-                <div className="flex justify-between pt-4">
-                  <button
-                    onClick={handlePrevQuestion}
-                    disabled={currentQuestion === 0}
-                    className={`px-6 py-3 rounded-lg font-medium ${
-                      currentQuestion === 0
-                        ? "bg-gray-100 dark:bg-gray-700 text-gray-400 cursor-not-allowed"
-                        : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
-                    }`}
-                  >
-                    Previous
-                  </button>
-                  
+                <div className="flex justify-end pt-4">
                   <button
                     onClick={handleNextQuestion}
                     className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200"
@@ -450,67 +468,18 @@ const WeeklyQuiz = () => {
                   <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">
                     Quiz Completed!
                   </h1>
-                  <p className="text-gray-600 dark:text-gray-300 mb-8">
-                    You've successfully finished the quiz
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                    Your score: {score} out of {totalQuestions}
                   </p>
                 </div>
 
                 <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-8 mb-8">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div className="bg-white dark:bg-gray-700 p-5 rounded-lg shadow">
-                      <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">Score</p>
-                      <p className="text-2xl font-bold text-indigo-700 dark:text-indigo-400">
-                        {score}/{totalQuestions}
-                      </p>
-                    </div>
-                    
-                    <div className="bg-white dark:bg-gray-700 p-5 rounded-lg shadow">
-                      <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">Percentage</p>
-                      <p className="text-2xl font-bold text-indigo-700 dark:text-indigo-400">
-                        {((score / totalQuestions) * 100).toFixed(1)}%
-                      </p>
-                    </div>
-                    
-                    <div className="bg-white dark:bg-gray-700 p-5 rounded-lg shadow">
-                      <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">Time Taken</p>
-                      <p className="text-2xl font-bold text-indigo-700 dark:text-indigo-400">
-                        {quizData.timeLimit ? 
-                          `${quizData.timeLimit} min` : 
-                          "No time limit"
-                        }
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="mb-8">
-                    <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-4">
-                      Performance Summary
-                    </h3>
-                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4">
-                      <div 
-                        className="bg-green-500 h-4 rounded-full" 
-                        style={{ width: `${(score / totalQuestions) * 100}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                  
-                  <div className="text-center">
-                    <p className="text-gray-700 dark:text-gray-300 mb-4">
-                      {score > totalQuestions * 0.7 ? 
-                        "Excellent work! You've demonstrated strong knowledge." : 
-                        score > totalQuestions * 0.5 ?
-                        "Good effort! Review the topics to improve further." :
-                        "Keep practicing! Focus on the fundamentals."
-                      }
-                    </p>
-                    
-                    <button
-                      className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg shadow transition duration-300"
-                      onClick={() => window.location.reload()}
-                    >
-                      Try Again
-                    </button>
-                  </div>
+                  <button
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg shadow transition duration-300"
+                    onClick={() => window.location.reload()}
+                  >
+                    Return to Home
+                  </button>
                 </div>
               </div>
             </div>

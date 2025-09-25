@@ -259,7 +259,7 @@ const HomePage = () => {
           <div className="max-w-md mx-auto text-center">
             <div className="flex justify-center mb-4">
               <div className="bg-white/20 w-20 overflow-hidden rounded-full dark:bg-white/10">
-                <img src="../assets/icon.png" className='w-20' alt="SGS Quiz" />
+                <img src="https://firebasestorage.googleapis.com/v0/b/soft-game-studio.firebasestorage.app/o/App%2Fsplash.png?alt=media&token=c839a793-40d5-4cab-b5e1-d2215493de83" className='w-20' alt="SGS Quiz" />
               </div>
             </div>
             <h1 className="text-4xl font-bold mb-3">SGS QUIZ</h1>

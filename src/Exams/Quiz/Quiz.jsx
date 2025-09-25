@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { fireDB } from "../../DataBase/firebaseConfig";
+import Layout from "../../components/layout/Layout";
 
 const OfficialQuizList = () => {
   const [quizzes, setQuizzes] = useState([]);
@@ -75,7 +76,8 @@ const OfficialQuizList = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
+    <Layout>
+ <div className="min-h-screen bg-gray-50 p-4">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
           Available Quizzes
@@ -131,6 +133,8 @@ const OfficialQuizList = () => {
         </div>
       </div>
     </div>
+    </Layout>
+   
   );
 };
 

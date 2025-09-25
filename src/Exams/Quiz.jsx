@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaTrophy, FaLock, FaPlay, FaCode, FaClock } from "react-icons/fa";
+import { FaTrophy, FaLock, FaPlay, FaCode, FaClock,  FaInfoCircle  } from "react-icons/fa";
 import { useAuth } from "./../AuthProvide.jsx";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { fireDB } from "../DataBase/firebaseConfig";
+import Layout from "../components/layout/Layout.jsx";
 
 const QuizList = () => {
   const [activeTab, setActiveTab] = useState("free");
@@ -91,6 +92,16 @@ const QuizList = () => {
     navigate(`/SGS-Quiz-${type}/${quiz.id}`);
   };
 
+
+  const handleDetailsQuiz = (quiz, type) => {
+    if ((type === 'official' || type === 'weekly') && !isLoggedIn) {
+      navigate('/login');
+      return;
+    }
+
+    navigate(`/SGS-Details-${type}/${quiz.id}`);
+  };
+
   const handleSeeResults = (type) => {
     if (!isLoggedIn) {
       navigate('/login');
@@ -105,43 +116,68 @@ const QuizList = () => {
     const isLocked = (typeLower === 'official' || typeLower === 'weekly') && !isLoggedIn;
     
     return (
-      <div className="bg-white rounded-lg shadow-md p-5 border-l-4 border-purple-500 dark:bg-neutral-800">
-        <div className="flex justify-between items-start">
-          <div className="flex-1">
-            <h3 className="font-bold text-lg text-gray-800 dark:text-white">{quiz.name}</h3>
-            <div className="flex items-center mt-2 text-sm text-gray-600 dark:text-gray-300">
-              <FaCode className="mr-1 text-purple-500" /> 
-              <span>{quiz.language || 'General'}</span>
-              <span className="mx-2">•</span>
-              <span>{quiz.questions?.length || 0} questions</span>
-            </div>
-            {quiz.description && (
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">{quiz.description}</p>
-            )}
-          </div>
-          
-          {isLocked ? (
-            <div className="flex flex-col items-center ml-4">
-              <FaLock className="text-amber-500 text-xl" />
-              <span className="text-xs text-amber-500 mt-1">Login Required</span>
-            </div>
-          ) : timers[quiz.id] === "STARTED" ? (
-            <button 
-              onClick={() => handleOpenQuiz(quiz, typeLower)} 
-              className="bg-purple-600 text-white py-2 px-4 rounded-lg text-sm hover:bg-purple-700 transition-colors whitespace-nowrap ml-4"
-            >
-              <FaPlay className="inline mr-1" /> Play
-            </button>
-          ) : (
-            <div className="flex flex-col items-center ml-4">
-              <FaClock className="text-gray-500 text-xl" />
-              <span className="text-xs text-gray-500 mt-1 whitespace-nowrap">
-                {timers[quiz.id] || "Upcoming"}
-              </span>
-            </div>
-          )}
-        </div>
+   <div className="bg-white rounded-lg shadow-md p-5 border-l-4 border-purple-500 dark:bg-neutral-800 transition-all duration-300 hover:shadow-lg">
+  {/* Image on top */}
+  <div className="flex justify-center">
+    <img
+      src={quiz.imageUrl}
+      alt={quiz.name}
+      className="h-40 sm:h-48 w-full object-contain object-center rounded-lg mb-4"
+    />
+  </div>
+
+  {/* Content */}
+  <h3 className="font-bold text-lg text-gray-800 dark:text-white line-clamp-2">
+    {quiz.name}
+  </h3>
+
+  <div className="flex items-center mt-2 text-sm text-gray-600 dark:text-gray-300 flex-wrap">
+    <FaCode className="mr-1 text-purple-500" />
+    <span>{quiz.language || "General"}</span>
+    <span className="mx-2">•</span>
+    <span>{quiz.questions?.length || 0} questions</span>
+  </div>
+
+  {quiz.description && (
+    <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 line-clamp-3">
+      {quiz.description}
+    </p>
+  )}
+
+  {/* Actions */}
+  <div className="flex flex-wrap items-center gap-3 mt-4">
+    {isLocked ? (
+      <div className="flex flex-col items-center">
+        <FaLock className="text-amber-500 text-xl" />
+        <span className="text-xs text-amber-500 mt-1">Login Required</span>
       </div>
+    ) : timers[quiz.id] === "STARTED" ? (
+      <button
+        onClick={() => handleOpenQuiz(quiz, typeLower)}
+        className="flex items-center bg-purple-600 text-white py-2 px-4 rounded-lg text-sm hover:bg-purple-700 transition-colors"
+      >
+        <FaPlay className="mr-1" /> Play
+      </button>
+    ) : (
+      <div className="flex flex-col items-center">
+        <FaClock className="text-gray-500 text-xl" />
+        <span className="text-xs text-gray-500 mt-1 whitespace-nowrap">
+          {timers[quiz.id] || "Upcoming"}
+        </span>
+      </div>
+    )}
+
+    {/* Details Button */}
+    <button
+      onClick={() => handleDetailsQuiz(quiz, typeLower)}
+      className="flex items-center bg-purple-600 text-white py-2 px-4 rounded-lg text-sm hover:bg-purple-700 transition-colors"
+    >
+      <FaInfoCircle className="mr-1" /> Details
+    </button>
+  </div>
+</div>
+
+
     );
   };
 
@@ -206,7 +242,7 @@ const QuizList = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-neutral-900 py-8">
+    <Layout> <div className="min-h-screen bg-gray-50 dark:bg-neutral-900 py-8">
       <div className="max-w-6xl mx-auto p-4 sm:p-6">
         <h1 className="text-3xl font-bold text-gray-800 mb-2 dark:text-white">Available Quizzes</h1>
         <p className="text-gray-600 mb-8 dark:text-gray-300">Test your knowledge with our various quiz categories</p>
@@ -253,6 +289,8 @@ const QuizList = () => {
         </div>
       </div>
     </div>
+    </Layout>
+   
   );
 };
 

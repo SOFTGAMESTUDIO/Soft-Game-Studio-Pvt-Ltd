@@ -7,9 +7,11 @@ import {
   doc,
   deleteDoc,
   query,
-  where
+  where,
+  writeBatch
 } from "firebase/firestore";
-import { FaEdit, FaTrash, FaTrophy } from "react-icons/fa";
+import { FaEdit, FaTrash, FaTrophy, FaLanguage } from "react-icons/fa";
+import { toast } from "react-toastify";
 import Layout from "../../../../../components/layout/Layout";
 import { fireDB } from "../../../../../DataBase/firebaseConfig";
 
@@ -20,6 +22,7 @@ const UserAnswers = () => {
   const [results, setResults] = useState([]);
   const [showResultForm, setShowResultForm] = useState(false);
   const [editingResult, setEditingResult] = useState(null);
+  const [deletingLanguage, setDeletingLanguage] = useState(false);
   const [newResult, setNewResult] = useState({
     examName: "",
     language: "",
@@ -35,6 +38,7 @@ const UserAnswers = () => {
       setUserAnswers(data.filter(user => !user.disqualified));
     } catch (error) {
       console.error("Error fetching user answers:", error);
+      toast.error("Failed to fetch user answers");
     } finally {
       setLoading(false);
     }
@@ -48,6 +52,7 @@ const UserAnswers = () => {
       setResults(data);
     } catch (error) {
       console.error("Error fetching results:", error);
+      toast.error("Failed to fetch results");
     }
   };
 
@@ -115,8 +120,10 @@ const UserAnswers = () => {
         winners: [],
         display: false
       });
+      toast.success("Result created successfully");
     } catch (error) {
       console.error("Error creating result:", error);
+      toast.error("Failed to create result");
     }
   };
 
@@ -136,8 +143,10 @@ const UserAnswers = () => {
         winners: [],
         display: false
       });
+      toast.success("Result updated successfully");
     } catch (error) {
       console.error("Error updating result:", error);
+      toast.error("Failed to update result");
     }
   };
 
@@ -147,8 +156,10 @@ const UserAnswers = () => {
       try {
         await deleteDoc(doc(fireDB, "results", resultId));
         fetchResults();
+        toast.success("Result deleted successfully");
       } catch (error) {
         console.error("Error deleting result:", error);
+        toast.error("Failed to delete result");
       }
     }
   };
@@ -160,8 +171,10 @@ const UserAnswers = () => {
         display: !currentDisplay
       });
       fetchResults();
+      toast.success(`Result ${!currentDisplay ? "published" : "hidden"} successfully`);
     } catch (error) {
       console.error("Error updating display status:", error);
+      toast.error("Failed to update result status");
     }
   };
 
@@ -192,13 +205,67 @@ const UserAnswers = () => {
     ? results 
     : results.filter(r => r.language === selectedLanguage);
 
+  // Delete all data for a specific language
+  const handleDeleteLanguageData = async () => {
+    if (selectedLanguage === "all") {
+      toast.error("Please select a specific language to delete data");
+      return;
+    }
+
+    if (!window.confirm(`Are you sure you want to delete ALL data for ${selectedLanguage}? This action cannot be undone!`)) {
+      return;
+    }
+
+    setDeletingLanguage(true);
+    try {
+      // Create a batch for batch operations
+      const batch = writeBatch(fireDB);
+      
+      // Delete user answers for the selected language
+      const userAnswersQuery = query(
+        collection(fireDB, "user_Quiz"), 
+        where("language", "==", selectedLanguage)
+      );
+      const userAnswersSnapshot = await getDocs(userAnswersQuery);
+      userAnswersSnapshot.forEach((document) => {
+        batch.delete(doc(fireDB, "user_Quiz", document.id));
+      });
+      
+      // Delete results for the selected language
+      const resultsQuery = query(
+        collection(fireDB, "results"), 
+        where("language", "==", selectedLanguage)
+      );
+      const resultsSnapshot = await getDocs(resultsQuery);
+      resultsSnapshot.forEach((document) => {
+        batch.delete(doc(fireDB, "results", document.id));
+      });
+      
+      // Commit the batch
+      await batch.commit();
+      
+      // Update local state
+      setUserAnswers(prev => prev.filter(ua => ua.language !== selectedLanguage));
+      setResults(prev => prev.filter(r => r.language !== selectedLanguage));
+      
+      toast.success(`All data for ${selectedLanguage} has been deleted successfully`);
+    } catch (error) {
+      console.error("Error deleting language data:", error);
+      toast.error("Failed to delete language data");
+    } finally {
+      setDeletingLanguage(false);
+    }
+  };
+
   if (loading) {
     return (
-      <div className="bg-purple-100 dark:bg-neutral-950 min-h-screen p-6">
-        <p className="text-center mt-10 text-purple-800 dark:text-purple-200">
-          Loading data...
-        </p>
-      </div>
+      <Layout>
+        <div className="bg-purple-100 dark:bg-neutral-950 min-h-screen p-6">
+          <div className="flex justify-center items-center h-64">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
+          </div>
+        </div>
+      </Layout>
     );
   }
 
@@ -217,7 +284,7 @@ const UserAnswers = () => {
               </p>
             </div>
             
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <select
                 value={selectedLanguage}
                 onChange={(e) => setSelectedLanguage(e.target.value)}
@@ -233,15 +300,30 @@ const UserAnswers = () => {
                   ))}
               </select>
               
-              <button
-                onClick={() => {
-                  setShowResultForm(true);
-                  setEditingResult(null);
-                }}
-                className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-4 py-2 rounded-lg transition-all flex items-center gap-2"
-              >
-                <FaTrophy /> Create Result
-              </button>
+              <div className="flex gap-2">
+                <button
+                  onClick={handleDeleteLanguageData}
+                  disabled={selectedLanguage === "all" || deletingLanguage}
+                  className={`px-4 py-2 rounded-lg transition-all flex items-center gap-2 ${
+                    selectedLanguage === "all" || deletingLanguage
+                      ? "bg-red-400 cursor-not-allowed"
+                      : "bg-red-600 hover:bg-red-700"
+                  } text-white`}
+                >
+                  <FaLanguage /> 
+                  {deletingLanguage ? "Deleting..." : `Delete ${selectedLanguage} Data`}
+                </button>
+                
+                <button
+                  onClick={() => {
+                    setShowResultForm(true);
+                    setEditingResult(null);
+                  }}
+                  className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-4 py-2 rounded-lg transition-all flex items-center gap-2"
+                >
+                  <FaTrophy /> Create Result
+                </button>
+              </div>
             </div>
           </div>
 

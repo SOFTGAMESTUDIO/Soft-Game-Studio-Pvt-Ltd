@@ -26,7 +26,7 @@ import { useCart } from "../../Modules/Cart/CartContext";
 const navItems = [
   { name: "Home", link: "/" },
   { name: "Notes", link: "/Notes&Books" },
-  { name: "Courses", link: "/OurCourse"},
+  { name: "Exam", link: "/SGS-Exam-Home"},
   { name: "E-Books", link: "/E-Books" },
 ];
 

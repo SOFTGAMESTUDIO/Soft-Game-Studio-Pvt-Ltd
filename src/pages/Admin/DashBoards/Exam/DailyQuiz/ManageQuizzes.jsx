@@ -8,20 +8,20 @@ import Layout from "../../../../../components/layout/Layout";
 
 const quizCardVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: {
       duration: 0.4,
-      ease: "easeOut"
-    }
+      ease: "easeOut",
+    },
   },
-  exit: { opacity: 0, x: -50 }
+  exit: { opacity: 0, x: -50 },
 };
 
 const buttonHover = {
   hover: { scale: 1.03 },
-  tap: { scale: 0.98 }
+  tap: { scale: 0.98 },
 };
 
 const ManageQuizzes = () => {
@@ -33,9 +33,9 @@ const ManageQuizzes = () => {
     try {
       const quizCollection = collection(fireDB, "Dailyquizzes");
       const quizSnapshot = await getDocs(quizCollection);
-      const quizList = quizSnapshot.docs.map((doc) => ({ 
-        id: doc.id, 
-        ...doc.data() 
+      const quizList = quizSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
       }));
       setQuizzes(quizList);
     } catch (error) {
@@ -51,7 +51,7 @@ const ManageQuizzes = () => {
       try {
         await deleteDoc(doc(fireDB, "Dailyquizzes", id));
         toast.success("Quiz deleted successfully");
-        setQuizzes(prev => prev.filter(quiz => quiz.id !== id));
+        setQuizzes((prev) => prev.filter((quiz) => quiz.id !== id));
       } catch (error) {
         toast.error("Failed to delete quiz");
         console.error(error);
@@ -66,24 +66,34 @@ const ManageQuizzes = () => {
   return (
     <Layout>
       <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-4 md:p-8">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
           className="max-w-6xl mx-auto"
         >
-          <div className="flex justify-between items-center mb-8">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">
               Manage Quizzes
             </h2>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg shadow"
-              onClick={() => navigate("/Admin-DailyQuiz-Create")}
-            >
-              Create New Quiz
-            </motion.button>
+            <div className="flex gap-2">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg shadow"
+                onClick={() => navigate("/Admin-DailyQuizQuiz-User-Answers")}
+              >
+                User Answers
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg shadow"
+                onClick={() => navigate("/Admin-DailyQuiz-Create")}
+              >
+                Create New Quiz
+              </motion.button>
+            </div>
           </div>
 
           {loading ? (
@@ -136,14 +146,18 @@ const ManageQuizzes = () => {
                       <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
                         {quiz.description}
                       </p>
-                      
+
                       <div className="flex flex-wrap gap-2 mt-4">
                         <motion.button
                           variants={buttonHover}
                           whileHover="hover"
                           whileTap="tap"
-                          className="flex-1 bg-blue-100 dark:bg-blue-900/50 hover:bg-blue-200 dark:hover:bg-blue-800 text-blue-600 dark:text-blue-400 px-3 py-2 rounded-lg text-sm font-medium"
-                          onClick={() => navigate(`/Admin-DailyQuiz-Edit-QuizDetails/${quiz.id}`)}
+                          className="flex-1 bg-blue-100 dark:bg-blue-900/30 hover:bg-blue-200 dark:hover:bg-blue-800/40 text-blue-600 dark:text-blue-400 px-3 py-2 rounded-lg text-sm font-medium"
+                          onClick={() =>
+                            navigate(
+                              `/Admin-DailyQuiz-Edit-QuizDetails/${quiz.id}`
+                            )
+                          }
                         >
                           Edit Details
                         </motion.button>
@@ -151,34 +165,27 @@ const ManageQuizzes = () => {
                           variants={buttonHover}
                           whileHover="hover"
                           whileTap="tap"
-                          className="flex-1 bg-purple-100 dark:bg-purple-900/50 hover:bg-purple-200 dark:hover:bg-purple-800 text-purple-600 dark:text-purple-400 px-3 py-2 rounded-lg text-sm font-medium"
-                          onClick={() => navigate(`/Admin-DailyQuiz-Edit-QuizQuestion/${quiz.id}`)}
+                          className="flex-1 bg-purple-100 dark:bg-purple-900/30 hover:bg-purple-200 dark:hover:bg-purple-800/40 text-purple-600 dark:text-purple-400 px-3 py-2 rounded-lg text-sm font-medium"
+                          onClick={() =>
+                            navigate(
+                              `/Admin-DailyQuiz-Edit-QuizQuestion/${quiz.id}`
+                            )
+                          }
                         >
                           Edit Questions
                         </motion.button>
                       </div>
-                       <div className="flex flex-wrap gap-2 mt-4">
-                        <motion.button
-                        variants={buttonHover}
-                        whileHover="hover"
-                        whileTap="tap"
-                        className="w-full mt-3 bg-red-100 dark:bg-red-900/50 hover:bg-red-200 dark:hover:bg-red-800 text-red-600 dark:text-red-400 px-3 py-2 rounded-lg text-sm font-medium"
-                        onClick={() => handleDelete(quiz.id)}
-                      >
-                        Delete Quiz
-                      </motion.button>
+                      <div className="flex flex-wrap gap-2 mt-4">
                         <motion.button
                           variants={buttonHover}
                           whileHover="hover"
                           whileTap="tap"
-                          className="flex-1 bg-purple-100 dark:bg-purple-900/50 hover:bg-purple-200 dark:hover:bg-purple-800 text-purple-600 dark:text-purple-400 px-3 py-2 rounded-lg text-sm font-medium"
-                          onClick={() => navigate(`/Admin-DailyQuizQuiz-User-Answers`)}
+                          className="w-full bg-red-100 dark:bg-red-900/30 hover:bg-red-200 dark:hover:bg-red-800/40 text-red-600 dark:text-red-400 px-3 py-2 rounded-lg text-sm font-medium"
+                          onClick={() => handleDelete(quiz.id)}
                         >
-                          User Answra
+                          Delete Quiz
                         </motion.button>
                       </div>
-                      
-                     
                     </div>
                   </motion.div>
                 ))}

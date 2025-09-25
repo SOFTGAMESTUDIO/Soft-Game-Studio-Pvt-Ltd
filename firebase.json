@@ -1,6 +1,7 @@
 {
   "hosting": {
     "site": "softgamestudios",
+   
     "public": "dist",
     "ignore": [
       "firebase.json",

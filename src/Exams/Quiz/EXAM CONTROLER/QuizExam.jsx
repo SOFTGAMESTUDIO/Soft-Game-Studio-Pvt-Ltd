@@ -406,10 +406,77 @@ const useExamKeyLock = (enableLock = true) => {
                     <p className="text-center font-medium">(Read Before Starting the Quiz)</p>
                   </div>
 
-                  <div 
-                    className="prose dark:prose-invert max-w-none bg-gray-50 dark:bg-gray-700 p-4 rounded-lg"
-                    dangerouslySetInnerHTML={{ __html: quizData.description }}
-                  />
+                     <div>
+                  <section className="max-w-3xl mx-auto bg-white dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 rounded-2xl shadow-lg p-6 sm:p-8">
+
+
+{/* No Cheating */}
+<div>
+<h3 className="font-medium text-gray-800 dark:text-white">🚫 No Cheating</h3>
+<ul className="mt-2 text-sm text-gray-600 dark:text-gray-300 space-y-1">
+<li>• <strong>Single attempt only.</strong> Multiple attempts are not permitted.</li>
+<li>• Tab switching, external devices, screen sharing, or outside help is considered cheating.</li>
+<li>• Any suspicious activity will result in <strong>immediate disqualification</strong>.</li>
+</ul>
+</div>
+
+
+{/* Strict Deadline */}
+<div className="flex gap-3 mt-6">
+<div className="flex-none p-3 rounded-lg bg-indigo-50 dark:bg-indigo-900/20">
+<svg className="w-6 h-6 text-indigo-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" strokeWidth="1.5" />
+<path d="M16 3v4M8 3v4M3 11h18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+</svg>
+</div>
+<div>
+<h3 className="font-medium text-gray-800 dark:text-white">📅 Strict Deadline</h3>
+<ul className="mt-2 text-sm text-gray-600 dark:text-gray-300 space-y-1">
+<li>• You must complete the exam within the allotted time once started.</li>
+<li>• Unfinished exams will be <strong>auto-submitted</strong> when time expires.</li>
+<li>• Late submissions or re-openings are not allowed.</li>
+</ul>
+</div>
+</div>
+
+
+{/* Identity & Fair Use */}
+<div className="flex gap-3 mt-6">
+<div className="flex-none p-3 rounded-lg bg-teal-50 dark:bg-teal-900/20">
+<svg className="w-6 h-6 text-teal-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+<circle cx="12" cy="7" r="4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+</svg>
+</div>
+<div>
+<h3 className="font-medium text-gray-800 dark:text-white">👤 Identity & Fair Use</h3>
+<ul className="mt-2 text-sm text-gray-600 dark:text-gray-300 space-y-1">
+<li>• The exam is <strong>personal and non-transferable</strong>.</li>
+<li>• Do not share your login, questions, or answers with anyone.</li>
+<li>• Your activity will be monitored for fair use.</li>
+</ul>
+</div>
+</div>
+
+
+{/* Important Notes */}
+<div className="mt-6 border-t border-gray-100 dark:border-neutral-800 pt-5">
+<h4 className="font-medium text-gray-800 dark:text-white">📌 Important Notes</h4>
+<ul className="mt-3 text-sm text-gray-600 dark:text-gray-300 space-y-2">
+<li>• Read all instructions carefully before beginning the exam.</li>
+<li>• Ensure a stable internet connection and a quiet, well-lit environment.</li>
+<li>• Once submitted, answers <strong>cannot be changed</strong> and the attempt cannot be re-done.</li>
+<li>• Results will be declared after evaluation; follow-up communication will be sent via your registered email.</li>
+<li>• If you face technical issues, contact support immediately with logs and screenshots — do not attempt to restart the exam unless instructed.</li>
+</ul>
+
+
+<div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+
+</div>
+</div>
+</section>
+                </div>
 
                   <div className="flex justify-center pt-4">
                     <button
